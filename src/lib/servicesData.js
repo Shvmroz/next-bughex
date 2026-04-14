@@ -1,0 +1,100 @@
+export const services = [
+  {
+    id: 1,
+    title: 'Flutter Development',
+    description: 'Cross-platform apps with native performance. One codebase for iOS, Android, Web, and Desktop.',
+    icon: '◈',
+    color: 'from-cyan-400 to-primary',
+    features: ['Single codebase', 'Native performance', 'Beautiful animations', '6-platform support'],
+  },
+  {
+    id: 2,
+    title: 'React Native',
+    description: 'JavaScript-powered mobile apps with true native components and seamless platform integration.',
+    icon: '⬡',
+    color: 'from-primary to-teal-400',
+    features: ['Native components', 'Huge ecosystem', 'Hot reloading', 'JavaScript/TypeScript'],
+  },
+  {
+    id: 3,
+    title: 'JavaScript / React',
+    description: 'Modern web applications with React, Next.js, and cutting-edge frontend technologies.',
+    icon: '◉',
+    color: 'from-teal-400 to-emerald-400',
+    features: ['React & Next.js', 'TypeScript', 'Performance first', 'SEO optimized'],
+  },
+  {
+    id: 4,
+    title: 'Laravel / PHP',
+    description: 'Robust, scalable backend systems with Laravel — the PHP framework for web artisans.',
+    icon: '⬢',
+    color: 'from-emerald-400 to-primary',
+    features: ['RESTful APIs', 'Eloquent ORM', 'Queue systems', 'Authentication'],
+  },
+  {
+    id: 5,
+    title: 'iOS Development',
+    description: 'Native iOS applications in Swift with pixel-perfect UI and Apple ecosystem integration.',
+    icon: '◆',
+    color: 'from-primary to-cyan-300',
+    features: ['Swift & SwiftUI', 'App Store ready', 'Core APIs', 'Apple ecosystem'],
+  },
+  {
+    id: 6,
+    title: 'Android Development',
+    description: 'Native Android apps with Kotlin, Jetpack Compose, and Google Play Store deployment.',
+    icon: '◇',
+    color: 'from-cyan-300 to-teal-500',
+    features: ['Kotlin & Compose', 'Material Design', 'Google Play', 'Background services'],
+  },
+  {
+    id: 7,
+    title: 'Node.js Backend',
+    description: 'Scalable, high-performance backend APIs and microservices built on Node.js and Express.',
+    icon: '⬣',
+    color: 'from-teal-500 to-primary',
+    features: ['REST & GraphQL', 'Microservices', 'Real-time with WS', 'Cloud-native'],
+  },
+  {
+    id: 8,
+    title: 'AI Solutions',
+    description: 'Intelligent automation and AI integration — chatbots, computer vision, and predictive analytics.',
+    icon: '◈',
+    color: 'from-primary to-emerald-300',
+    features: ['LLM integration', 'Computer vision', 'Data pipelines', 'Custom models'],
+  },
+];
+
+export const stats = [
+  { value: '150+', label: 'Projects Delivered' },
+  { value: '50+', label: 'Happy Clients' },
+  { value: '8+', label: 'Years Experience' },
+  { value: '15+', label: 'Team Experts' },
+];
+
+export const testimonials = [
+  {
+    id: 1,
+    name: 'James Wilson',
+    role: 'CEO, TechVentures',
+    avatar: 'JW',
+    text: 'BugHex transformed our vision into a stunning Flutter app in record time. Their attention to detail and technical expertise is unmatched.',
+    rating: 5,
+  },
+  {
+    id: 2,
+    name: 'Sophia Nguyen',
+    role: 'CTO, DataFlow Inc',
+    avatar: 'SN',
+    text: "The AI integration they built for us increased our productivity by 40%. Exceptional team with a deep understanding of modern tech stacks.",
+    rating: 5,
+  },
+  {
+    id: 3,
+    name: 'Michael Torres',
+    role: 'Founder, AppStudio',
+    avatar: 'MT',
+    text: 'From React Native to Node.js backend, BugHex handled our entire stack with professionalism. Highly recommend their services.',
+    rating: 5,
+  },
+];
