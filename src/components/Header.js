@@ -25,7 +25,6 @@ export default function Header() {
       setScrolled(window.scrollY >= (heroHeight - headerHeight));
     };
 
-    // Set initial state
     onScroll();
 
     window.addEventListener('scroll', onScroll);
@@ -36,7 +35,7 @@ export default function Header() {
     <motion.header
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
       style={{
-        background: scrolled ? 'rgba(0, 0, 0, 0.05)' : 'transparent',
+        background: 'transparent',
         backdropFilter: scrolled ? 'blur(25px) saturate(180%)' : 'none',
         borderBottom: scrolled ? '1px solid rgba(0, 0, 0, 0.08)' : '1px solid transparent',
         boxShadow: scrolled ? '0 10px 30px rgba(0, 0, 0, 0.05)' : 'none',
@@ -45,15 +44,24 @@ export default function Header() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
+      {scrolled && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 18%, rgba(0,0,0,0.15) 32%, transparent 48%)',
+          }}
+        />
+      )}
+
       <div
-        className={`max-w-7xl mx-auto px-6 flex items-center justify-between transition-all duration-500 ${scrolled ? 'py-2.5' : 'py-5'
-          }`}
+        className={`relative max-w-7xl mx-auto px-6 flex items-center justify-between transition-all duration-500 ${scrolled ? 'py-2.5' : 'py-5'}`}
       >
         <Link href="/" className="group">
           <Logo
             width={40}
             height={40}
             textColor={scrolled ? 'text-dark' : 'text-white'}
+            scrolled={scrolled}
           />
         </Link>
 
@@ -67,12 +75,10 @@ export default function Header() {
             >
               <Link
                 href={link.href}
-                className={`text-sm font-semibold transition-colors duration-300 relative group ${scrolled ? 'text-dark/70 hover:text-primary' : 'text-white/80 hover:text-white'
-                  }`}
+                className={`text-sm font-semibold transition-colors duration-300 relative group ${scrolled ? 'text-dark/70 hover:text-primary' : 'text-white/80 hover:text-white'}`}
               >
                 {link.label}
-                <span className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${scrolled ? 'bg-primary' : 'bg-white'
-                  }`} />
+                <span className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${scrolled ? 'bg-primary' : 'bg-white'}`} />
               </Link>
             </motion.div>
           ))}
@@ -92,6 +98,7 @@ export default function Header() {
             </button>
           </Link>
         </motion.div>
+
         <button
           className="md:hidden flex flex-col gap-1.5"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -136,4 +143,3 @@ export default function Header() {
     </motion.header>
   );
 }
-
