@@ -7,6 +7,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/home/HeroSection';
 import ServicesSection from '@/components/home/ServicesSection';
+import TechSlider from '@/components/home/TechSlider';
 import LeadershipSection from '@/components/home/LeadershipSection';
 import ContactSection from '@/components/home/ContactSection';
 
@@ -31,6 +32,7 @@ export default function HomePage() {
         <main className="flex-grow">
           <HeroSection />
           <ServicesSection />
+          <TechSlider />
           <LeadershipSection />
           <ContactSection />
         </main>

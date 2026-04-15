@@ -32,23 +32,24 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const isTransparent = isHeroPage && !scrolled && !activeDropdown;
+  const isHeroTransparent = isHeroPage && !scrolled;
+  const isTransparent = isHeroTransparent && !activeDropdown;
   const headerBg = isTransparent
     ? 'bg-transparent border-transparent'
-    : activeDropdown && isHeroPage && !scrolled
-    ? 'bg-[#0a0a0f]/90 backdrop-blur-xl border-white/[0.06]'
+    : isHeroTransparent && activeDropdown
+    ? 'bg-black/40 backdrop-blur-md border-white/10'
     : 'bg-white border-gray-100 shadow-sm';
 
   const dropdownBg =
-    activeDropdown && isHeroPage && !scrolled
-      ? 'bg-[#0a0a0f]/90 backdrop-blur-xl border-white/[0.06]'
+    isHeroTransparent && activeDropdown
+      ? 'bg-black/40 backdrop-blur-md border-white/10'
       : 'bg-white border-gray-100';
 
-  const textColor = isTransparent ? 'text-white hover:text-primary' : 'text-dark hover:text-primary';
-  const chevronColor = isTransparent ? 'stroke-white' : 'stroke-dark/60';
-  const dropdownTextColor = activeDropdown && isHeroPage && !scrolled ? 'text-white' : 'text-dark';
+  const textColor = isHeroTransparent ? 'text-white hover:text-primary' : 'text-dark hover:text-primary';
+  const chevronColor = isHeroTransparent ? 'stroke-white' : 'stroke-dark/60';
+  const dropdownTextColor = isHeroTransparent && activeDropdown ? 'text-white' : 'text-dark';
   const dropdownSubColor =
-    activeDropdown && isHeroPage && !scrolled ? 'text-white/40' : 'text-dark/40';
+    isHeroTransparent && activeDropdown ? 'text-white/50' : 'text-dark/40';
 
   const showScrollBar = scrolled && !activeDropdown && !menuOpen;
 
@@ -83,7 +84,7 @@ export default function Header() {
         <div className="w-full max-w-[1440px] mx-auto px-6 flex items-center justify-between">
           <div className="flex-shrink-0 w-[200px]">
             <Link href="/">
-              <Logo isDark={!isTransparent} />
+              <Logo isDark={!isHeroTransparent} />
             </Link>
           </div>
 
@@ -133,9 +134,9 @@ export default function Header() {
             className="lg:hidden flex flex-col gap-1.5"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            <span className={`w-6 h-0.5 transition-all ${isTransparent ? 'bg-white' : 'bg-dark'}`} />
-            <span className={`w-6 h-0.5 transition-all ${isTransparent ? 'bg-white' : 'bg-dark'}`} />
-            <span className={`w-6 h-0.5 transition-all ${isTransparent ? 'bg-white' : 'bg-dark'}`} />
+            <span className={`w-6 h-0.5 transition-all ${isHeroTransparent ? 'bg-white' : 'bg-dark'}`} />
+            <span className={`w-6 h-0.5 transition-all ${isHeroTransparent ? 'bg-white' : 'bg-dark'}`} />
+            <span className={`w-6 h-0.5 transition-all ${isHeroTransparent ? 'bg-white' : 'bg-dark'}`} />
           </button>
         </div>
       </motion.header>

@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { Icon } from '@iconify/react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { contactPageContent } from '@/lib/mock';
@@ -156,13 +157,13 @@ export default function ContactPage() {
                       className="flex items-center gap-5 group"
                     >
                       <div
-                        className="w-14 h-14 rounded-2xl flex items-center justify-center text-xl flex-shrink-0 transition-all duration-300 group-hover:scale-105"
+                        className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-105"
                         style={{
                           background: 'linear-gradient(135deg, rgba(27,181,162,0.12), rgba(27,181,162,0.04))',
                           border: '1px solid rgba(27,181,162,0.15)',
                         }}
                       >
-                        {item.icon}
+                        <Icon icon={item.icon} width={24} className="text-primary" />
                       </div>
                       <div>
                         <p className="text-xs text-dark/30 uppercase tracking-wider font-bold mb-0.5">{item.label}</p>

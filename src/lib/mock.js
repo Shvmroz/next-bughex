@@ -141,9 +141,9 @@ export const contactSectionContent = {
   bodyText:
     'Whether you need a Flutter app, a complex backend, or an AI-powered solution, BugHex has the expertise to bring your vision to life. We work with startups and enterprises alike.',
   contactInfo: [
-    { icon: '📧', label: 'Email', value: 'hello@bughex.dev' },
-    { icon: '📍', label: 'Location', value: 'Remote — Worldwide' },
-    { icon: '⏱', label: 'Response Time', value: 'Within 24 hours' },
+    { icon: 'mdi:email-outline', label: 'Email', value: 'hello@bughex.dev' },
+    { icon: 'mdi:map-marker-outline', label: 'Location', value: 'Remote — Worldwide' },
+    { icon: 'mdi:clock-outline', label: 'Response Time', value: 'Within 24 hours' },
   ],
   serviceOptions: [
     'Flutter Development',
@@ -454,9 +454,9 @@ export const contactPageContent = {
   infoBody:
     'Whether you need a Flutter app, a complex backend, or an AI-powered solution, BugHex has the expertise to bring your vision to life.',
   contactInfo: [
-    { icon: '📧', label: 'Email', value: 'hello@bughex.dev' },
-    { icon: '📍', label: 'Location', value: 'Remote — Worldwide' },
-    { icon: '⏱', label: 'Response Time', value: 'Within 24 hours' },
+    { icon: 'mdi:email-outline', label: 'Email', value: 'hello@bughex.dev' },
+    { icon: 'mdi:map-marker-outline', label: 'Location', value: 'Remote — Worldwide' },
+    { icon: 'mdi:clock-outline', label: 'Response Time', value: 'Within 24 hours' },
   ],
   serviceOptions: [
     'Flutter Development',

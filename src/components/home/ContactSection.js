@@ -2,6 +2,7 @@
 
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useState, useRef } from 'react';
+import { Icon } from '@iconify/react';
 import { SectionHeader } from './ServicesSection';
 import { contactSectionContent } from '@/lib/mock';
 
@@ -96,13 +97,13 @@ export default function ContactSection() {
               {c.contactInfo.map((item, i) => (
                 <motion.div key={item.label} variants={fadeUp} custom={i + 2} className="flex items-center gap-4 group">
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0 transition-all duration-300 group-hover:scale-105"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-105"
                     style={{
                       background: 'rgba(27, 181, 162, 0.1)',
                       border: '1px solid rgba(27, 181, 162, 0.15)',
                     }}
                   >
-                    {item.icon}
+                    <Icon icon={item.icon} width={22} className="text-primary" />
                   </div>
                   <div>
                     <p className="text-xs text-dark/30 uppercase tracking-wider font-bold">{item.label}</p>
