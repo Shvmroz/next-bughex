@@ -4,15 +4,7 @@ import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
-
-const leaders = [
-    { nameFirst: 'Umair', nameLast: 'Hashmi', role: 'Founder & CEO' },
-    { nameFirst: 'Zain', nameLast: 'Sherazi', role: 'Chief Finance Officer' },
-    { nameFirst: 'Ammar', nameLast: 'Yousaf', role: 'Chief of Staff' },
-    { nameFirst: 'Shamroz', nameLast: 'Khan', role: 'Chief Delivery Officer' },
-    { nameFirst: 'Atif', nameLast: 'Umair', role: 'VP Operations' },
-    { nameFirst: 'Moeen', nameLast: 'U Din', role: 'Lead Developer' },
-];
+import { leaders, leadershipSectionContent } from '@/lib/mock';
 
 export default function LeadershipSection() {
     const scrollRef = useRef(null);
@@ -56,7 +48,7 @@ export default function LeadershipSection() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            Our Global Leadership
+                            {leadershipSectionContent.title}
                         </motion.h2>
                     </div>
 

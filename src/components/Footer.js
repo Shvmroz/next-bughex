@@ -3,60 +3,7 @@
 import Link from 'next/link';
 import { Icon } from "@iconify/react";
 import { motion } from 'framer-motion';
-
-const footerData = {
-  Services: [
-    'Digital Consulting & Strategy',
-    'Digital Commerce',
-    'Business Applications',
-    'Cloud Operations & Migration',
-    'Cloud Applications',
-    'Development & Integrations',
-    'Managed Services'
-  ],
-  Industries: [
-    'Communications',
-    'Banking & Financial Services',
-    'Public Sector',
-    'Health',
-    'Retail'
-  ],
-  Insights: [
-    'Case Studies',
-    'Newsroom',
-    'Whitepapers',
-    'Blogs'
-  ],
-  'Quick Links': [
-    'Who we are',
-    'Careers',
-    'Our Leadership',
-    'Investor Relation',
-    'Financial Reports'
-  ]
-};
-
-const socialLinks = [
-  {
-    name: 'LinkedIn',
-    icon: 'mdi:linkedin',
-    href: '#',
-    hoverColor: '#0A66C2'
-  },
-  {
-    name: 'Facebook',
-    icon: 'mdi:facebook',
-    href: '#',
-    hoverColor: '#1877F2'
-  },
-  {
-    name: 'Instagram',
-    icon: 'mdi:instagram',
-    href: '#',
-    hoverColor: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
-    isGradient: true
-  }
-];
+import { footerData, socialLinks, siteMeta } from '@/lib/mock';
 
 export default function Footer() {
   return (
@@ -145,8 +92,8 @@ export default function Footer() {
         <div className="mt-8 flex flex-col md:flex-row justify-between items-center gap-6">
 
           <div className="flex flex-col gap-1">
-            <span className="font-display font-bold text-xl text-gradient-animated">Launching Ideas Into Real Products</span>
-            <span className="text-xs text-white/30 font-medium tracking-wide">From Zero to Product — Fast &amp; Smart</span>
+            <span className="font-display font-bold text-xl text-gradient-animated">{siteMeta.tagline}</span>
+            <span className="text-xs text-white/30 font-medium tracking-wide">{siteMeta.subTagline}</span>
           </div>
 
           {/* SOCIAL ICONS */}
@@ -173,7 +120,7 @@ export default function Footer() {
 
         {/* COPYRIGHT */}
         <p className="text-xs text-white/20 font-medium tracking-wide text-center md:text-right w-full mt-6">
-          © {new Date().getFullYear()} Bughex Ltd. All Rights Reserved.
+          {siteMeta.copyright}
         </p>
 
       </div>

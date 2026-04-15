@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { services } from '@/lib/servicesData';
+import { services, servicesSectionContent } from '@/lib/mock';
 
 const container = {
   hidden: {},
@@ -29,9 +29,9 @@ export default function ServicesSection() {
       />
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
-          tag="What We Do"
-          title="Services We Offer"
-          subtitle="From mobile apps to enterprise backends, we cover the full spectrum of modern software development."
+          tag={servicesSectionContent.tag}
+          title={servicesSectionContent.title}
+          subtitle={servicesSectionContent.subtitle}
         />
 
         <motion.div

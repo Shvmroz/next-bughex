@@ -1,48 +1,22 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from './Logo';
-
-const navLinks = [
-  { label: 'WHAT WE DO', href: '/#services', hasDropdown: true },
-  { label: 'OUR PROJECTS', href: '/projects', hasDropdown: true },
-  { label: 'WHO WE HELP', href: '#', hasDropdown: false },
-  { label: 'WHO WE ARE', href: '#', hasDropdown: false },
-];
-
-const megaMenuData = {
-  'WHAT WE DO': [
-    { title: 'Company Overview', subtitle: 'Our mission and roadmap' },
-    { title: 'Leadership', subtitle: 'Meet our visionaries' },
-    { title: 'Careers', subtitle: 'Join our growing team' }
-  ],
-  'OUR PROJECTS': [
-    { title: 'E-Commerce Solutions', subtitle: 'Modern sales platforms' },
-    { title: 'AI & ML Products', subtitle: 'Intelligent automation' },
-    { title: 'Enterprise Apps', subtitle: 'Scaling business operations' },
-    { title: 'Mobile Ecosystems', subtitle: 'Flutter & Native experiences' }
-  ],
-  'default': [
-    { title: 'Insights', subtitle: 'Latest from BugHex' },
-    { title: 'Contact', subtitle: 'Get in touch' }
-  ]
-};
+import { navLinks, megaMenuData } from '@/lib/mock';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const [navHovered, setNavHovered] = useState(false);
   const [winWidth, setWinWidth] = useState(0);
   const pathname = usePathname();
-  const isProjectsPage = pathname.startsWith('/projects');
 
+  const isHeroPage = pathname === '/';
   const { scrollYProgress } = useScroll();
-  const scaleX = scrollYProgress;
-  const bugX = useTransform(scaleX, (v) => v * (winWidth - 20));
+  const bugX = useTransform(scrollYProgress, (v) => v * (winWidth - 20));
 
   useEffect(() => {
     const updateWidth = () => setWinWidth(window.innerWidth);
@@ -52,36 +26,45 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const isLightContent = !scrolled && !isProjectsPage;
-  const isGlass = activeDropdown && !scrolled && !isProjectsPage;
+  const isTransparent = isHeroPage && !scrolled && !activeDropdown;
+  const headerBg = isTransparent
+    ? 'bg-transparent border-transparent'
+    : activeDropdown && isHeroPage && !scrolled
+    ? 'bg-[#0a0a0f]/90 backdrop-blur-xl border-white/[0.06]'
+    : 'bg-white border-gray-100 shadow-sm';
+
+  const dropdownBg =
+    activeDropdown && isHeroPage && !scrolled
+      ? 'bg-[#0a0a0f]/90 backdrop-blur-xl border-white/[0.06]'
+      : 'bg-white border-gray-100';
+
+  const textColor = isTransparent ? 'text-white hover:text-primary' : 'text-dark hover:text-primary';
+  const chevronColor = isTransparent ? 'stroke-white' : 'stroke-dark/60';
+  const dropdownTextColor = activeDropdown && isHeroPage && !scrolled ? 'text-white' : 'text-dark';
+  const dropdownSubColor =
+    activeDropdown && isHeroPage && !scrolled ? 'text-white/40' : 'text-dark/40';
+
+  const showScrollBar = scrolled && !activeDropdown && !menuOpen;
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 z-50 px-0"
-      onMouseEnter={() => setNavHovered(true)}
-      onMouseLeave={() => {
-        setNavHovered(false);
-        setActiveDropdown(null);
-      }}
+      className="fixed top-0 left-0 right-0 z-50"
+      onMouseLeave={() => setActiveDropdown(null)}
     >
-      {/* Scroll progress bar - HIDDEN on any hover or at top */}
+      {/* Scroll progress bar */}
       <div
-        className={`fixed top-[70px] left-0 right-0 h-[3px] overflow-visible pointer-events-none z-[60] ${scrolled && !navHovered && !activeDropdown && !menuOpen ? 'opacity-100' : 'opacity-0'
-          }`}
-        style={{ transition: 'opacity 0s' }}
+        className={`fixed top-[70px] left-0 right-0 h-[3px] overflow-visible pointer-events-none z-[60] transition-opacity duration-300 ${showScrollBar ? 'opacity-100' : 'opacity-0'}`}
       >
-        <div className={`absolute inset-0 w-full h-full ${isLightContent ? 'bg-white/10' : 'bg-dark/5'}`} />
+        <div className="absolute inset-0 w-full h-full bg-dark/5" />
         <motion.div
           className="absolute inset-x-0 bottom-0 h-full bg-primary origin-left"
-          style={{ scaleX }}
+          style={{ scaleX: scrollYProgress }}
         />
         <motion.img
           src="/bug.png"
@@ -92,40 +75,43 @@ export default function Header() {
       </div>
 
       <motion.header
-        className={`relative h-[70px] flex items-center transition-all duration-500 border-b ${scrolled || isProjectsPage
-          ? 'bg-white shadow-sm border-gray-100'
-          : isGlass
-            ? 'bg-black/60 backdrop-blur-4xl border-white/[0.03] shadow-2xl'
-            : 'bg-transparent border-transparent'
-          }`}
+        className={`relative h-[70px] flex items-center transition-all duration-300 border-b ${headerBg}`}
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
         <div className="w-full max-w-[1440px] mx-auto px-6 flex items-center justify-between">
-          {/* LOGO */}
           <div className="flex-shrink-0 w-[200px]">
             <Link href="/">
-              <Logo isDark={!isLightContent} />
+              <Logo isDark={!isTransparent} />
             </Link>
           </div>
 
-          {/* NAV LINKS */}
           <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <div
                 key={link.label}
-                className="relative py-6 group"
-                onMouseEnter={() => link.hasDropdown && setActiveDropdown(link.label)}
+                className="relative py-6"
+                onMouseEnter={() => link.hasDropdown ? setActiveDropdown(link.label) : setActiveDropdown(null)}
               >
                 <Link
                   href={link.href}
-                  className={`text-[11px] font-bold tracking-widest transition-colors duration-200 flex items-center gap-1.5 ${isLightContent ? 'text-white hover:text-white/80' : 'text-dark hover:text-primary'}`}
+                  className={`text-[11px] font-bold tracking-widest transition-colors duration-200 flex items-center gap-1.5 ${textColor}`}
                 >
                   {link.label}
                   {link.hasDropdown && (
-                    <svg className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === link.label ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                    <svg
+                      className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === link.label ? 'rotate-180' : ''}`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        className={chevronColor}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2.5}
+                        d="M19 9l-7 7-7-7"
+                      />
                     </svg>
                   )}
                 </Link>
@@ -133,60 +119,92 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* ACTIONS */}
           <div className="hidden lg:flex items-center">
-            <Link href="/#contact">
+            <Link href="/contact">
               <button className="btn">
                 <i className="animation"></i>
-                LET'S TALK
+                LET&apos;S TALK
                 <i className="animation"></i>
               </button>
             </Link>
           </div>
 
-          {/* MOBILE MENU TOGGLE */}
           <button
             className="lg:hidden flex flex-col gap-1.5"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            <span className={`w-6 h-0.5 transition-all ${isLightContent ? 'bg-white' : 'bg-dark'}`} />
-            <span className={`w-6 h-0.5 transition-all ${isLightContent ? 'bg-white' : 'bg-dark'}`} />
-            <span className={`w-6 h-0.5 transition-all ${isLightContent ? 'bg-white' : 'bg-dark'}`} />
+            <span className={`w-6 h-0.5 transition-all ${isTransparent ? 'bg-white' : 'bg-dark'}`} />
+            <span className={`w-6 h-0.5 transition-all ${isTransparent ? 'bg-white' : 'bg-dark'}`} />
+            <span className={`w-6 h-0.5 transition-all ${isTransparent ? 'bg-white' : 'bg-dark'}`} />
           </button>
         </div>
       </motion.header>
 
-      {/* DROPDOWN / MEGA MENU */}
+      {/* MEGA MENU DROPDOWN */}
       <AnimatePresence>
-        {activeDropdown && (
+        {activeDropdown && megaMenuData[activeDropdown] && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className={`absolute top-[70px] left-0 right-0 z-40 overflow-hidden ${scrolled || isProjectsPage ? 'bg-white border-b border-gray-100 shadow-xl' : 'bg-black/60 backdrop-blur-4xl border-b border-white/[0.03] shadow-2xl'}`}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className={`absolute top-[70px] left-0 right-0 z-40 border-b shadow-2xl ${dropdownBg}`}
             onMouseEnter={() => setActiveDropdown(activeDropdown)}
           >
-            <div className="max-w-7xl mx-auto px-12 py-16">
-              <div className="flex flex-col gap-8">
-                {(megaMenuData[activeDropdown] || megaMenuData['default']).map((item, idx) => (
+            <div className="max-w-7xl mx-auto px-12 py-14">
+              <div className="grid grid-cols-2 gap-x-16 gap-y-8">
+                {megaMenuData[activeDropdown].map((item, idx) => (
                   <motion.div
                     key={item.title}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.05 }}
+                    transition={{ delay: idx * 0.05, duration: 0.2 }}
                   >
-                    <Link href="#" className="group inline-block">
-                      <h4 className={`text-3xl font-bold transition-colors duration-200 tracking-tight ${isLightContent ? 'text-white group-hover:text-primary' : 'text-dark group-hover:text-primary'}`}>
+                    <Link href={item.href || '#'} className="group inline-block">
+                      <h4
+                        className={`text-2xl font-bold transition-colors duration-200 tracking-tight group-hover:text-primary ${dropdownTextColor}`}
+                      >
                         {item.title}
                       </h4>
-                      <p className={`text-sm mt-1 font-medium ${isLightContent ? 'text-white/40' : 'text-gray-400'}`}>
+                      <p className={`text-sm mt-1 font-medium ${dropdownSubColor}`}>
                         {item.subtitle}
                       </p>
                     </Link>
                   </motion.div>
                 ))}
               </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* MOBILE MENU */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-white border-b border-gray-100 shadow-xl overflow-hidden"
+          >
+            <div className="px-6 py-6 flex flex-col gap-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-sm font-bold tracking-widest text-dark hover:text-primary transition-colors py-2 border-b border-gray-50"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link href="/contact" onClick={() => setMenuOpen(false)}>
+                <button className="btn w-full mt-2">
+                  <i className="animation"></i>
+                  LET&apos;S TALK
+                  <i className="animation"></i>
+                </button>
+              </Link>
             </div>
           </motion.div>
         )}
