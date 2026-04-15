@@ -17,7 +17,6 @@ export default function ContactSection() {
     <section id="contact" className="py-24 md:py-32 bg-[#f8f9fa]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
-          tag="Get In Touch"
           title="Start Your Project"
           subtitle="Ready to build something extraordinary? Let's talk about your vision."
         />

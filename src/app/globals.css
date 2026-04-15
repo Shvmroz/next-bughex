@@ -5,8 +5,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary: #13a796;
-  --primary-dark: #068375;
+  --primary: #1bb5a2;
+  --primary-dark: #138E7E;
   --background: #ffffff;
   --text: #0a0a12;
   --text-muted: #666666;
@@ -46,26 +46,52 @@ body {
   background: var(--primary-dark);
 }
 
-.text-gradient {
-  background: linear-gradient(135deg, #087165 0%, #13a796 50%, #087165 100%);
+.text-gradient-animated {
+  background: linear-gradient(135deg,
+      #6ecbc0 0%,
+      #6ecbc0 30%,
+      #129586 50%,
+      #6ecbc0 70%,
+      #6ecbc0 100%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  display: inline-block;
+  animation: shimmer 4s linear infinite, floatText 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes floatText {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 .bg-glass {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(19, 167, 150, 0.1);
+  border: 1px solid rgba(27, 181, 162, 0.1);
 }
 
 .glow-primary {
-  box-shadow: 0 10px 30px rgba(19, 167, 150, 0.2);
+  box-shadow: 0 10px 30px rgba(27, 181, 162, 0.2);
 }
 
 .glow-text {
-  text-shadow: 0 0 30px rgba(19, 167, 150, 0.2);
+  text-shadow: 0 0 30px rgba(27, 181, 162, 0.2);
 }
 
 .hex-clip {
@@ -74,9 +100,13 @@ body {
 
 @layer utilities {
   .grid-bg {
-    background-image: linear-gradient(rgba(19, 167, 150, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(19, 167, 150, 0.03) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(27, 181, 162, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(27, 181, 162, 0.03) 1px, transparent 1px);
     background-size: 50px 50px;
+  }
+  .backdrop-blur-4xl {
+    backdrop-filter: blur(80px);
+    -webkit-backdrop-filter: blur(80px);
   }
 }
 

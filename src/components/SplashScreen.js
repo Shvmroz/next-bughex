@@ -73,19 +73,19 @@ function Pixel({ frag, dissolve, onDone }) {
   return (
     <motion.div
       style={{
-        background: `rgba(19, 167, 150, ${opacity})`,
-        borderRight: '1px solid rgba(19, 167, 150, 0.2)',
-        borderBottom: '1px solid rgba(19, 167, 150, 0.2)',
+        background: `rgba(27, 181, 162, ${opacity})`,
+        borderRight: '1px solid rgba(27, 181, 162, 0.2)',
+        borderBottom: '1px solid rgba(27, 181, 162, 0.2)',
       }}
       initial={{ opacity: 1, scale: 1 }}
       animate={dissolve ? { opacity: 0, scale: 0.6 } : { opacity: 1, scale: 1 }}
       transition={
         dissolve
           ? {
-              delay: frag.delay,
-              duration: 0.5,
-              ease: [0.43, 0.13, 0.23, 0.96],
-            }
+            delay: frag.delay,
+            duration: 0.5,
+            ease: [0.43, 0.13, 0.23, 0.96],
+          }
           : { duration: 0 }
       }
       onAnimationComplete={dissolve ? onDone : undefined}

@@ -21,7 +21,7 @@ export default function BlogsPage() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-dark">
+    <div className="min-h-screen flex flex-col bg-white">
       <Header />
       <main className="flex-grow">
         <section className="pt-32 pb-16 relative overflow-hidden">
@@ -34,30 +34,23 @@ export default function BlogsPage() {
           <div className="absolute inset-0 grid-bg opacity-30" />
 
           <div className="relative max-w-7xl mx-auto px-6 text-center">
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 mb-6"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-              <span className="text-xs text-primary font-medium tracking-wider uppercase">Knowledge Base</span>
-            </motion.div>
+
 
             <motion.h1
-              className="font-display text-4xl md:text-6xl font-bold text-white mb-4"
+              className="font-display text-4xl md:text-6xl font-bold text-dark mb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
             >
-              Our <span className="text-gradient">Blog</span>
+              Our <span className="text-gradient-animated">Projects</span>
             </motion.h1>
             <motion.p
-              className="text-white/50 text-lg max-w-xl mx-auto mb-10"
+              className="text-dark/60 text-lg max-w-xl mx-auto mb-10"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Insights, tutorials, and deep dives from the BugHex engineering team.
+              Insights, case studies, and deep dives into BugHex creations.
             </motion.p>
 
             <motion.div
@@ -71,7 +64,7 @@ export default function BlogsPage() {
                 placeholder="Search articles..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full px-5 py-3 rounded-full bg-dark-card border border-dark-border text-white/70 text-sm focus:outline-none focus:border-primary/50 transition-colors placeholder-white/20"
+                className="w-full px-5 py-3 rounded-full bg-white border border-gray-200 shadow-sm text-dark/80 text-sm focus:outline-none focus:border-primary/50 transition-colors placeholder-dark/30"
               />
             </motion.div>
 
@@ -86,8 +79,8 @@ export default function BlogsPage() {
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
                   className={`px-4 py-2 rounded-full text-sm transition-all duration-300 ${activeCategory === cat
-                      ? 'bg-primary text-dark font-semibold'
-                      : 'border border-dark-border text-white/50 hover:border-primary/50 hover:text-primary'
+                    ? 'bg-primary border border-primary text-white font-semibold shadow-md'
+                    : 'bg-white border border-gray-200 text-dark/60 hover:border-primary/50 hover:text-primary'
                     }`}
                 >
                   {cat}
@@ -111,7 +104,7 @@ export default function BlogsPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <p className="text-white/30 text-lg">No articles found for your search.</p>
+                <p className="text-dark/40 text-lg">No articles found for your search.</p>
               </motion.div>
             )}
           </div>

@@ -106,17 +106,9 @@ function ServiceCard({ service }) {
 export function SectionHeader({ tag, title, subtitle }) {
   return (
     <div className="text-center max-w-2xl mx-auto">
-      <motion.div
-        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 mb-4"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-      >
-        <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-        <span className="text-xs text-primary font-bold tracking-wider uppercase">{tag}</span>
-      </motion.div>
+
       <motion.h2
-        className="font-display text-3xl md:text-5xl font-bold text-dark mb-4"
+        className="font-display text-4xl md:text-6xl font-bold mb-4 text-gradient-animated tracking-tight pb-2"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}

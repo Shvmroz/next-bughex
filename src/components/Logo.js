@@ -2,48 +2,53 @@
 
 import { motion } from 'framer-motion';
 
-export default function Logo({ width = 40, height = 40, className = "", textColor = "text-dark", scrolled = false }) {
-    const bugSize = width * 0.6;
-
-    const resolvedTextColor = scrolled ? 'text-primary' : textColor;
+export default function Logo({ isDark = false }) {
+    const fullLogoSrc = isDark ? '/full-logo-dark.png' : '/full-logo.png';
 
     return (
-        <div className={`flex items-center gap-0 ${className}`}>
-            <div className="relative flex-shrink-0" style={{ width, height }}>
+        <motion.div
+            className="relative flex items-center group cursor-pointer h-10 select-none"
+            initial="initial"
+            whileHover="active"
+        >
+            {/* 
+          1. THE ICON (bughex-logo.png)
+      */}
+            <div className="relative z-20 w-10 h-10 flex-shrink-0">
                 <img
                     src="/bughex-logo.png"
-                    alt="Logo Icon"
-                    className="w-full h-full relative z-10"
+                    alt="Bughex Icon"
+                    className="w-full h-full object-contain"
                 />
             </div>
 
-            <div className="relative">
-                <span className={`font-display font-bold uppercase tracking-tight flex items-center transition-colors duration-500 ${resolvedTextColor}`}
-                    style={{ fontSize: 40 }}>
-                    UG<span className="text-primary">H</span>E
-                    <span className="relative flex items-center">
-                        X
-                        <motion.img
-                            src="/bug.png"
-                            alt="Bug"
-                            className="pointer-events-none ml-1"
-                            style={{
-                                width: bugSize,
-                                height: bugSize,
-                            }}
-                            animate={{
-                                scale: [1, 1.25, 1, 1.25, 1],
-                                y: [0, -2, 0, -2, 0]
-                            }}
-                            transition={{
-                                duration: 4.5,
-                                repeat: Infinity,
-                                ease: "easeInOut"
-                            }}
-                        />
-                    </span>
-                </span>
-            </div>
-        </div>
+            {/* 
+          2. THE FULL LOGO 
+      */}
+            <motion.div
+                className="absolute left-0 top-0 z-10 h-10 overflow-hidden flex items-center"
+                variants={{
+                    initial: {
+                        width: 40,
+                        opacity: 0
+                    },
+                    active: {
+                        width: 160,
+                        opacity: 1
+                    }
+                }}
+                transition={{
+                    duration: 0.45,
+                    ease: [0.22, 1, 0.36, 1]
+                }}
+            >
+                <img
+                    src={fullLogoSrc}
+                    alt="Bughex Full"
+                    className="h-8 max-w-none object-contain"
+                    style={{ width: '180px' }}
+                />
+            </motion.div>
+        </motion.div>
     );
 }

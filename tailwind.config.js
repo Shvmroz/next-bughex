@@ -30,8 +30,8 @@ module.exports = {
         },
       },
       backgroundImage: {
-        'grid-pattern': "linear-gradient(rgba(24, 214, 191, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(24, 214, 191, 0.05) 1px, transparent 1px)",
-        'radial-glow': 'radial-gradient(ellipse at center, rgba(24, 214, 191, 0.15) 0%, transparent 70%)',
+        'grid-pattern': "linear-gradient(rgba(27, 181, 162, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(27, 181, 162, 0.05) 1px, transparent 1px)",
+        'radial-glow': 'radial-gradient(ellipse at center, rgba(27, 181, 162, 0.15) 0%, transparent 70%)',
       },
       backgroundSize: {
         'grid': '50px 50px',

@@ -25,10 +25,10 @@ export default function HeroSection() {
           transition={{ delay: 0.3, duration: 0.7 }}
         >
           We Build{' '}
-          <span className="text-gradient">Digital</span>
+          <span className="text-gradient-animated">Digital</span>
           <br />
           Products That{' '}
-          <span className="text-gradient">Matter</span>
+          <span className="text-gradient-animated">Matter</span>
         </motion.h1>
 
         <motion.p

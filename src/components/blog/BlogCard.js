@@ -12,10 +12,9 @@ export default function BlogCard({ blog, index }) {
       transition={{ delay: index * 0.1 }}
       className="group"
     >
-      <Link href={`/blogs/${blog.slug}`}>
+      <Link href={`/projects/${blog.slug}`}>
         <div
-          className="rounded-2xl border border-dark-border hover:border-primary/30 transition-all duration-500 overflow-hidden h-full"
-          style={{ background: 'rgba(17, 17, 24, 0.8)' }}
+          className="rounded-2xl border border-gray-100 hover:border-primary/30 transition-all duration-500 overflow-hidden h-full shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(19,167,150,0.08)] bg-white"
         >
           <div
             className="h-44 flex items-center justify-center relative overflow-hidden"
@@ -43,13 +42,13 @@ export default function BlogCard({ blog, index }) {
               <span className="text-xs px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary">
                 {blog.category}
               </span>
-              <span className="text-xs text-white/30">{blog.readTime}</span>
+              <span className="text-xs text-dark/40">{blog.readTime}</span>
             </div>
 
-            <h3 className="font-display font-bold text-white text-base leading-tight mb-2 group-hover:text-primary transition-colors duration-300">
+            <h3 className="font-display font-bold text-dark text-lg leading-tight mb-2 group-hover:text-primary transition-colors duration-300">
               {blog.title}
             </h3>
-            <p className="text-white/50 text-sm leading-relaxed mb-5 line-clamp-2">{blog.excerpt}</p>
+            <p className="text-dark/60 text-sm leading-relaxed mb-5 line-clamp-2">{blog.excerpt}</p>
 
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -60,8 +59,8 @@ export default function BlogCard({ blog, index }) {
                   {blog.author.charAt(0)}
                 </div>
                 <div>
-                  <p className="text-xs text-white/60 font-medium">{blog.author}</p>
-                  <p className="text-xs text-white/30">{blog.date}</p>
+                  <p className="text-xs text-dark/70 font-medium">{blog.author}</p>
+                  <p className="text-xs text-dark/40">{blog.date}</p>
                 </div>
               </div>
               <motion.span

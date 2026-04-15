@@ -121,7 +121,7 @@ export default function AboutSection() {
 
             <h2 className="font-display text-3xl md:text-5xl font-bold text-dark mb-6 leading-tight">
               Turning Complex Ideas Into{' '}
-              <span className="text-gradient">Elegant Solutions</span>
+              <span className="text-gradient-animated">Elegant Solutions</span>
             </h2>
 
             <p className="text-dark/60 text-base leading-relaxed mb-6 font-medium">
