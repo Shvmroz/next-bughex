@@ -8,25 +8,21 @@ const slides = [
     preText: 'We Analyze',
     headline: 'Understand Your Vision',
     body: 'Every great product starts with deep discovery. We immerse ourselves in your business, your users, and your market — mapping the precise path from idea to impact.',
-    num: '01',
   },
   {
     preText: 'We Architect',
     headline: 'Design the Blueprint',
     body: 'Our engineers craft scalable, battle-tested architectures. Clean code, modular systems, and cloud-native infrastructure built to grow with your ambitions.',
-    num: '02',
   },
   {
     preText: 'We Deliver',
     headline: 'Ship With Precision',
     body: 'Rapid iteration, rigorous QA, and on-time delivery — every sprint brings your product closer to market. We move fast without breaking things.',
-    num: '03',
   },
   {
     preText: 'We Evolve',
     headline: 'Grow Without Limits',
     body: 'Post-launch, we stay by your side. Performance monitoring, feature expansion, and strategic roadmap planning — a partnership that lasts beyond go-live.',
-    num: '04',
   },
 ];
 
@@ -37,7 +33,10 @@ function SlideItem({ slide, index, scrollYProgress }) {
   const end = (index + 1) / TOTAL;
   const opacity = useTransform(scrollYProgress, [start, start + 0.08, end - 0.08, end], [0, 1, 1, 0]);
   const y = useTransform(scrollYProgress, [start, start + 0.08, end - 0.08, end], [60, 0, 0, -60]);
-  const numOpacity = useTransform(scrollYProgress, [start, start + 0.08, end - 0.08, end], [0, 0.04, 0.04, 0]);
+
+  const parts = slide.headline.trim().split(/\s+/);
+  const lastWord = parts.length > 1 ? parts.pop() : '';
+  const restOfTitle = parts.join(' ');
 
   return (
     <motion.div
@@ -45,35 +44,20 @@ function SlideItem({ slide, index, scrollYProgress }) {
       className="absolute inset-0 flex flex-col justify-center pl-8 md:pl-16 lg:pl-20"
     >
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-9 h-9 rounded-lg bg-primary/20 border border-primary/30 flex items-center justify-center flex-shrink-0">
-          <span className="text-primary font-display font-bold text-xs">{slide.num}</span>
-        </div>
+        <div className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" />
         <span className="text-[11px] font-bold tracking-[0.4em] text-primary uppercase">
           {slide.preText}
         </span>
       </div>
 
       <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] mb-8 tracking-tight max-w-3xl">
-        {slide.headline}
+        {restOfTitle} <span className="text-gradient-animated">{lastWord}</span>
       </h2>
 
-      <p className="text-white/45 text-lg leading-relaxed font-medium max-w-xl">
+      <p className="text-white/60 text-lg leading-relaxed font-medium max-w-xl">
         {slide.body}
       </p>
 
-      <div className="mt-10 flex items-center gap-4">
-        <div className="h-px w-16 bg-primary/40" />
-        <span className="text-[11px] text-white/20 font-bold tracking-widest uppercase">
-          Step {index + 1} of {TOTAL}
-        </span>
-      </div>
-
-      <motion.span
-        style={{ opacity: numOpacity }}
-        className="absolute right-0 top-1/2 -translate-y-1/2 font-display font-bold text-[200px] leading-none text-white select-none pointer-events-none hidden lg:block"
-      >
-        {slide.num}
-      </motion.span>
     </motion.div>
   );
 }
@@ -99,31 +83,59 @@ export default function ScrollTextSection() {
     offset: ['start start', 'end end'],
   });
 
+  const videoScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1.05, 1]);
+  const videoOpacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0.3, 0.6, 0.6, 0.3]);
+
   return (
     <section
       ref={containerRef}
-      className="relative bg-[#0a0a0f]"
+      className="relative bg-black"
       style={{ height: `${TOTAL * 100}vh` }}
+      data-theme="dark"
     >
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 50% at 15% 50%, rgba(27,181,162,0.04) 0%, transparent 60%)',
-        }}
-      />
-      <div className="absolute inset-0 grid-bg opacity-10" />
-
       <div className="sticky top-0 h-screen overflow-hidden">
-        <div className="w-full h-full max-w-7xl mx-auto px-6 flex items-stretch">
+        {/* VIDEO BACKGROUND */}
+        <motion.div
+          style={{ scale: videoScale }}
+          className="absolute inset-0 z-0"
+        >
+          <motion.video
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{ opacity: videoOpacity }}
+            className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
+          >
+            <source src="/video/vid-5.mp4" type="video/mp4" />
+          </motion.video>
+        </motion.div>
+
+        {/* OVERLAY GRADIENTS */}
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(to bottom, rgba(10,10,15,0.8) 0%, rgba(10,10,15,0.4) 40%, rgba(10,10,15,0.7) 100%)',
+          }}
+        />
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(27,181,162,0.08) 0%, transparent 70%)',
+          }}
+        />
+
+        <div className="w-full h-full max-w-7xl mx-auto px-6 flex items-stretch relative z-10">
 
           <div className="hidden md:flex flex-col items-center justify-center w-16 flex-shrink-0 gap-5">
             {slides.map((_, i) => (
               <ProcessLine key={i} index={i} scrollYProgress={scrollYProgress} />
             ))}
-            <p className="text-[9px] text-white/15 font-bold tracking-[0.3em] mt-6 uppercase whitespace-nowrap"
-               style={{ writingMode: 'vertical-rl' }}>
-              PROCESS
+            <p className="text-[9px] text-primary font-bold tracking-[0.3em] mt-6 uppercase whitespace-nowrap"
+              style={{ writingMode: 'vertical-rl' }}>
+              BUGHEX
             </p>
           </div>
 

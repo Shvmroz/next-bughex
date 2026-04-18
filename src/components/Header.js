@@ -12,6 +12,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [winWidth, setWinWidth] = useState(0);
+  const [isDarkSection, setIsDarkSection] = useState(false);
   const pathname = usePathname();
 
   const isHeroPage = pathname === '/';
@@ -26,30 +27,43 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+
+      let dark = false;
+      const darkSections = document.querySelectorAll('[data-theme="dark"]');
+      darkSections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 70 && rect.bottom >= 0) {
+          dark = true;
+        }
+      });
+      setIsDarkSection(dark);
+    };
     onScroll();
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const isHeroTransparent = isHeroPage && !scrolled;
-  const isTransparent = isHeroTransparent && !activeDropdown;
-  const headerBg = isTransparent
+  const isDarkTheme = isHeroTransparent || isDarkSection;
+
+  const headerBg = isDarkTheme && !activeDropdown
     ? 'bg-transparent border-transparent'
-    : isHeroTransparent && activeDropdown
-    ? 'bg-black/40 backdrop-blur-md border-white/10'
-    : 'bg-white border-gray-100 shadow-sm';
+    : isDarkTheme && activeDropdown
+      ? 'bg-black/40 backdrop-blur-md border-white/10'
+      : 'bg-white border-gray-100 shadow-sm';
 
   const dropdownBg =
-    isHeroTransparent && activeDropdown
+    isDarkTheme && activeDropdown
       ? 'bg-black/40 backdrop-blur-md border-white/10'
       : 'bg-white border-gray-100';
 
-  const textColor = isHeroTransparent ? 'text-white hover:text-primary' : 'text-dark hover:text-primary';
-  const chevronColor = isHeroTransparent ? 'stroke-white' : 'stroke-dark/60';
-  const dropdownTextColor = isHeroTransparent && activeDropdown ? 'text-white' : 'text-dark';
-  const dropdownSubColor =
-    isHeroTransparent && activeDropdown ? 'text-white/50' : 'text-dark/40';
+  const textColor = isDarkTheme ? 'text-white hover:text-primary' : 'text-dark hover:text-primary';
+  const chevronColor = isDarkTheme ? 'stroke-white' : 'stroke-dark/60';
+  const dropdownTextColor = isDarkTheme && activeDropdown ? 'text-white' : 'text-dark';
+  const dropdownSubColor = isDarkTheme && activeDropdown ? 'text-white/50' : 'text-dark/40';
+  const hamburgerLines = isDarkTheme ? 'bg-white' : 'bg-dark';
 
   const showScrollBar = scrolled && !activeDropdown && !menuOpen;
 
@@ -84,7 +98,7 @@ export default function Header() {
         <div className="w-full max-w-[1440px] mx-auto px-6 flex items-center justify-between">
           <div className="flex-shrink-0 w-[200px]">
             <Link href="/">
-              <Logo isDark={!isHeroTransparent} />
+              <Logo isDark={!isDarkTheme} />
             </Link>
           </div>
 
@@ -95,27 +109,50 @@ export default function Header() {
                 className="relative py-6"
                 onMouseEnter={() => link.hasDropdown ? setActiveDropdown(link.label) : setActiveDropdown(null)}
               >
-                <Link
-                  href={link.href}
-                  className={`text-[11px] font-bold tracking-widest transition-colors duration-200 flex items-center gap-1.5 ${textColor}`}
-                >
-                  {link.label}
-                  {link.hasDropdown && (
-                    <svg
-                      className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === link.label ? 'rotate-180' : ''}`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        className={chevronColor}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2.5}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  )}
-                </Link>
+                {link.href ? (
+                  <Link
+                    href={link.href}
+                    className={`text-[11px] font-bold tracking-widest transition-colors duration-200 flex items-center gap-1.5 ${textColor}`}
+                  >
+                    {link.label}
+                    {link.hasDropdown && (
+                      <svg
+                        className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === link.label ? 'rotate-180' : ''}`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          className={chevronColor}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2.5}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    )}
+                  </Link>
+                ) : (
+                  <button
+                    className={`text-[11px] font-bold tracking-widest transition-colors duration-200 flex items-center gap-1.5 outline-none cursor-pointer ${textColor}`}
+                  >
+                    {link.label}
+                    {link.hasDropdown && (
+                      <svg
+                        className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === link.label ? 'rotate-180' : ''}`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          className={chevronColor}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2.5}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                )}
               </div>
             ))}
           </nav>
@@ -134,9 +171,9 @@ export default function Header() {
             className="lg:hidden flex flex-col gap-1.5"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            <span className={`w-6 h-0.5 transition-all ${isHeroTransparent ? 'bg-white' : 'bg-dark'}`} />
-            <span className={`w-6 h-0.5 transition-all ${isHeroTransparent ? 'bg-white' : 'bg-dark'}`} />
-            <span className={`w-6 h-0.5 transition-all ${isHeroTransparent ? 'bg-white' : 'bg-dark'}`} />
+            <span className={`w-6 h-0.5 transition-all ${hamburgerLines}`} />
+            <span className={`w-6 h-0.5 transition-all ${hamburgerLines}`} />
+            <span className={`w-6 h-0.5 transition-all ${hamburgerLines}`} />
           </button>
         </div>
       </motion.header>

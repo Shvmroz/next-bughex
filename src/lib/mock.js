@@ -12,13 +12,13 @@ export const siteMeta = {
 
 // ─── NAVIGATION ───────────────────────────────────────────
 export const navLinks = [
-  { label: 'OUR PROJECTS', href: '/projects', hasDropdown: true },
-  { label: 'INSIGHTS', href: '/insights', hasDropdown: false },
+  { label: 'WHO WE ARE', href: '/about', hasDropdown: false },
+  { label: 'PROJECTS', hasDropdown: true },
   { label: 'CONTACT', href: '/contact', hasDropdown: false },
 ];
 
 export const megaMenuData = {
-  'OUR PROJECTS': [
+  'PROJECTS': [
     { title: 'E-Commerce Solutions', subtitle: 'Modern sales platforms', href: '/projects' },
     { title: 'AI & ML Products', subtitle: 'Intelligent automation', href: '/projects' },
     { title: 'Enterprise Apps', subtitle: 'Scaling business operations', href: '/projects' },

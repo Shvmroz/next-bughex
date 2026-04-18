@@ -12,7 +12,7 @@ export default function HeroSection() {
         playsInline
         className="absolute top-0 left-0 w-full h-full object-cover z-0 pointer-events-none opacity-60"
       >
-        <source src="/vecteezy_futuristic.mp4" type="video/mp4" />
+        <source src="/video/vid-4.mp4" type="video/mp4" />
       </video>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16 flex flex-col items-center text-center">
