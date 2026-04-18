@@ -2,10 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
+import SectionHeader from './SectionHeader';
 
 const techRow1 = [
   { name: 'React', icon: 'logos:react', color: '#61DAFB' },
-  { name: 'Next.js', icon: 'logos:nextjs-icon', color: '#ffffff' },
+  { name: 'Next.js', icon: 'logos:nextjs-icon', color: '#000000' },
   { name: 'Flutter', icon: 'logos:flutter', color: '#54C5F8' },
   { name: 'Node.js', icon: 'logos:nodejs-icon', color: '#8CC84B' },
   { name: 'TypeScript', icon: 'logos:typescript-icon', color: '#3178C6' },
@@ -18,7 +19,7 @@ const techRow1 = [
 
 const techRow2 = [
   { name: 'Android', icon: 'logos:android-icon', color: '#3DDC84' },
-  { name: 'iOS', icon: 'logos:apple', color: '#ffffff' },
+  { name: 'iOS', icon: 'logos:apple', color: '#000000' },
   { name: 'Python', icon: 'logos:python', color: '#3776AB' },
   { name: 'GraphQL', icon: 'logos:graphql', color: '#E10098' },
   { name: 'MongoDB', icon: 'logos:mongodb-icon', color: '#47A248' },
@@ -26,63 +27,105 @@ const techRow2 = [
   { name: 'Redis', icon: 'logos:redis', color: '#DC382D' },
   { name: 'Firebase', icon: 'logos:firebase', color: '#FFCA28' },
   { name: 'TailwindCSS', icon: 'logos:tailwindcss-icon', color: '#06B6D4' },
-  { name: 'OpenAI', icon: 'simple-icons:openai', color: '#ffffff' },
+  { name: 'OpenAI', icon: 'simple-icons:openai', color: '#000000' },
 ];
 
-function TechChip({ tech }) {
+function TechCard({ tech }) {
+  // Generate slightly different positions for each bubble based on the tech name length
+  const seed = tech.name.length;
+  const bubbles = [
+    { size: 6, top: `${10 + (seed * 7) % 25}%`, left: `${12 + (seed * 3) % 20}%`, delay: 0 },
+    { size: 4, top: `${20 + (seed * 5) % 20}%`, right: `${15 + (seed * 9) % 20}%`, delay: 1 },
+    { size: 5, bottom: `${15 + (seed * 4) % 20}%`, left: `${40 + (seed * 2) % 40}%`, delay: 0.5 },
+  ];
+
   return (
     <div
-      className="flex items-center gap-3 px-5 py-3 rounded-2xl mx-3 flex-shrink-0 group transition-all duration-300 hover:scale-105"
-      style={{
-        background: 'rgba(255,255,255,0.04)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        backdropFilter: 'blur(8px)',
-      }}
+      className="flex flex-col items-center justify-center w-32 h-32 md:w-40 md:h-40 rounded-3xl mx-4 flex-shrink-0 group transition-all duration-500 relative bg-white overflow-hidden border"
+      style={{ borderColor: `${tech.color}40` }}
     >
-      <span
-        className="w-8 h-8 flex items-center justify-center rounded-lg flex-shrink-0"
-        style={{ background: `${tech.color}18` }}
+      {/* BUBBLE ANIMATIONS - Shown only on hover */}
+      {bubbles.map((b, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={{
+            width: b.size,
+            height: b.size,
+            top: b.top,
+            left: b.left,
+            right: b.right,
+            bottom: b.bottom,
+            background: tech.color,
+            filter: 'blur(1px)',
+          }}
+          animate={{
+            y: [-12, 12, -12],
+            x: [-8, 8, -8],
+            scale: [1, 1.4, 1],
+          }}
+          transition={{
+            duration: 4 + (seed % 3) + i,
+            repeat: Infinity,
+            delay: b.delay,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
+
+      {/* Subtle Background Glow on Hover */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle at center, ${tech.color}08 0%, transparent 70%)`,
+        }}
+      />
+
+      <div
+        className="w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-4 transition-all duration-500 group-hover:scale-110 relative z-10"
+        style={{
+          background: `${tech.color}10`,
+        }}
       >
-        <Icon icon={tech.icon} width={22} style={{ color: tech.color }} />
-      </span>
-      <span className="text-sm font-semibold text-white/70 whitespace-nowrap group-hover:text-white transition-colors">
+        <Icon icon={tech.icon} width={32} style={{ color: tech.color }} className="drop-shadow-sm" />
+      </div>
+
+      <span className="text-xs font-bold text-dark/40 tracking-widest uppercase relative z-10 transition-colors duration-300 group-hover:text-dark">
         {tech.name}
       </span>
+
+      {/* Bottom accent line */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-1 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"
+        style={{ background: tech.color }}
+      />
     </div>
   );
 }
 
 function InfiniteTrack({ techs, direction = 'left', speed = 35 }) {
-  const duplicated = [...techs, ...techs, ...techs];
-  const totalWidth = techs.length * 170;
+  const items = [...techs, ...techs];
 
   return (
-    <div className="overflow-hidden relative w-full">
-      <motion.div
-        className="flex"
-        animate={{
-          x: direction === 'left' ? [-totalWidth, 0] : [0, -totalWidth],
-        }}
-        transition={{
-          x: {
-            repeat: Infinity,
-            repeatType: 'loop',
-            duration: speed,
-            ease: 'linear',
-          },
+    <div className="overflow-hidden relative w-full flex">
+      <div
+        className="flex flex-nowrap w-max"
+        style={{
+          animation: `${direction === 'left' ? 'scroll-left' : 'scroll-right'} ${speed}s linear infinite`,
+          willChange: 'transform',
         }}
       >
-        {duplicated.map((tech, i) => (
-          <TechChip key={`${tech.name}-${i}`} tech={tech} />
+        {items.map((tech, i) => (
+          <TechCard key={`${tech.name}-${i}`} tech={tech} />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
 
 export default function TechSlider() {
   return (
-    <section className="py-20 relative overflow-hidden" style={{ background: '#0a0a0f' }}>
+    <section className="py-20 relative overflow-hidden" style={{ background: '#F8F9FA' }}>
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -91,26 +134,10 @@ export default function TechSlider() {
       />
       <div className="absolute inset-0 grid-bg opacity-10" />
 
-      <div className="max-w-7xl mx-auto px-6 mb-12 relative z-10 text-center">
-        <motion.p
-          className="text-xs font-bold tracking-[0.3em] text-primary uppercase mb-3"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          Our Stack
-        </motion.p>
-        <motion.h2
-          className="font-display text-3xl md:text-5xl font-bold text-white tracking-tight"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-        >
-          Technologies We{' '}
-          <span className="text-gradient-animated">Master</span>
-        </motion.h2>
-      </div>
+      <SectionHeader
+        tag="Our Stack"
+        title="Technologies We Master"
+      />
 
       <div className="relative z-10 space-y-5">
         <div

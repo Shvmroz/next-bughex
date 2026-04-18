@@ -12,7 +12,6 @@ export const siteMeta = {
 
 // ─── NAVIGATION ───────────────────────────────────────────
 export const navLinks = [
-  { label: 'WHAT WE DO', href: '/#services', hasDropdown: true },
   { label: 'OUR PROJECTS', href: '/projects', hasDropdown: true },
   { label: 'INSIGHTS', href: '/insights', hasDropdown: false },
   { label: 'CONTACT', href: '/contact', hasDropdown: false },

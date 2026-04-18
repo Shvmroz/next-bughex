@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import { leaders, leadershipSectionContent } from '@/lib/mock';
+import SectionHeader from './SectionHeader';
 
 export default function LeadershipSection() {
     const scrollRef = useRef(null);
@@ -41,16 +42,10 @@ export default function LeadershipSection() {
 
                 {/* HEADER */}
                 <div className="flex justify-between items-end mb-10">
-                    <div className="max-w-2xl">
-                        <motion.h2
-                            className="text-4xl md:text-5xl font-bold text-gradient-animated tracking-tight pb-2"
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                        >
-                            {leadershipSectionContent.title}
-                        </motion.h2>
-                    </div>
+                    <SectionHeader
+                        title={leadershipSectionContent.title}
+                        align="left"
+                    />
 
                     {/* Animated Slider Controls */}
                     <div className="flex gap-3">

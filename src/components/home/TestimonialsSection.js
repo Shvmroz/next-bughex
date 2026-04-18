@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { testimonials } from '@/lib/servicesData';
-import { SectionHeader } from './ServicesSection';
+import SectionHeader from './SectionHeader';
 
 export default function TestimonialsSection() {
   return (

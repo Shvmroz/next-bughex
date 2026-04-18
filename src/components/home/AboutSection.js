@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { SectionHeader } from './ServicesSection';
+import SectionHeader from './SectionHeader';
 
 const techStack = [
   'Flutter', 'React Native', 'Next.js', 'Node.js',
