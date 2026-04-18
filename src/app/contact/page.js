@@ -9,13 +9,13 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow pt-20">
+      <main className="flex-grow">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          <ContactSection />
+          <ContactSection isPage />
         </motion.div>
       </main>
       <Footer />

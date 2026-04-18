@@ -9,6 +9,8 @@ import HeroSection from '@/components/home/HeroSection';
 import TechSlider from '@/components/home/TechSlider';
 import LeadershipSection from '@/components/home/LeadershipSection';
 import ContactSection from '@/components/home/ContactSection';
+import ScrollTextSection from '@/components/home/ScrollTextSection';
+import VideoShowcaseSection from '@/components/home/VideoShowcaseSection';
 
 export default function HomePage() {
   const [showSplash, setShowSplash] = useState(true);
@@ -31,6 +33,8 @@ export default function HomePage() {
         <main className="flex-grow">
           <HeroSection />
           <TechSlider />
+          <ScrollTextSection />
+          <VideoShowcaseSection />
           <LeadershipSection />
           <ContactSection />
         </main>

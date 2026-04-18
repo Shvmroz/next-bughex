@@ -18,12 +18,6 @@ export const navLinks = [
 ];
 
 export const megaMenuData = {
-  'WHAT WE DO': [
-    { title: 'Flutter Development', subtitle: 'Cross-platform mobile excellence', href: '/#services' },
-    { title: 'AI Solutions', subtitle: 'Intelligent automation & ML', href: '/#services' },
-    { title: 'Web & Backend', subtitle: 'React, Node.js, Laravel', href: '/#services' },
-    { title: 'Native Mobile', subtitle: 'iOS & Android specialists', href: '/#services' },
-  ],
   'OUR PROJECTS': [
     { title: 'E-Commerce Solutions', subtitle: 'Modern sales platforms', href: '/projects' },
     { title: 'AI & ML Products', subtitle: 'Intelligent automation', href: '/projects' },
