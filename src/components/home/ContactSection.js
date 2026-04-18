@@ -60,7 +60,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-[#fafafa] relative overflow-hidden">
+    <section id="contact" className="py-24 bg-[#fafafa] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <SectionHeader
           tag="Partner with us"
