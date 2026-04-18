@@ -48,17 +48,18 @@ body {
 
 .text-gradient-animated {
   background: linear-gradient(135deg,
-      #6ecbc0 0%,
-      #6ecbc0 30%,
-      #129586 50%,
-      #6ecbc0 70%,
-      #6ecbc0 100%);
+      #19B5A4 0%,
+      #21D9C4 30%,
+      #19B5A4 50%,
+      #21D9C4 70%,
+      #19B5A4 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   display: inline-block;
-  animation: shimmer 4s linear infinite, floatText 3s ease-in-out infinite;
+  animation: shimmer 4s linear infinite;
+  line-height: 1.25;
 }
 
 @keyframes shimmer {
@@ -67,17 +68,6 @@ body {
   }
 }
 
-@keyframes floatText {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-5px);
-  }
-}
 
 .bg-glass {
   background: rgba(255, 255, 255, 0.8);

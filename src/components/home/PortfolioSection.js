@@ -90,8 +90,8 @@ export default function PortfolioSection() {
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${activeCategory === cat
-                  ? 'bg-primary text-white shadow-md'
-                  : 'border border-[#f1f3f5] bg-white text-dark/50 hover:border-primary/50 hover:text-primary shadow-sm'
+                ? 'bg-primary text-white shadow-md'
+                : 'border border-[#f1f3f5] bg-white text-dark/50 hover:border-primary/50 hover:text-primary shadow-sm'
                 }`}
             >
               {cat}
