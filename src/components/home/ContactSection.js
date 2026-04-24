@@ -49,7 +49,12 @@ export default function ContactSection({ isPage = false }) {
   const email = c.contactInfo.find(info => info.label === 'Email')?.value || 'hello@bughex.dev';
   const allSocials = [
     ...socialLinks,
-    { name: 'Email', icon: 'mdi:email', href: `mailto:${email}`, hoverColor: '#1bb5a2' }
+    {
+      name: 'Email',
+      icon: 'mdi:email',
+      href: `mailto:${email}`,
+      hoverColor: '#1bb5a2'
+    }
   ];
 
   const handleSubmit = (e) => {
@@ -73,7 +78,7 @@ export default function ContactSection({ isPage = false }) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24 items-start">
 
-          {/* LEFT — HEADLINE + INFO */}
+          {/* LEFT — HEADLINE + SOCIALS */}
           <div>
             <h2 className="font-display text-4xl md:text-5xl xl:text-6xl font-bold text-dark leading-[1.05] mb-6 tracking-tight">
               Let&apos;s build<br />
@@ -84,39 +89,22 @@ export default function ContactSection({ isPage = false }) {
               Whether you need a Flutter app, complex backend, or AI-powered solution &mdash; we&apos;re here to engineer it.
             </p>
 
-            {/* CONTACT ITEMS */}
-            <div className="space-y-6 mb-12">
-              {c.contactInfo.map((info) => (
-                <div key={info.label} className="flex items-center gap-5 group">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/8 border border-primary/15 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:border-primary transition-all duration-300">
-                    <Icon icon={info.icon} width={20} className="text-primary group-hover:text-white transition-colors duration-300" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold text-dark/30 uppercase tracking-widest mb-0.5">{info.label}</p>
-                    {info.label === 'Email' ? (
-                      <a href={`mailto:${info.value}`} className="text-base font-bold text-dark hover:text-primary transition-colors">
-                        {info.value}
-                      </a>
-                    ) : (
-                      <p className="text-base font-bold text-dark">{info.value}</p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* SOCIALS */}
+            {/* SOCIALS — matching footer hover effect */}
             <div>
               <p className="text-[10px] font-bold text-dark/30 uppercase tracking-widest mb-4">Connect</p>
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-4">
                 {allSocials.map((social) => (
                   <motion.a
                     key={social.name}
                     href={social.href}
-                    className="w-11 h-11 rounded-2xl bg-[#F8F9FA] border border-gray-200 flex items-center justify-center text-dark/40 transition-all duration-300 hover:border-primary/40 hover:text-primary group relative overflow-hidden"
-                    whileHover={{ y: -3 }}
+                    className="w-12 h-12 rounded-2xl bg-[#F8F9FA] border border-gray-200 flex items-center justify-center text-dark/40 transition-all duration-300 hover:text-white hover:border-primary/50 group relative overflow-hidden"
+                    whileHover={{ y: -5 }}
                   >
-                    <Icon icon={social.icon} width={20} className="relative z-10" />
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+                      style={{ background: social.hoverColor }}
+                    />
+                    <Icon icon={social.icon} width={22} className="relative z-10" />
                   </motion.a>
                 ))}
               </div>

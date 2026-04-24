@@ -9,7 +9,6 @@ import Link from 'next/link';
 
 const capabilities = [
   {
-    number: '01',
     icon: 'mdi:cellphone-link',
     title: 'Mobile Apps',
     subtitle: 'Flutter & React Native',
@@ -18,7 +17,6 @@ const capabilities = [
     accent: '#1bb5a2',
   },
   {
-    number: '02',
     icon: 'mdi:web',
     title: 'Web Platforms',
     subtitle: 'React, Next.js & More',
@@ -27,7 +25,6 @@ const capabilities = [
     accent: '#0ea5e9',
   },
   {
-    number: '03',
     icon: 'mdi:robot-outline',
     title: 'AI Specialization',
     subtitle: 'LLMs & Automation',
@@ -36,7 +33,6 @@ const capabilities = [
     accent: '#10b981',
   },
   {
-    number: '04',
     icon: 'mdi:shield-check-outline',
     title: 'Cybersecurity',
     subtitle: 'Penetration & Hardening',
@@ -53,51 +49,63 @@ const stats = [
   { value: '100%', label: 'Client Satisfaction' },
 ];
 
-function CapabilityCard({ cap, index, scrollYProgress }) {
+function CapabilityCard({ cap, index, scrollXProgress }) {
   const start = index / capabilities.length;
   const end = (index + 1) / capabilities.length;
 
   const opacity = useTransform(
-    scrollYProgress,
+    scrollXProgress,
     [start, start + 0.04, end - 0.04, end],
     [0, 1, 1, 0]
   );
-  const y = useTransform(
-    scrollYProgress,
+  const x = useTransform(
+    scrollXProgress,
     [start, start + 0.04, end - 0.04, end],
-    [60, 0, 0, -60]
+    [120, 0, 0, -120]
   );
   const scale = useTransform(
-    scrollYProgress,
+    scrollXProgress,
     [start, start + 0.04, end - 0.04, end],
     [0.96, 1, 1, 0.96]
   );
 
   return (
     <motion.div
-      style={{ opacity, y, scale }}
+      style={{ opacity, x, scale }}
       className="absolute inset-0 flex items-center justify-center px-6"
     >
       <div className="w-full max-w-4xl">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.6fr] gap-0 rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-100">
 
-          {/* LEFT — NUMBER + ICON */}
+          {/* LEFT — ICON WITH ANIMATED GRADIENT */}
           <div
-            className="flex flex-col justify-between p-10 md:p-14 text-white relative overflow-hidden"
+            className="flex flex-col justify-center items-center p-10 md:p-14 text-white relative overflow-hidden"
             style={{ background: `linear-gradient(135deg, ${cap.accent}ee, ${cap.accent}99)` }}
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4 pointer-events-none" />
 
-            <span className="text-white/20 font-display font-bold text-8xl md:text-9xl leading-none select-none relative z-10">
-              {cap.number}
-            </span>
-
+            {/* Animated gradient icon background */}
             <div className="relative z-10">
-              <div className="w-16 h-16 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center mb-6 backdrop-blur-sm">
-                <Icon icon={cap.icon} width={32} className="text-white" />
+              <div
+                className="w-24 h-24 rounded-3xl flex items-center justify-center mb-6 backdrop-blur-sm relative overflow-hidden"
+                style={{
+                  background: `linear-gradient(135deg, ${cap.accent}cc, ${cap.accent}66)`,
+                  border: '1px solid rgba(255,255,255,0.2)',
+                }}
+              >
+                {/* Animated gradient overlay */}
+                <div
+                  className="absolute inset-0 opacity-60"
+                  style={{
+                    background: `linear-gradient(45deg, ${cap.accent}, ${cap.accent}88, #ffffff44, ${cap.accent}88, ${cap.accent})`,
+                    backgroundSize: '300% 300%',
+                    animation: 'gradientShift 3s ease infinite',
+                  }}
+                />
+                <Icon icon={cap.icon} width={40} className="text-white relative z-10" />
               </div>
-              <p className="text-white/60 text-xs font-bold tracking-[0.25em] uppercase">{cap.subtitle}</p>
+              <p className="text-white/60 text-xs font-bold tracking-[0.25em] uppercase text-center">{cap.subtitle}</p>
             </div>
           </div>
 
@@ -172,7 +180,7 @@ export default function AboutPage() {
   const hOpacity5 = useTransform(heroProgress, [0.85, 0.95, 1], [0, 1, 1]);
   const hY5 = useTransform(heroProgress, [0.85, 0.95], [50, 0]);
 
-  // Capabilities scroll
+  // Capabilities scroll - horizontal movement
   const capRef = useRef(null);
   const { scrollYProgress: capProgressRaw } = useScroll({
     target: capRef,
@@ -261,27 +269,27 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* CORE CAPABILITIES — SCROLL CARDS */}
+        {/* CORE CAPABILITIES — HORIZONTAL SCROLL CARDS */}
         <section ref={capRef} className="h-[500vh] bg-[#FAFBFC] relative">
           <div className="sticky top-0 h-screen overflow-hidden">
             <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
 
-            {/* Heading */}
-            <div className="absolute top-0 left-0 right-0 pt-20 md:pt-24 text-center z-20 pointer-events-none">
+            {/* Heading with proper spacing */}
+            <div className="absolute top-0 left-0 right-0 pt-16 md:pt-20 text-center z-20 pointer-events-none">
               <span className="text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-3 block">Our Expertise</span>
               <h2 className="font-display text-4xl md:text-6xl font-bold text-dark tracking-tight leading-[1.1]">
                 Core <span className="text-gradient-animated">Capabilities</span>
               </h2>
             </div>
 
-            {/* Cards stack */}
-            <div className="absolute inset-0 flex items-center justify-center mt-12">
+            {/* Cards stack - horizontal movement */}
+            <div className="absolute inset-0 flex items-center justify-center pt-24">
               {capabilities.map((cap, i) => (
                 <CapabilityCard
-                  key={cap.number}
+                  key={cap.title}
                   cap={cap}
                   index={i}
-                  scrollYProgress={capProgress}
+                  scrollXProgress={capProgress}
                 />
               ))}
             </div>
