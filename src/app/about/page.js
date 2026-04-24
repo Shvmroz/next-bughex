@@ -7,12 +7,154 @@ import Footer from '@/components/Footer';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 
+const capabilities = [
+  {
+    number: '01',
+    icon: 'mdi:cellphone-link',
+    title: 'Mobile Apps',
+    subtitle: 'Flutter & React Native',
+    body: 'We engineer high-performance native and cross-platform mobile applications. One codebase, every platform — iOS, Android, Web, and Desktop.',
+    tags: ['Flutter', 'React Native', 'Swift', 'Kotlin'],
+    accent: '#1bb5a2',
+  },
+  {
+    number: '02',
+    icon: 'mdi:web',
+    title: 'Web Platforms',
+    subtitle: 'React, Next.js & More',
+    body: 'From dynamic SPAs to massive enterprise platforms. We build with modern stacks and serverless architectures built to handle global scale.',
+    tags: ['React', 'Next.js', 'Node.js', 'Laravel'],
+    accent: '#0ea5e9',
+  },
+  {
+    number: '03',
+    icon: 'mdi:robot-outline',
+    title: 'AI Specialization',
+    subtitle: 'LLMs & Automation',
+    body: 'Our true differentiator. We integrate intelligent AI — from large language models to complex automation pipelines — positioning you lightyears ahead.',
+    tags: ['OpenAI', 'LangChain', 'TensorFlow', 'Python'],
+    accent: '#10b981',
+  },
+  {
+    number: '04',
+    icon: 'mdi:shield-check-outline',
+    title: 'Cybersecurity',
+    subtitle: 'Penetration & Hardening',
+    body: 'Elite security audits, penetration testing, and hardening for your entire digital infrastructure. We find vulnerabilities before attackers do.',
+    tags: ['Pentesting', 'OWASP', 'Audits', 'Compliance'],
+    accent: '#f59e0b',
+  },
+];
+
+const stats = [
+  { value: '10+', label: 'Years in Dubai' },
+  { value: '150+', label: 'Products Shipped' },
+  { value: '50+', label: 'Global Clients' },
+  { value: '100%', label: 'Client Satisfaction' },
+];
+
+function CapabilityCard({ cap, index, scrollYProgress }) {
+  const start = index / capabilities.length;
+  const end = (index + 1) / capabilities.length;
+
+  const opacity = useTransform(
+    scrollYProgress,
+    [start, start + 0.04, end - 0.04, end],
+    [0, 1, 1, 0]
+  );
+  const y = useTransform(
+    scrollYProgress,
+    [start, start + 0.04, end - 0.04, end],
+    [60, 0, 0, -60]
+  );
+  const scale = useTransform(
+    scrollYProgress,
+    [start, start + 0.04, end - 0.04, end],
+    [0.96, 1, 1, 0.96]
+  );
+
+  return (
+    <motion.div
+      style={{ opacity, y, scale }}
+      className="absolute inset-0 flex items-center justify-center px-6"
+    >
+      <div className="w-full max-w-4xl">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.6fr] gap-0 rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-100">
+
+          {/* LEFT — NUMBER + ICON */}
+          <div
+            className="flex flex-col justify-between p-10 md:p-14 text-white relative overflow-hidden"
+            style={{ background: `linear-gradient(135deg, ${cap.accent}ee, ${cap.accent}99)` }}
+          >
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4 pointer-events-none" />
+
+            <span className="text-white/20 font-display font-bold text-8xl md:text-9xl leading-none select-none relative z-10">
+              {cap.number}
+            </span>
+
+            <div className="relative z-10">
+              <div className="w-16 h-16 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center mb-6 backdrop-blur-sm">
+                <Icon icon={cap.icon} width={32} className="text-white" />
+              </div>
+              <p className="text-white/60 text-xs font-bold tracking-[0.25em] uppercase">{cap.subtitle}</p>
+            </div>
+          </div>
+
+          {/* RIGHT — CONTENT */}
+          <div className="bg-white p-10 md:p-14 flex flex-col justify-between">
+            <div>
+              <h3 className="font-display text-3xl md:text-4xl font-bold text-dark mb-4 tracking-tight">
+                {cap.title}
+              </h3>
+              <p className="text-dark/60 text-base md:text-lg leading-relaxed font-medium mb-8">
+                {cap.body}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {cap.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs px-3 py-1.5 rounded-full border font-bold tracking-wide"
+                  style={{
+                    borderColor: `${cap.accent}30`,
+                    color: cap.accent,
+                    background: `${cap.accent}08`,
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* PROGRESS DOTS */}
+        <div className="flex justify-center gap-2 mt-8">
+          {capabilities.map((_, i) => (
+            <div
+              key={i}
+              className="rounded-full transition-all duration-300"
+              style={{
+                width: i === index ? 24 : 6,
+                height: 6,
+                background: i === index ? cap.accent : '#e5e7eb',
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function AboutPage() {
   // Hero Scroll Story
   const heroRef = useRef(null);
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroRef,
-    offset: ["start start", "end end"]
+    offset: ['start start', 'end end'],
   });
 
   const hOpacity1 = useTransform(heroProgress, [0, 0.15, 0.25], [1, 1, 0]);
@@ -30,40 +172,33 @@ export default function AboutPage() {
   const hOpacity5 = useTransform(heroProgress, [0.85, 0.95, 1], [0, 1, 1]);
   const hY5 = useTransform(heroProgress, [0.85, 0.95], [50, 0]);
 
-  // Horizontal Timeline Core
-  const timelineRef = useRef(null);
-  const { scrollYProgress: timelineProgressRaw } = useScroll({
-    target: timelineRef,
-    offset: ["start start", "end end"]
+  // Capabilities scroll
+  const capRef = useRef(null);
+  const { scrollYProgress: capProgressRaw } = useScroll({
+    target: capRef,
+    offset: ['start start', 'end end'],
   });
-
-  // Smoothing the scroll to x
-  const timelineProgress = useSpring(timelineProgressRaw, { stiffness: 400, damping: 90 });
-  const x = useTransform(timelineProgress, [0, 1], ["0%", "-66.66%"]);
-  // "when scroll in the middel zoom out"
-  const scale = useTransform(timelineProgress, [0, 0.5, 1], [1, 0.85, 1]);
+  const capProgress = useSpring(capProgressRaw, { stiffness: 300, damping: 80 });
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
       <main className="flex-grow">
 
-        {/* HERO SECTION - 5 STEP SCROLL STORY */}
+        {/* HERO SCROLL STORY */}
         <section ref={heroRef} className="h-[500vh] relative bg-[#FAFBFC]">
           <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden w-full">
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
-                background:
-                  'radial-gradient(ellipse 70% 50% at 50% 30%, rgba(27, 181, 162, 0.08) 0%, transparent 70%)',
+                background: 'radial-gradient(ellipse 70% 50% at 50% 30%, rgba(27, 181, 162, 0.08) 0%, transparent 70%)',
               }}
             />
             <div className="absolute inset-0 grid-bg opacity-40 mix-blend-multiply" />
 
             <div className="relative max-w-5xl mx-auto px-6 text-center z-10 w-full">
-
-
               <div className="relative h-[250px] md:h-[200px] w-full max-w-4xl mx-auto flex items-center justify-center">
+
                 <motion.div style={{ opacity: hOpacity1, y: hY1 }} className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                   <p className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[52px] text-dark/70 font-medium leading-[1.3] text-center">
                     <span className="text-dark font-bold block mb-3 sm:mb-5">BugHex is a premier Dubai-based agency.</span>
@@ -98,70 +233,58 @@ export default function AboutPage() {
                     Keep scrolling to see exactly what powers our market-dominating ecosystem.
                   </p>
                 </motion.div>
+
               </div>
             </div>
           </div>
         </section>
 
-        {/* CORE EXPERTISE - HORIZONTAL TIMELINE */}
-        <section ref={timelineRef} className="h-[400vh] bg-white relative">
-          <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden w-full bg-white z-10">
-            <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
+        {/* STATS BAR */}
+        <section className="py-16 bg-dark relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 pointer-events-none" />
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0 md:divide-x md:divide-white/10">
+              {stats.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  className="text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <p className="font-display text-4xl md:text-5xl font-bold text-primary mb-2">{s.value}</p>
+                  <p className="text-white/40 text-xs font-bold tracking-widest uppercase">{s.label}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            <div className="w-full absolute top-20 md:top-24 left-0 text-center z-20 px-6">
-              <span className="text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-4 block">Our Expertise</span>
-              <h2 className="font-display text-4xl md:text-6xl font-bold text-dark mb-4 tracking-tight leading-[1.1]">
+        {/* CORE CAPABILITIES — SCROLL CARDS */}
+        <section ref={capRef} className="h-[500vh] bg-[#FAFBFC] relative">
+          <div className="sticky top-0 h-screen overflow-hidden">
+            <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
+
+            {/* Heading */}
+            <div className="absolute top-0 left-0 right-0 pt-20 md:pt-24 text-center z-20 pointer-events-none">
+              <span className="text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-3 block">Our Expertise</span>
+              <h2 className="font-display text-4xl md:text-6xl font-bold text-dark tracking-tight leading-[1.1]">
                 Core <span className="text-gradient-animated">Capabilities</span>
               </h2>
             </div>
 
-            <motion.div style={{ scale }} className="w-full h-[60vh] flex items-center mt-48 md:mt-32">
-              <motion.div style={{ x }} className="flex gap-16 md:gap-32 px-[10vw] md:px-[20vw] w-[300vw] items-center h-full relative">
-
-                {/* THE JOURNEY LINE */}
-                <div className="absolute top-1/2 left-0 w-full h-px bg-gray-100 -translate-y-1/2 z-0" />
-
-                {/* ITEM 1 */}
-                <div className="w-[85vw] md:w-[65vw] max-w-5xl flex-shrink-0 flex flex-col md:flex-row bg-[#FAFBFC] border border-gray-100 rounded-[3rem] shadow-sm hover:bg-white hover:shadow-2xl hover:border-primary/20 transition-all duration-500 group relative z-10 overflow-hidden">
-                  <div className="w-full md:w-1/3 min-h-[200px] md:min-h-0 bg-white flex items-center justify-center border-b md:border-b-0 md:border-r border-gray-100 group-hover:bg-primary/5 transition-all duration-500">
-                    <Icon icon="mdi:cellphone-link" width={96} className="text-dark/20 group-hover:text-primary transition-all duration-500" />
-                  </div>
-                  <div className="flex-1 p-8 md:p-14 text-center md:text-left flex flex-col justify-center">
-                    <h3 className="font-display text-2xl md:text-3xl font-bold text-dark mb-4 group-hover:text-primary transition-colors">Mobile Apps</h3>
-                    <p className="text-dark/60 font-medium text-base md:text-lg leading-relaxed">
-                      We engineer high-performance native and cross-platform mobile applications using Flutter, React Native, iOS, and Android to create seamless user experiences that dominate app stores.
-                    </p>
-                  </div>
-                </div>
-
-                {/* ITEM 2 */}
-                <div className="w-[85vw] md:w-[65vw] max-w-5xl flex-shrink-0 flex flex-col md:flex-row bg-[#FAFBFC] border border-gray-100 rounded-[3rem] shadow-sm hover:bg-white hover:shadow-2xl hover:border-primary/20 transition-all duration-500 group relative z-10 overflow-hidden">
-                  <div className="w-full md:w-1/3 min-h-[200px] md:min-h-0 bg-white flex items-center justify-center border-b md:border-b-0 md:border-r border-gray-100 group-hover:bg-primary/5 transition-all duration-500">
-                    <Icon icon="mdi:web" width={96} className="text-dark/20 group-hover:text-primary transition-all duration-500" />
-                  </div>
-                  <div className="flex-1 p-8 md:p-14 text-center md:text-left flex flex-col justify-center">
-                    <h3 className="font-display text-2xl md:text-3xl font-bold text-dark mb-4 group-hover:text-primary transition-colors">Web Platforms</h3>
-                    <p className="text-dark/60 font-medium text-base md:text-lg leading-relaxed">
-                      From dynamic single-page applications to massive enterprise web platforms. We build with modern stacks like React, Next.js, and highly scalable serverless architectures.
-                    </p>
-                  </div>
-                </div>
-
-                {/* ITEM 3 */}
-                <div className="w-[85vw] md:w-[65vw] max-w-5xl flex-shrink-0 flex flex-col md:flex-row bg-[#FAFBFC] border border-gray-100 rounded-[3rem] shadow-sm hover:bg-white hover:shadow-2xl hover:border-primary/20 transition-all duration-500 group relative z-10 overflow-hidden">
-                  <div className="w-full md:w-1/3 min-h-[200px] md:min-h-0 bg-white flex items-center justify-center border-b md:border-b-0 md:border-r border-gray-100 group-hover:bg-primary/5 transition-all duration-500">
-                    <Icon icon="mdi:robot-outline" width={102} className="text-dark/20 group-hover:text-primary transition-all duration-500" />
-                  </div>
-                  <div className="flex-1 p-8 md:p-14 text-center md:text-left flex flex-col justify-center">
-                    <h3 className="font-display text-2xl md:text-3xl font-bold text-dark mb-4 group-hover:text-primary transition-colors">AI Specialization</h3>
-                    <p className="text-dark/60 font-medium text-base md:text-lg leading-relaxed">
-                      Our true differentiator. We integrate intelligent AI solutions—from large language models to complex automation—supercharging your capabilities and positioning you lightyears ahead.
-                    </p>
-                  </div>
-                </div>
-
-              </motion.div>
-            </motion.div>
+            {/* Cards stack */}
+            <div className="absolute inset-0 flex items-center justify-center mt-12">
+              {capabilities.map((cap, i) => (
+                <CapabilityCard
+                  key={cap.number}
+                  cap={cap}
+                  index={i}
+                  scrollYProgress={capProgress}
+                />
+              ))}
+            </div>
           </div>
         </section>
 

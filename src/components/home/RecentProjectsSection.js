@@ -48,7 +48,7 @@ export default function RecentProjectsSection() {
                                 Our Digital <br />Portfolio
                             </h3>
                             <p className="text-white/70 font-medium text-lg max-w-sm">
-                                We take pride in building scalable, visually spectacular products. See what we've engineered.
+                                We take pride in building scalable, visually spectacular products. See what we&apos;ve engineered.
                             </p>
                         </div>
                     </div>

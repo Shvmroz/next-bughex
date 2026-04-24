@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import SectionHeader from './SectionHeader';
 
@@ -31,72 +30,30 @@ const techRow2 = [
 ];
 
 function TechCard({ tech }) {
-  // Generate slightly different positions for each bubble based on the tech name length
-  const seed = tech.name.length;
-  const bubbles = [
-    { size: 6, top: `${10 + (seed * 7) % 25}%`, left: `${12 + (seed * 3) % 20}%`, delay: 0 },
-    { size: 4, top: `${20 + (seed * 5) % 20}%`, right: `${15 + (seed * 9) % 20}%`, delay: 1 },
-    { size: 5, bottom: `${15 + (seed * 4) % 20}%`, left: `${40 + (seed * 2) % 40}%`, delay: 0.5 },
-  ];
-
   return (
     <div
-      className="flex flex-col items-center justify-center w-32 h-32 md:w-40 md:h-40 rounded-3xl mx-4 flex-shrink-0 group transition-all duration-500 relative bg-white overflow-hidden border"
-      style={{ borderColor: `${tech.color}40` }}
+      className="flex flex-col items-center justify-center w-20 md:w-24 py-6 rounded-2xl mx-3 flex-shrink-0 group transition-all duration-300 relative bg-white border border-gray-100 hover:border-gray-200 hover:shadow-md overflow-hidden"
     >
-      {/* BUBBLE ANIMATIONS - Shown only on hover */}
-      {bubbles.map((b, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          style={{
-            width: b.size,
-            height: b.size,
-            top: b.top,
-            left: b.left,
-            right: b.right,
-            bottom: b.bottom,
-            background: tech.color,
-            filter: 'blur(1px)',
-          }}
-          animate={{
-            y: [-12, 12, -12],
-            x: [-8, 8, -8],
-            scale: [1, 1.4, 1],
-          }}
-          transition={{
-            duration: 4 + (seed % 3) + i,
-            repeat: Infinity,
-            delay: b.delay,
-            ease: 'easeInOut',
-          }}
-        />
-      ))}
-
-      {/* Subtle Background Glow on Hover */}
+      {/* Subtle tint on hover */}
       <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{
-          background: `radial-gradient(circle at center, ${tech.color}08 0%, transparent 70%)`,
-        }}
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{ background: `${tech.color}06` }}
       />
 
       <div
-        className="w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-4 transition-all duration-500 group-hover:scale-110 relative z-10"
-        style={{
-          background: `${tech.color}10`,
-        }}
+        className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center mb-3 relative z-10"
+        style={{ background: `${tech.color}12` }}
       >
-        <Icon icon={tech.icon} width={32} style={{ color: tech.color }} className="drop-shadow-sm" />
+        <Icon icon={tech.icon} width={24} style={{ color: tech.color }} className="drop-shadow-sm" />
       </div>
 
-      <span className="text-xs font-bold text-dark/40 tracking-widest uppercase relative z-10 transition-colors duration-300 group-hover:text-dark">
+      <span className="text-[9px] font-bold text-dark/40 tracking-widest uppercase relative z-10 group-hover:text-dark/70 transition-colors duration-300 text-center px-1">
         {tech.name}
       </span>
 
-      {/* Bottom accent line */}
+      {/* Bottom accent */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-1 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"
+        className="absolute bottom-0 left-0 right-0 h-[2px] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-center"
         style={{ background: tech.color }}
       />
     </div>
@@ -139,7 +96,7 @@ export default function TechSlider() {
         title="Technologies We Master"
       />
 
-      <div className="relative z-10 space-y-5">
+      <div className="relative z-10 space-y-4">
         <div
           className="relative"
           style={{

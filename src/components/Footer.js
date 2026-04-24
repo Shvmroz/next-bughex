@@ -47,7 +47,7 @@ export default function Footer() {
           <Link href="/contact">
             <button className="btn bg-white text-dark hover:bg-primary hover:text-white shadow-2xl border-none">
               <i className="animation"></i>
-              Let's Talk
+              Let&apos;s Talk
               <i className="animation"></i>
             </button>
           </Link>
