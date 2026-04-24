@@ -269,18 +269,23 @@ export default function AboutPage() {
         {/* CORE CAPABILITIES — SCROLL CARDS */}
         <section ref={capRef} className="h-[500vh] bg-[#FAFBFC] relative">
           <div className="sticky top-0 h-screen overflow-hidden">
+
+            {/* Background */}
             <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
 
-            {/* Heading */}
-            <div className="absolute top-0 left-0 right-0 pt-20 md:pt-28 text-center z-20 pointer-events-none">
-              <span className="text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-4 block">Our Expertise</span>
+            {/* Heading (fixed height area) */}
+            <div className="absolute top-0 left-0 right-0 h-[180px] md:h-[220px] pt-20 md:pt-28 text-center z-20 pointer-events-none">
+              <span className="text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-4 block">
+                Our Expertise
+              </span>
+
               <h2 className="font-display text-4xl md:text-6xl font-bold text-dark tracking-tight leading-[1.1]">
                 Core <span className="text-gradient-animated">Capabilities</span>
               </h2>
             </div>
 
-            {/* Cards stack */}
-            <div className="absolute inset-0 flex items-center justify-center pt-32 md:pt-36">
+            {/* Cards Area (starts AFTER heading) */}
+            <div className="absolute left-0 right-0 bottom-0 top-[180px] md:top-[220px] flex items-center justify-center">
               {capabilities.map((cap, i) => (
                 <CapabilityCard
                   key={cap.number}
@@ -290,6 +295,7 @@ export default function AboutPage() {
                 />
               ))}
             </div>
+
           </div>
         </section>
 
