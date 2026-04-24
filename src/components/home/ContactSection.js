@@ -12,7 +12,7 @@ function FormField({ label, type = 'text', placeholder, value, onChange, require
     <div className="relative w-full">
       <label className={`block text-[10px] font-bold tracking-widest uppercase mb-2 transition-colors duration-300 ${focused ? 'text-primary' : 'text-dark/40'}`}>
         {label} {required && <span className="text-red-400">*</span>}
-        }
+        
       </label>
       {textarea ? (
         <textarea
