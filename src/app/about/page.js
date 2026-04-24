@@ -62,10 +62,10 @@ function CapabilityCard({ cap, index, scrollYProgress }) {
     [start, start + 0.04, end - 0.04, end],
     [0, 1, 1, 0]
   );
-  const y = useTransform(
+  const x = useTransform(
     scrollYProgress,
     [start, start + 0.04, end - 0.04, end],
-    [60, 0, 0, -60]
+    [-80, 0, 0, 80]
   );
   const scale = useTransform(
     scrollYProgress,
@@ -75,29 +75,34 @@ function CapabilityCard({ cap, index, scrollYProgress }) {
 
   return (
     <motion.div
-      style={{ opacity, y, scale }}
+      style={{ opacity, x, scale }}
       className="absolute inset-0 flex items-center justify-center px-6"
     >
       <div className="w-full max-w-4xl">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.6fr] gap-0 rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-100">
 
-          {/* LEFT — NUMBER + ICON */}
+          {/* LEFT — ICON with looped gradient bg */}
           <div
-            className="flex flex-col justify-between p-10 md:p-14 text-white relative overflow-hidden"
-            style={{ background: `linear-gradient(135deg, ${cap.accent}ee, ${cap.accent}99)` }}
+            className="flex flex-col items-center justify-center p-10 md:p-14 text-white relative overflow-hidden"
           >
+            {/* Animated looped gradient background */}
+            <div
+              className="absolute inset-0 capability-gradient-bg pointer-events-none"
+              style={{
+                '--accent': cap.accent,
+                background: `linear-gradient(135deg, ${cap.accent}ff, ${cap.accent}99, ${cap.accent}cc, ${cap.accent}66, ${cap.accent}ff)`,
+                backgroundSize: '300% 300%',
+                animation: 'gradientShift 3s ease infinite',
+              }}
+            />
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4 pointer-events-none" />
 
-            <span className="text-white/20 font-display font-bold text-8xl md:text-9xl leading-none select-none relative z-10">
-              {cap.number}
-            </span>
-
-            <div className="relative z-10">
-              <div className="w-16 h-16 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center mb-6 backdrop-blur-sm">
-                <Icon icon={cap.icon} width={32} className="text-white" />
+            <div className="relative z-10 flex flex-col items-center gap-6">
+              <div className="w-20 h-20 rounded-3xl bg-white/15 border border-white/25 flex items-center justify-center backdrop-blur-sm shadow-lg">
+                <Icon icon={cap.icon} width={40} className="text-white" />
               </div>
-              <p className="text-white/60 text-xs font-bold tracking-[0.25em] uppercase">{cap.subtitle}</p>
+              <p className="text-white/70 text-xs font-bold tracking-[0.25em] uppercase text-center">{cap.subtitle}</p>
             </div>
           </div>
 
@@ -267,15 +272,15 @@ export default function AboutPage() {
             <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
 
             {/* Heading */}
-            <div className="absolute top-0 left-0 right-0 pt-20 md:pt-24 text-center z-20 pointer-events-none">
-              <span className="text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-3 block">Our Expertise</span>
+            <div className="absolute top-0 left-0 right-0 pt-20 md:pt-28 text-center z-20 pointer-events-none">
+              <span className="text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-4 block">Our Expertise</span>
               <h2 className="font-display text-4xl md:text-6xl font-bold text-dark tracking-tight leading-[1.1]">
                 Core <span className="text-gradient-animated">Capabilities</span>
               </h2>
             </div>
 
             {/* Cards stack */}
-            <div className="absolute inset-0 flex items-center justify-center mt-12">
+            <div className="absolute inset-0 flex items-center justify-center pt-32 md:pt-36">
               {capabilities.map((cap, i) => (
                 <CapabilityCard
                   key={cap.number}

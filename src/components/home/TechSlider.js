@@ -32,7 +32,7 @@ const techRow2 = [
 function TechCard({ tech }) {
   return (
     <div
-      className="flex flex-col items-center justify-center w-20 md:w-24 py-6 rounded-2xl mx-3 flex-shrink-0 group transition-all duration-300 relative bg-white border border-gray-100 hover:border-gray-200 hover:shadow-md overflow-hidden"
+      className="flex flex-row items-center gap-3 px-5 py-3.5 rounded-2xl mx-2.5 flex-shrink-0 group transition-all duration-300 relative bg-white border border-gray-100 hover:border-gray-200 hover:shadow-md overflow-hidden"
     >
       {/* Subtle tint on hover */}
       <div
@@ -41,19 +41,19 @@ function TechCard({ tech }) {
       />
 
       <div
-        className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center mb-3 relative z-10"
+        className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 relative z-10"
         style={{ background: `${tech.color}12` }}
       >
-        <Icon icon={tech.icon} width={24} style={{ color: tech.color }} className="drop-shadow-sm" />
+        <Icon icon={tech.icon} width={20} style={{ color: tech.color }} className="drop-shadow-sm" />
       </div>
 
-      <span className="text-[9px] font-bold text-dark/40 tracking-widest uppercase relative z-10 group-hover:text-dark/70 transition-colors duration-300 text-center px-1">
+      <span className="text-[11px] font-bold text-dark/50 tracking-wider relative z-10 group-hover:text-dark/80 transition-colors duration-300 whitespace-nowrap">
         {tech.name}
       </span>
 
       {/* Bottom accent */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-[2px] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-center"
+        className="absolute bottom-0 left-0 right-0 h-[2px] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"
         style={{ background: tech.color }}
       />
     </div>
