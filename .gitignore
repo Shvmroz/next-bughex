@@ -6,8 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-public/*.mp4
-public/video/
+# public/*.mp4
+# public/video/
 
 node_modules
 dist
