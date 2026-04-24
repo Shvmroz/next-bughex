@@ -165,40 +165,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* CTA SECTION */}
-        <section className="py-32 bg-[#0a0a0f] relative overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover opacity-60"
-            >
-              <source src="/video/vid-2.mp4" type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-[#0a0a0f]/30 mix-blend-multiply" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/20 to-transparent" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 rounded-full blur-[120px] pointer-events-none mix-blend-overlay" />
-          </div>
-
-          <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to build the future?
-            </h2>
-            <p className="text-white/70 text-lg mb-10 font-medium">
-              Contact our Dubai team directly to discuss how BugHex can architect your next big project.
-            </p>
-            <Link href="/contact">
-              <button className="btn bg-white text-dark hover:bg-primary hover:text-white shadow-2xl border-none">
-                <i className="animation"></i>
-                Let's Talk
-                <i className="animation"></i>
-              </button>
-            </Link>
-          </div>
-        </section>
-
       </main>
       <Footer />
     </div>
