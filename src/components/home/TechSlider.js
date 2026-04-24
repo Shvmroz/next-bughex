@@ -29,10 +29,10 @@ const techRow2 = [
   { name: 'OpenAI', icon: 'simple-icons:openai', color: '#000000' },
 ];
 
-function HorizontalTechCard({ tech }) {
+function TechCard({ tech }) {
   return (
     <div
-      className="flex items-center gap-4 px-6 py-4 rounded-2xl mx-3 flex-shrink-0 group transition-all duration-300 relative bg-white border border-gray-100 hover:border-gray-200 hover:shadow-md overflow-hidden"
+      className="flex flex-col items-center justify-center w-20 md:w-24 py-6 rounded-2xl mx-3 flex-shrink-0 group transition-all duration-300 relative bg-white border border-gray-100 hover:border-gray-200 hover:shadow-md overflow-hidden"
     >
       {/* Subtle tint on hover */}
       <div
@@ -41,17 +41,15 @@ function HorizontalTechCard({ tech }) {
       />
 
       <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 relative z-10"
+        className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center mb-3 relative z-10"
         style={{ background: `${tech.color}12` }}
       >
-        <Icon icon={tech.icon} width={28} style={{ color: tech.color }} className="drop-shadow-sm" />
+        <Icon icon={tech.icon} width={24} style={{ color: tech.color }} className="drop-shadow-sm" />
       </div>
 
-      <div className="relative z-10">
-        <span className="text-sm font-bold text-dark/70 tracking-wide group-hover:text-dark transition-colors duration-300">
-          {tech.name}
-        </span>
-      </div>
+      <span className="text-[9px] font-bold text-dark/40 tracking-widest uppercase relative z-10 group-hover:text-dark/70 transition-colors duration-300 text-center px-1">
+        {tech.name}
+      </span>
 
       {/* Bottom accent */}
       <div
@@ -75,7 +73,7 @@ function InfiniteTrack({ techs, direction = 'left', speed = 35 }) {
         }}
       >
         {items.map((tech, i) => (
-          <HorizontalTechCard key={`${tech.name}-${i}`} tech={tech} />
+          <TechCard key={`${tech.name}-${i}`} tech={tech} />
         ))}
       </div>
     </div>
