@@ -48,15 +48,15 @@ export default function Header() {
   const isHeroTransparent = isHeroPage && !scrolled;
   const isDarkTheme = isHeroTransparent || isDarkSection;
 
-  const headerBg = isDarkTheme && !activeDropdown
+  const headerBg = (isDarkTheme && !activeDropdown && !menuOpen)
     ? 'bg-transparent border-transparent'
-    : isDarkTheme && activeDropdown
-      ? 'bg-black/40 backdrop-blur-md border-white/10'
+    : (isDarkTheme && (activeDropdown || menuOpen))
+      ? 'bg-black/80 backdrop-blur-md border-white/10'
       : 'bg-white border-gray-100 shadow-sm';
 
   const dropdownBg =
-    isDarkTheme && activeDropdown
-      ? 'bg-black/40 backdrop-blur-md border-white/10'
+    isDarkTheme && (activeDropdown || menuOpen)
+      ? 'bg-black/80 backdrop-blur-md border-white/10'
       : 'bg-white border-gray-100';
 
   const textColor = isDarkTheme ? 'text-white hover:text-primary' : 'text-dark hover:text-primary';
@@ -168,12 +168,12 @@ export default function Header() {
           </div>
 
           <button
-            className="lg:hidden flex flex-col gap-1.5"
+            className="lg:hidden flex flex-col gap-1.5 relative z-[70] p-2"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            <span className={`w-6 h-0.5 transition-all ${hamburgerLines}`} />
-            <span className={`w-6 h-0.5 transition-all ${hamburgerLines}`} />
-            <span className={`w-6 h-0.5 transition-all ${hamburgerLines}`} />
+            <span className={`w-6 h-0.5 transition-all duration-300 ${hamburgerLines} ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+            <span className={`w-6 h-0.5 transition-all duration-300 ${hamburgerLines} ${menuOpen ? 'opacity-0' : ''}`} />
+            <span className={`w-6 h-0.5 transition-all duration-300 ${hamburgerLines} ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
           </button>
         </div>
       </motion.header>
@@ -223,21 +223,30 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-b border-gray-100 shadow-xl overflow-hidden"
+            className={`lg:hidden absolute top-[70px] left-0 right-0 z-40 border-b shadow-2xl overflow-hidden ${isDarkTheme ? 'bg-black/80 backdrop-blur-md border-white/10' : 'bg-white/95 backdrop-blur-xl border-gray-100'}`}
           >
-            <div className="px-6 py-6 flex flex-col gap-4">
+            <div className="px-8 py-8 flex flex-col gap-2">
               {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="text-sm font-bold tracking-widest text-dark hover:text-primary transition-colors py-2 border-b border-gray-50"
-                >
-                  {link.label}
-                </Link>
+                link.href ? (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className={`text-xs font-bold tracking-[0.2em] hover:text-primary transition-all duration-300 py-4 border-b ${isDarkTheme ? 'text-white/80 border-white/5' : 'text-dark border-gray-50'}`}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <button
+                    key={link.label}
+                    className={`text-xs font-bold tracking-[0.2em] hover:text-primary transition-all duration-300 py-4 border-b text-left w-full cursor-default ${isDarkTheme ? 'text-white/80 border-white/5' : 'text-dark border-gray-50'}`}
+                  >
+                    {link.label}
+                  </button>
+                )
               ))}
-              <Link href="/contact" onClick={() => setMenuOpen(false)}>
-                <button className="btn w-full mt-2">
+              <Link href="/contact" onClick={() => setMenuOpen(false)} className="mt-6">
+                <button className="btn w-full">
                   <i className="animation"></i>
                   LET&apos;S TALK
                   <i className="animation"></i>

@@ -34,7 +34,7 @@ export default function RecentProjectsSection() {
                             playsInline
                             className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
                         >
-                            <source src="/video/vid-1.mp4" type="video/mp4" />
+                            <source src="/video/recent_project_video.mp4" type="video/mp4" />
                         </video>
 
                         {/* Color and Gradient Overlays */}
@@ -101,7 +101,7 @@ export default function RecentProjectsSection() {
                             viewport={{ once: true }}
                         >
                             <Link href="/projects" className="w-full sm:w-auto">
-                                <button className="btn w-full sm:w-auto h-[56px] px-10 text-[11px] lg:text-xs tracking-[0.2em] shadow-xl group">
+                                <button className="btn w-full sm:w-auto h-[40px] px-10 text-[11px] lg:text-xs tracking-[0.2em] shadow-xl group">
                                     <i className="animation"></i>
                                     <span className="relative z-10 flex items-center justify-center gap-3">
                                         PROJECTS

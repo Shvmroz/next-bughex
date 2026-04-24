@@ -30,7 +30,7 @@ export default function Footer() {
             playsInline
             className="w-full h-full object-cover opacity-60"
           >
-            <source src="/video/vid-2.mp4" type="video/mp4" />
+            <source src="/video/footer_video.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-[#0a0a0f]/30 mix-blend-multiply" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/20 to-transparent" />
@@ -53,7 +53,7 @@ export default function Footer() {
           </Link>
         </div>
       </section>
-      <footer className="bg-[#0a0a0f] text-white pt-24 pb-12 shadow-sm relative overflow-hidden">
+      <footer className="bg-[#0a0a0f] text-white pt-12 pb-6 shadow-sm relative overflow-hidden">
         {/* Background Decorative Element */}
         <div
           className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full opacity-[0.03] blur-[120px] pointer-events-none"
@@ -119,7 +119,7 @@ export default function Footer() {
           </div>
 
           {/* BOTTOM BAR */}
-          <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-center items-center">
+          <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row justify-center items-center">
             <p className="text-[11px] text-white/20 font-bold tracking-[0.2em] uppercase">
               {siteMeta.copyright}
             </p>

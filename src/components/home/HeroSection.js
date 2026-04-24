@@ -12,7 +12,7 @@ export default function HeroSection() {
         playsInline
         className="absolute top-0 left-0 w-full h-full object-cover z-0 pointer-events-none opacity-60"
       >
-        <source src="/video/vid-4.mp4" type="video/mp4" />
+        <source src="/video/hero_section_video.mp4" type="video/mp4" />
       </video>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16 flex flex-col items-center text-center">
@@ -31,14 +31,6 @@ export default function HeroSection() {
           <span className="text-gradient-animated">Matter</span>
         </motion.h1>
 
-        <motion.p
-          className="text-lg md:text-xl text-white/60 max-w-2xl leading-relaxed mb-10 font-medium"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          Premium development agency delivering Flutter, React Native, AI, and full-stack solutions. We transform ideas into market-leading products.
-        </motion.p>
 
       </div>
 

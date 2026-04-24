@@ -107,7 +107,7 @@ export default function ScrollTextSection() {
             style={{ opacity: videoOpacity }}
             className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
           >
-            <source src="/video/vid-5.mp4" type="video/mp4" />
+            <source src="/video/scroll_text_section_video.mp4" type="video/mp4" />
           </motion.video>
         </motion.div>
 

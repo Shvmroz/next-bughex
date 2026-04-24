@@ -13,7 +13,7 @@ export const siteMeta = {
 // ─── NAVIGATION ───────────────────────────────────────────
 export const navLinks = [
   { label: 'WHO WE ARE', href: '/about', hasDropdown: false },
-  { label: 'PROJECTS', hasDropdown: true },
+  { label: 'PROJECTS', href: '/projects', hasDropdown: true },
   { label: 'CONTACT', href: '/contact', hasDropdown: false },
 ];
 
@@ -205,7 +205,6 @@ export const footerData = {
 
 export const socialLinks = [
   { name: 'LinkedIn', icon: 'mdi:linkedin', href: '#', hoverColor: '#0A66C2' },
-  { name: 'Facebook', icon: 'mdi:facebook', href: '#', hoverColor: '#1877F2' },
   {
     name: 'Instagram',
     icon: 'mdi:instagram',
@@ -214,6 +213,8 @@ export const socialLinks = [
       'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
     isGradient: true,
   },
+  { name: 'Facebook', icon: 'mdi:facebook', href: '#', hoverColor: '#1877F2' },
+
 ];
 
 // ─── PROJECTS PAGE ────────────────────────────────────────
