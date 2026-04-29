@@ -12,7 +12,7 @@ function FormField({ label, type = 'text', placeholder, value, onChange, require
     <div className="relative w-full">
       <label className={`block text-[10px] font-bold tracking-widest uppercase mb-2 transition-colors duration-300 ${focused ? 'text-primary' : 'text-dark/40'}`}>
         {label} {required && <span className="text-red-400">*</span>}
-        
+
       </label>
       {textarea ? (
         <textarea
@@ -63,7 +63,7 @@ export default function ContactSection({ isPage = false }) {
       {/* DECORATIVE TOP BORDER LINE */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
-      <div className={`max-w-7xl mx-auto px-6 ${isPage ? 'pt-36 pb-24' : 'py-24 md:py-32'}`}>
+      <div className={`max-w-7xl mx-auto px-6 ${isPage ? 'pt-36 pb-24' : 'py-16 md:py-32'}`}>
 
         {/* SECTION LABEL */}
         <div className="flex items-center gap-3 mb-16">
@@ -153,11 +153,10 @@ export default function ContactSection({ isPage = false }) {
                             key={opt}
                             type="button"
                             onClick={() => setFormData({ ...formData, service: opt })}
-                            className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-all duration-200 border ${
-                              formData.service === opt
+                            className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-all duration-200 border ${formData.service === opt
                                 ? 'bg-primary border-primary text-white shadow-sm'
                                 : 'bg-[#F8F9FA] border-gray-200 text-dark/50 hover:border-primary/40 hover:text-primary'
-                            }`}
+                              }`}
                           >
                             {opt}
                           </button>

@@ -31,8 +31,34 @@ const TOTAL = slides.length;
 function SlideItem({ slide, index, scrollYProgress }) {
   const start = index / TOTAL;
   const end = (index + 1) / TOTAL;
-  const opacity = useTransform(scrollYProgress, [start, start + 0.08, end - 0.08, end], [0, 1, 1, 0]);
-  const y = useTransform(scrollYProgress, [start, start + 0.08, end - 0.08, end], [60, 0, 0, -60]);
+  const isFirst = index === 0;
+  const isLast = index === TOTAL - 1;
+
+  // Slower transitions by increasing the range (0.15 instead of 0.08)
+  const range = 0.15;
+
+  const opacity = useTransform(
+    scrollYProgress,
+    [
+      isFirst ? 0 : start,
+      isFirst ? 0 : start + range,
+      isLast ? 1 : end - range,
+      isLast ? 1 : end
+    ],
+    [
+      isFirst ? 1 : 0,
+      1,
+      1,
+      isLast ? 1 : 0
+    ]
+  );
+
+  // Subtle Y movement or removed for "fade effect not as scroll"
+  const y = useTransform(
+    scrollYProgress,
+    [start, start + range, end - range, end],
+    [20, 0, 0, -20]
+  );
 
   const parts = slide.headline.trim().split(/\s+/);
   const lastWord = parts.length > 1 ? parts.pop() : '';
@@ -135,7 +161,7 @@ export default function ScrollTextSection() {
             ))}
             <p className="text-[9px] text-primary font-bold tracking-[0.3em] mt-6 uppercase whitespace-nowrap"
               style={{ writingMode: 'vertical-rl' }}>
-              BUGHEX
+              WHO WE ARE
             </p>
           </div>
 

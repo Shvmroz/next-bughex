@@ -15,7 +15,7 @@ export default function HeroSection() {
         <source src="/video/hero_section_video.mp4" type="video/mp4" />
       </video>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16 flex flex-col items-center text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-16 pb-12 md:pt-24 md:pb-16 flex flex-col items-center text-center">
 
 
         <motion.h1

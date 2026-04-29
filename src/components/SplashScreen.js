@@ -1,36 +1,41 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const COLS = 16;
-const ROWS = 10;
 
 export default function SplashScreen({ onComplete }) {
   const [phase, setPhase] = useState('cover');
   const [allDone, setAllDone] = useState(false);
-  const completedRef = useRef(0);
-  const totalFragments = COLS * ROWS;
+  const [isMobile, setIsMobile] = useState(false);
 
-  const fragments = useRef(
-    Array.from({ length: totalFragments }, (_, i) => ({
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
+  const COLS = isMobile ? 8 : 16;
+  const ROWS = isMobile ? 12 : 10;
+  const totalFragments = COLS * ROWS;
+  const completedRef = useRef(0);
+
+  const fragments = useMemo(() => {
+    return Array.from({ length: totalFragments }, (_, i) => ({
       id: i,
       col: i % COLS,
       row: Math.floor(i / COLS),
-      delay: Math.random() * 1.8,
-    }))
-  ).current;
+      delay: Math.random() * 1.2, // Reduced delay for faster exit
+    }));
+  }, [totalFragments, COLS]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setPhase('dissolve');
-    }, 600);
+    }, 400); // Faster initial wait
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     if (allDone) {
-      setTimeout(() => onComplete(), 100);
+      onComplete();
     }
   }, [allDone, onComplete]);
 
@@ -43,7 +48,7 @@ export default function SplashScreen({ onComplete }) {
 
   return (
     <AnimatePresence>
-      {phase !== 'done' && (
+      {!allDone && (
         <div className="fixed inset-0 z-[9999] overflow-hidden pointer-events-none">
           <div
             className="absolute inset-0 grid"
@@ -68,25 +73,28 @@ export default function SplashScreen({ onComplete }) {
 }
 
 function Pixel({ frag, dissolve, onDone }) {
-  const opacity = 0.55 + ((frag.col + frag.row) % 4) * 0.1;
+  // Faster, more subtle fragments for mobile performance
+  const opacity = 0.6 + ((frag.col + frag.row) % 3) * 0.1;
 
   return (
     <motion.div
       style={{
         background: `rgba(27, 181, 162, ${opacity})`,
-        borderRight: '1px solid rgba(27, 181, 162, 0.2)',
-        borderBottom: '1px solid rgba(27, 181, 162, 0.2)',
+        border: 'none', // Removed borders as requested
       }}
-      initial={{ opacity: 1, scale: 1 }}
-      animate={dissolve ? { opacity: 0, scale: 0.6 } : { opacity: 1, scale: 1 }}
+      initial={{ opacity: 0 }}
+      animate={dissolve
+        ? { opacity: 0, scale: 0.8 }
+        : { opacity: 1, scale: 1 }
+      }
       transition={
         dissolve
           ? {
             delay: frag.delay,
-            duration: 0.5,
-            ease: [0.43, 0.13, 0.23, 0.96],
+            duration: 0.4,
+            ease: "easeOut",
           }
-          : { duration: 0 }
+          : { duration: 0.3 }
       }
       onAnimationComplete={dissolve ? onDone : undefined}
     />

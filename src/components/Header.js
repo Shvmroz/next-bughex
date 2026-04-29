@@ -13,6 +13,7 @@ export default function Header() {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [winWidth, setWinWidth] = useState(0);
   const [isDarkSection, setIsDarkSection] = useState(false);
+  const [isBlurSection, setIsBlurSection] = useState(false);
   const pathname = usePathname();
 
   const isHeroPage = pathname === '/';
@@ -31,6 +32,8 @@ export default function Header() {
       setScrolled(window.scrollY > 20);
 
       let dark = false;
+      let blur = false;
+
       const darkSections = document.querySelectorAll('[data-theme="dark"]');
       darkSections.forEach(section => {
         const rect = section.getBoundingClientRect();
@@ -38,7 +41,17 @@ export default function Header() {
           dark = true;
         }
       });
+
+      const blurSections = document.querySelectorAll('[data-nav-blur="true"]');
+      blurSections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 70 && rect.bottom >= 0) {
+          blur = true;
+        }
+      });
+
       setIsDarkSection(dark);
+      setIsBlurSection(blur);
     };
     onScroll();
     window.addEventListener('scroll', onScroll);
@@ -48,11 +61,13 @@ export default function Header() {
   const isHeroTransparent = isHeroPage && !scrolled;
   const isDarkTheme = isHeroTransparent || isDarkSection;
 
-  const headerBg = (isDarkTheme && !activeDropdown && !menuOpen)
-    ? 'bg-transparent border-transparent'
-    : (isDarkTheme && (activeDropdown || menuOpen))
-      ? 'bg-black/80 backdrop-blur-md border-white/10'
-      : 'bg-white border-gray-100 shadow-sm';
+  const headerBg = (isBlurSection && !activeDropdown && !menuOpen)
+    ? 'bg-black/40 backdrop-blur-md border-white/5'
+    : (isDarkTheme && !activeDropdown && !menuOpen)
+      ? 'bg-transparent border-transparent'
+      : (isDarkTheme && (activeDropdown || menuOpen))
+        ? 'bg-black/80 backdrop-blur-md border-white/10'
+        : 'bg-white border-gray-100 shadow-sm';
 
   const dropdownBg =
     isDarkTheme && (activeDropdown || menuOpen)
@@ -85,7 +100,7 @@ export default function Header() {
           src="/bug.png"
           alt=""
           className="absolute -bottom-[9px] w-5 h-5 object-contain"
-          style={{ x: bugX, left: 0 }}
+          style={{ x: bugX, left: 0, rotate: 90 }}
         />
       </div>
 

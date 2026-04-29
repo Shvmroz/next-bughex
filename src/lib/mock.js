@@ -464,3 +464,88 @@ export const contactPageContent = {
   successTitle: 'Message Sent!',
   successSubtext: "We'll get back to you within 24 hours.",
 };
+
+// ─── CAPABILITIES PAGE ─────────────────────────────────────────
+
+export const capabilities = [
+  {
+    number: '01',
+    icon: 'mingcute:ai-line',
+    stroke: '#1bb5a2',
+    title: 'AI Integration',
+    subtitle: 'Automation & Intelligence',
+    body: 'Build AI assistants and automate workflows with smart systems.',
+  },
+  {
+    number: '02',
+    icon: 'logos:flutter',
+    stroke: '#02569B',
+    title: 'Flutter',
+    subtitle: 'Cross-Platform Mobile',
+    body: 'High-performance apps using one codebase across platforms.',
+  },
+  {
+    number: '03',
+    icon: 'logos:react',
+    stroke: '#61DAFB',
+    title: 'React Native',
+    subtitle: 'Native Mobile Apps',
+    body: 'Create fast mobile apps with near-native performance using React.',
+  },
+  {
+    number: '04',
+    icon: 'logos:apple',
+    stroke: '#111111',
+    title: 'iOS Development',
+    subtitle: 'Apple Platforms',
+    body: 'Build polished iOS apps using Swift and Apple frameworks.',
+  },
+  {
+    number: '05',
+    icon: 'logos:android-icon',
+    stroke: '#3DDC84',
+    title: 'Android Development',
+    subtitle: 'Google Platforms',
+    body: 'Develop reliable Android apps with Kotlin and development standards.',
+  },
+  {
+    number: '06',
+    icon: 'logos:nextjs-icon',
+    stroke: '#000000',
+    title: 'React / Next.js',
+    subtitle: 'Web Platforms',
+    body: 'Scalable web apps with optimized performance and architecture.',
+  },
+  {
+    number: '07',
+    icon: 'logos:nodejs-icon',
+    stroke: '#339933',
+    title: 'Node.js',
+    subtitle: 'Backend & APIs',
+    body: 'Engineer fast backend systems for scalable real-time applications.',
+  },
+  {
+    number: '08',
+    icon: 'logos:laravel',
+    stroke: '#FF2D20',
+    title: 'Laravel / PHP',
+    subtitle: 'Server-Side Engineering',
+    body: 'Develop secure backend systems and dashboards for workflows.',
+  },
+  {
+    number: '09',
+    icon: 'logos:mongodb-icon',
+    stroke: '#47A248',
+    title: 'MongoDB',
+    subtitle: 'NoSQL Database',
+    body: 'Design scalable NoSQL databases with flexible schemas and access.',
+  },
+  {
+    number: '10',
+    icon: 'logos:mysql-icon',
+    stroke: '#00758F',
+    title: 'MySQL',
+    subtitle: 'Relational Database',
+    body: 'Build reliable relational databases with optimized queries consistency.',
+  },
+];

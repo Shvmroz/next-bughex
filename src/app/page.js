@@ -11,6 +11,9 @@ import LeadershipSection from '@/components/home/LeadershipSection';
 import ContactSection from '@/components/home/ContactSection';
 import ScrollTextSection from '@/components/home/ScrollTextSection';
 import RecentProjectsSection from '@/components/home/RecentProjectsSection';
+import CapabilitiesSection from '@/components/home/CapabilitiesSection';
+import { Icon } from '@iconify/react';
+import { capabilities } from '@/lib/mock';
 export default function HomePage() {
   const [showSplash, setShowSplash] = useState(true);
 
@@ -33,6 +36,17 @@ export default function HomePage() {
           <HeroSection />
           <TechSlider />
           <RecentProjectsSection />
+          <CapabilitiesSection
+            title="Capabilities"
+            tag="Our Expertise"
+            subtitle="AI, Web, Mobile, and Security engineering at scale."
+            items={capabilities.map((cap) => ({
+              ...cap,
+              description: cap.body,
+              features: cap.tags,
+              icon: <Icon icon={cap.icon} width={32} />,
+            }))}
+          />
           <LeadershipSection />
           <ScrollTextSection />
           <ContactSection />

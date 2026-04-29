@@ -21,7 +21,7 @@ export default function Footer() {
 
   return (
     <>
-      <section className="py-32 bg-[#0a0a0f] relative overflow-hidden">
+      <section data-theme="dark" data-nav-blur="true" className="py-32 bg-[#0a0a0f] relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <video
             autoPlay
@@ -53,7 +53,7 @@ export default function Footer() {
           </Link>
         </div>
       </section>
-      <footer className="bg-[#0a0a0f] text-white pt-12 pb-6 shadow-sm relative overflow-hidden">
+      <footer data-theme="dark" data-nav-blur="true" className="bg-[#0a0a0f] text-white pt-12 pb-6 shadow-sm relative overflow-hidden">
         {/* Background Decorative Element */}
         <div
           className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full opacity-[0.03] blur-[120px] pointer-events-none"

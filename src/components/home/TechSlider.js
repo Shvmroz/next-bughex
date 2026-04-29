@@ -82,7 +82,7 @@ function InfiniteTrack({ techs, direction = 'left', speed = 35 }) {
 
 export default function TechSlider() {
   return (
-    <section className="py-24 relative overflow-hidden" style={{ background: '#F8F9FA' }}>
+    <section className="py-12 md:py-24 relative overflow-hidden" style={{ background: '#F8F9FA' }}>
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
