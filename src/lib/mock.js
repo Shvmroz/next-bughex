@@ -114,16 +114,47 @@ export const services = [
 
 // ─── LEADERSHIP SECTION ───────────────────────────────────
 export const leadershipSectionContent = {
-  title: 'Our Global Leadership',
+  title: 'Our Founders',
 };
 
 export const leaders = [
-  { nameFirst: 'Umair', nameLast: 'Hashmi', role: 'Founder & CEO' },
-  { nameFirst: 'Zain', nameLast: 'Sherazi', role: 'Chief Finance Officer' },
-  { nameFirst: 'Ammar', nameLast: 'Yousaf', role: 'Chief of Staff' },
-  { nameFirst: 'Shamroz', nameLast: 'Khan', role: 'Chief Delivery Officer' },
-  { nameFirst: 'Atif', nameLast: 'Umair', role: 'VP Operations' },
-  { nameFirst: 'Moeen', nameLast: 'U Din', role: 'Lead Developer' },
+  {
+    nameFirst: 'Zain',
+    nameLast: 'Sherazi',
+    role: 'Project Lead & Android Specialist',
+    linkedin: 'https://www.linkedin.com/in/syed-zain-ul-abidin-sherazi'
+  },
+  {
+    nameFirst: 'Umair',
+    nameLast: 'Hashmi',
+    role: 'Flutter Lead & Client Relations Manager',
+    linkedin: 'https://www.linkedin.com/in/umair-hashmi'
+  },
+  {
+    nameFirst: 'Ammar',
+    nameLast: 'Yousaf',
+    role: 'Full Stack Mobile App Developer & Head of Global Marketing',
+    linkedin: 'https://www.linkedin.com/in/ammar-yousaf-react-native-53321a19a'
+  },
+  {
+    nameFirst: 'Atif',
+    nameLast: 'Raza',
+    role: 'Backend Engineering Lead & Head of AI',
+    linkedin: 'https://www.linkedin.com/in/atif-raza-7a6855217'
+  },
+  {
+    nameFirst: 'Moeen',
+    nameLast: 'U Din',
+    role: 'Full Stack Lead & Head of DevOps',
+    linkedin: 'https://www.linkedin.com/in/moeen-u-din'
+  },
+  {
+    nameFirst: 'Shamroz',
+    nameLast: 'Khan',
+    image: '/shamroz-khan.png',
+    role: 'Frontend Lead & Head of UI/UX',
+    linkedin: 'https://www.linkedin.com/in/shvmroz'
+  },
 ];
 
 // ─── CONTACT SECTION ──────────────────────────────────────

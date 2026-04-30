@@ -88,26 +88,68 @@ export default function LeadershipSection() {
                         transition={{ duration: 0.6, delay: i * 0.05 }}
                         viewport={{ once: true, margin: "0px -100px 0px -100px" }}
                     >
-                        {/* IMAGE PLACEHOLDER */}
-                        <div className="aspect-[4/5] bg-gray-100 rounded-3xl overflow-hidden mb-6 relative border border-gray-50 flex items-center justify-center">
-                            <Icon icon="mdi:account" width={80} className="text-gray-200" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/[0.03] to-transparent pointer-events-none" />
+
+                        {/* IMAGE CARD */}
+                        <div className="rounded-t-3xl overflow-hidden bg-white">
+
+                            <div className="aspect-[4/5] bg-[#FAFBFC] hover:bg-primary flex items-center justify-center relative overflow-hidden">
+
+                                {/*  GRAPH BACKGROUND EFFECT */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                                    {/* grid lines */}
+                                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:16px_16px] opacity-25" />
+
+                                </div>
+
+                                {/* IMAGE / ICON */}
+                                <div className="relative z-10">
+                                    {leader.image ? (
+                                        <img
+                                            src={leader.image}
+                                            alt={leader.nameFirst}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    ) : (
+                                        <Icon icon="mdi:account" width={80} className="text-gray-200" />
+                                    )}
+                                </div>
+
+                                {/* gradient */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent" />
+                            </div>
+
                         </div>
 
-                        {/* INFO */}
-                        <div className="space-y-3 px-2">
-                            <h3 className="text-3xl font-bold text-dark tracking-tight">
-                                {leader.nameFirst} <span className="text-primary">{leader.nameLast}</span>
-                            </h3>
-                            <div className="flex items-center justify-between gap-4 pt-1">
-                                <p className="text-base text-dark/70 font-semibold tracking-tight">
-                                    {leader.role}
-                                </p>
-                                <Link href="#" className="flex-shrink-0 transition-transform hover:scale-110">
-                                    <Icon icon="mdi:linkedin" width={28} className="text-dark hover:text-[#0A66C2] transition-colors" />
+                        {/* INFO SECTION */}
+                        <div className="px-2 pt-4">
+
+                            <div className="flex items-start justify-between gap-3">
+
+                                <h3 className="text-2xl font-extrabold text-dark leading-tight truncate">
+                                    {leader.nameFirst}{' '}
+                                    <span className="text-primary">{leader.nameLast}</span>
+                                </h3>
+
+                                <Link
+                                    href={leader.linkedin}
+                                    target="_blank"
+                                    className="flex-shrink-0 inline-flex items-center justify-center cursor-pointer"
+                                >
+                                    <Icon
+                                        icon="mdi:linkedin"
+                                        width={28}
+                                        className="text-dark hover:text-[#0A66C2] transition-colors"
+                                    />
                                 </Link>
+
                             </div>
+
+                            <p className="text-base text-dark/60 mt-2 font-medium font-mono">
+                                {leader.role}
+                            </p>
+
                         </div>
+
                     </motion.div>
                 ))}
 
