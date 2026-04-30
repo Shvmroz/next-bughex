@@ -112,7 +112,7 @@ export default function Header() {
       >
         <div className="w-full max-w-[1440px] mx-auto px-6 flex items-center justify-between">
           <div className="flex-shrink-0 w-[200px]">
-            <Link href="/">
+            <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
               <Logo isDark={!isDarkTheme} />
             </Link>
           </div>

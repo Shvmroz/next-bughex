@@ -43,10 +43,12 @@ export const metadata = {
     siteName: 'BugHex',
     images: [
       {
-        url: '/og-image.png',
+        url: 'https://www.thebughex.com/og-image.png',
+        secureUrl: 'https://www.thebughex.com/og-image.png',
         width: 1200,
         height: 630,
         alt: 'BugHex Software Development Agency',
+        type: 'image/png',
       },
     ],
     type: 'website',
@@ -58,7 +60,7 @@ export const metadata = {
     title: 'BugHex | Software Development Agency',
     description:
       'Software development agency for web, mobile, and AI solutions.',
-    images: ['/og-image.png'],
+    images: ['https://www.thebughex.com/og-image.png'],
   },
 
   robots: {

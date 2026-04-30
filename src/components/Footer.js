@@ -66,7 +66,7 @@ export default function Footer() {
 
             {/* BRAND COLUMN */}
             <div className="lg:col-span-4 space-y-10">
-              <Link href="/" className="inline-block">
+              <Link href="/" className="inline-block" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
                 <Logo staticLogo={true} isDark={false} />
               </Link>
 

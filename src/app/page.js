@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import SplashScreen from '@/components/SplashScreen';
 import Header from '@/components/Header';
@@ -14,8 +14,17 @@ import RecentProjectsSection from '@/components/home/RecentProjectsSection';
 import CapabilitiesSection from '@/components/home/CapabilitiesSection';
 import { Icon } from '@iconify/react';
 import { capabilities } from '@/lib/mock';
+
 export default function HomePage() {
   const [showSplash, setShowSplash] = useState(true);
+
+  // Disable browser scroll restoration so navigating to "/" always starts at top
+  useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
