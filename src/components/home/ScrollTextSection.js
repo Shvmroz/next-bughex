@@ -31,33 +31,22 @@ const TOTAL = slides.length;
 function SlideItem({ slide, index, scrollYProgress }) {
   const start = index / TOTAL;
   const end = (index + 1) / TOTAL;
-  const isFirst = index === 0;
   const isLast = index === TOTAL - 1;
 
-  // Slower transitions by increasing the range (0.15 instead of 0.08)
-  const range = 0.15;
-
+  // Instant snap - only show when in the middle of the range
   const opacity = useTransform(
     scrollYProgress,
-    [
-      isFirst ? 0 : start,
-      isFirst ? 0 : start + range,
-      isLast ? 1 : end - range,
-      isLast ? 1 : end
-    ],
-    [
-      isFirst ? 1 : 0,
-      1,
-      1,
-      isLast ? 1 : 0
-    ]
-  );
-
-  // Subtle Y movement or removed for "fade effect not as scroll"
-  const y = useTransform(
-    scrollYProgress,
-    [start, start + range, end - range, end],
-    [20, 0, 0, -20]
+    (value) => {
+      // For last slide, keep it visible until the very end
+      if (isLast && value >= start) {
+        return 1;
+      }
+      // Show slide only when scroll is in its range
+      if (value >= start && value < end) {
+        return 1;
+      }
+      return 0;
+    }
   );
 
   const parts = slide.headline.trim().split(/\s+/);
@@ -66,7 +55,7 @@ function SlideItem({ slide, index, scrollYProgress }) {
 
   return (
     <motion.div
-      style={{ opacity, y }}
+      style={{ opacity }}
       className="absolute inset-0 flex flex-col justify-center pl-8 md:pl-16 lg:pl-20"
     >
       <div className="flex items-center gap-3 mb-6">
@@ -116,10 +105,10 @@ export default function ScrollTextSection() {
     <section
       ref={containerRef}
       className="relative bg-black"
-      style={{ height: `${TOTAL * 100}vh` }}
+      style={{ height: `${TOTAL * 80}vh` }}
       data-theme="dark"
     >
-      <div className="sticky top-0 h-screen overflow-hidden">
+      <div className="sticky top-0 h-screen overflow-hidden snap-start">
         {/* VIDEO BACKGROUND */}
         <motion.div
           style={{ scale: videoScale }}

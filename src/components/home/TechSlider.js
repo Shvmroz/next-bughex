@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef, useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import SectionHeader from './SectionHeader';
 
@@ -29,10 +30,23 @@ const techRow2 = [
   { name: 'OpenAI', icon: 'simple-icons:openai', color: '#000000' },
 ];
 
+const techRow3 = [
+  { name: 'Vue.js', icon: 'logos:vue', color: '#4FC08D' },
+  { name: 'Angular', icon: 'logos:angular-icon', color: '#DD0031' },
+  { name: 'Rust', icon: 'logos:rust', color: '#CE422B' },
+  { name: 'Go', icon: 'logos:go', color: '#00ADD8' },
+  { name: 'Java', icon: 'logos:java', color: '#007396' },
+  { name: 'C++', icon: 'logos:c-plusplus', color: '#00599C' },
+  { name: 'MySQL', icon: 'logos:mysql-icon', color: '#00758F' },
+  { name: 'Elasticsearch', icon: 'logos:elasticsearch', color: '#005571' },
+  { name: 'Kubernetes', icon: 'logos:kubernetes', color: '#326CE5' },
+  { name: 'Jenkins', icon: 'logos:jenkins', color: '#D33833' },
+];
+
 function TechCard({ tech }) {
   return (
     <div
-      className="flex flex-row items-center gap-3 px-5 py-3.5 rounded-2xl mx-2.5 flex-shrink-0 group transition-all duration-300 relative bg-white border border-gray-100 hover:border-gray-200 hover:shadow-md overflow-hidden"
+      className="flex flex-row items-center gap-5 px-8 py-4 rounded-[6px] mx-3 flex-shrink-0 group transition-all duration-300 relative bg-white border border-gray-100 hover:border-gray-200 hover:shadow-md overflow-hidden h-20"
     >
       {/* Subtle tint on hover */}
       <div
@@ -40,14 +54,9 @@ function TechCard({ tech }) {
         style={{ background: `${tech.color}06` }}
       />
 
-      <div
-        className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 relative z-10"
-        style={{ background: `${tech.color}12` }}
-      >
-        <Icon icon={tech.icon} width={20} style={{ color: tech.color }} className="drop-shadow-sm" />
-      </div>
+      <Icon icon={tech.icon} width={36} style={{ color: tech.color }} className="drop-shadow-sm flex-shrink-0 relative z-10" />
 
-      <span className="text-[11px] font-bold text-dark/50 tracking-wider relative z-10 group-hover:text-dark/80 transition-colors duration-300 whitespace-nowrap">
+      <span className="text-[16px] font-bold text-dark/50 tracking-wider relative z-10 group-hover:text-dark/80 transition-colors duration-300 whitespace-nowrap">
         {tech.name}
       </span>
 
@@ -61,18 +70,26 @@ function TechCard({ tech }) {
 }
 
 function InfiniteTrack({ techs, direction = 'left', speed = 35 }) {
-  const items = [...techs, ...techs];
+  const trackRef = useRef(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   return (
-    <div className="overflow-hidden relative w-full flex">
+    <div 
+      className="overflow-hidden relative w-full flex"
+      ref={trackRef}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div
         className="flex flex-nowrap w-max"
         style={{
-          animation: `${direction === 'left' ? 'scroll-left' : 'scroll-right'} ${speed}s linear infinite`,
+          animation: `scroll-left ${speed}s linear infinite`,
+          animationPlayState: isPaused ? 'paused' : 'running',
+          animationDirection: direction === 'right' ? 'reverse' : 'normal',
           willChange: 'transform',
         }}
       >
-        {items.map((tech, i) => (
+        {[...techs, ...techs].map((tech, i) => (
           <TechCard key={`${tech.name}-${i}`} tech={tech} />
         ))}
       </div>
@@ -104,7 +121,7 @@ export default function TechSlider() {
             WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
           }}
         >
-          <InfiniteTrack techs={techRow1} direction="left" speed={40} />
+          <InfiniteTrack techs={techRow1} direction="left" />
         </div>
         <div
           className="relative"
@@ -113,7 +130,16 @@ export default function TechSlider() {
             WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
           }}
         >
-          <InfiniteTrack techs={techRow2} direction="right" speed={35} />
+          <InfiniteTrack techs={techRow2} direction="right" />
+        </div>
+        <div
+          className="relative"
+          style={{
+            maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+          }}
+        >
+          <InfiniteTrack techs={techRow3} direction="left" />
         </div>
       </div>
     </section>

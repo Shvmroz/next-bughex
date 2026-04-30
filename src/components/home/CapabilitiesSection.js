@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { services, servicesSectionContent } from '@/lib/mock';
 
 export default function CapabilitiesSection({
@@ -10,51 +10,140 @@ export default function CapabilitiesSection({
     subtitle = servicesSectionContent.subtitle,
     tag = servicesSectionContent.tag
 }) {
-    const containerRef = useRef(null);
-
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ['start start', 'end end'],
-    });
+    const cardsContainerRef = useRef(null);
+    const [scrollX, setScrollX] = useState(0);
+    const [isHovering, setIsHovering] = useState(false);
+    const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+    const [manualScroll, setManualScroll] = useState(0);
+    const autoScrollTimeoutRef = useRef(null);
+    const animationFrameRef = useRef(null);
+    const scrollVelocityRef = useRef(0);
 
     const cardWidth = 344;
-    const x = useTransform(scrollYProgress, [0, 1], ['0%', `-${(items.length - 1) * cardWidth}px`]);
+    const gap = 24;
+    const itemCount = items.length;
+    const singleLoopWidth = itemCount * (cardWidth + gap);
+
+    // Smooth continuous auto-scroll using requestAnimationFrame
+    useEffect(() => {
+        if (!isAutoScrolling || isHovering) {
+            if (animationFrameRef.current) {
+                cancelAnimationFrame(animationFrameRef.current);
+            }
+            return;
+        }
+
+        const animate = () => {
+            setScrollX(prev => {
+                const next = (prev + 1) % singleLoopWidth;
+                return next;
+            });
+            animationFrameRef.current = requestAnimationFrame(animate);
+        };
+
+        animationFrameRef.current = requestAnimationFrame(animate);
+
+        return () => {
+            if (animationFrameRef.current) {
+                cancelAnimationFrame(animationFrameRef.current);
+            }
+        };
+    }, [isAutoScrolling, isHovering, singleLoopWidth]);
+
+    // Handle mouse wheel scroll
+    useEffect(() => {
+        const handleWheel = (e) => {
+            if (!cardsContainerRef.current) return;
+            
+            const rect = cardsContainerRef.current.getBoundingClientRect();
+            if (e.clientY < rect.top || e.clientY > rect.bottom) return;
+
+            e.preventDefault();
+            
+            // Stop auto-scroll when user scrolls
+            setIsAutoScrolling(false);
+            
+            // Clear previous timeout
+            if (autoScrollTimeoutRef.current) {
+                clearTimeout(autoScrollTimeoutRef.current);
+            }
+            
+            // Scroll horizontally based on wheel delta
+            const scrollAmount = e.deltaY > 0 ? 30 : -30;
+            setScrollX(prev => {
+                let newScroll = prev + scrollAmount;
+                // Allow looping
+                while (newScroll < 0) newScroll += singleLoopWidth;
+                while (newScroll >= singleLoopWidth) newScroll -= singleLoopWidth;
+                return newScroll;
+            });
+
+            // Resume auto-scroll after 2 seconds of no wheel movement (only if not hovering)
+            autoScrollTimeoutRef.current = setTimeout(() => {
+                if (!isHovering) {
+                    setIsAutoScrolling(true);
+                }
+            }, 2000);
+        };
+
+        const container = cardsContainerRef.current;
+        if (container) {
+            container.addEventListener('wheel', handleWheel, { passive: false });
+            return () => {
+                container.removeEventListener('wheel', handleWheel);
+                if (autoScrollTimeoutRef.current) {
+                    clearTimeout(autoScrollTimeoutRef.current);
+                }
+            };
+        }
+    }, [singleLoopWidth, isHovering]);
 
     return (
-        <section
-            ref={containerRef}
-            className="relative bg-white border-y border-[#f1f3f5]"
-            style={{ height: `calc(100vh + ${(items.length - 1) * cardWidth}px)` }}
-        >
-            <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-                <div className="max-w-7xl mx-auto px-6 pt-16 md:pt-20 pb-8 md:pb-12 w-full">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 mb-6">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                        <span className="text-xs text-primary font-bold tracking-wider uppercase">
-                            {tag}
-                        </span>
-                    </div>
-
-                    <h2 className="font-display text-4xl md:text-5xl font-bold text-dark mb-4">
-                        Our <span className="text-gradient-animated">{title}</span>
-                    </h2>
-
-                    <p className="text-dark/60 text-lg max-w-2xl font-medium">
-                        {subtitle}
-                    </p>
+        <section className="relative bg-white border-y border-[#f1f3f5] py-16 md:py-20">
+            <div className="max-w-7xl mx-auto px-6 mb-12">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 mb-6">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    <span className="text-xs text-primary font-bold tracking-wider uppercase">
+                        {tag}
+                    </span>
                 </div>
 
-                <div className="relative">
-                    <div className="absolute top-1/2 left-0 w-full h-[1px] -translate-y-1/2 pointer-events-none z-0">
-                        <div className="w-full h-full bg-gradient-to-r from-transparent via-primary/25 to-transparent border-t border-dashed border-primary/20" />
-                    </div>
+                <h2 className="font-display text-4xl md:text-5xl font-bold text-dark mb-4">
+                    Our <span className="text-gradient-animated">{title}</span>
+                </h2>
 
-                    <motion.div style={{ x }} className="flex gap-6 px-[8%]">
-                        {items.map((service, index) => (
-                            <CapabilityCard key={service.id || index} service={service} />
-                        ))}
-                    </motion.div>
+                <p className="text-dark/60 text-lg max-w-2xl font-medium">
+                    {subtitle}
+                </p>
+            </div>
+
+            <div 
+                className="relative overflow-hidden"
+                ref={cardsContainerRef}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => {
+                    setIsHovering(false);
+                    // Resume auto-scroll when mouse leaves
+                    if (autoScrollTimeoutRef.current) {
+                        clearTimeout(autoScrollTimeoutRef.current);
+                    }
+                    setIsAutoScrolling(true);
+                }}
+            >
+                <div className="absolute top-1/2 left-0 w-full h-[1px] -translate-y-1/2 pointer-events-none z-0">
+                    <div className="w-full h-full bg-gradient-to-r from-transparent via-primary/25 to-transparent border-t border-dashed border-primary/20" />
                 </div>
+
+                <motion.div 
+                    className="flex gap-6 px-[8%] py-8"
+                    animate={{ x: -scrollX }}
+                    transition={{ type: 'tween', duration: 0.05, ease: 'linear' }}
+                >
+                    {/* Render items twice for seamless looping */}
+                    {[...items, ...items].map((service, index) => (
+                        <CapabilityCard key={`${service.id || index}-${Math.floor(index / items.length)}`} service={service} />
+                    ))}
+                </motion.div>
             </div>
         </section>
     );
@@ -78,7 +167,7 @@ function CapabilityCard({ service }) {
     const strokeColor = hexToRgba(service.stroke || '#1bb5a2', 0.5);
 
     return (
-        <motion.div className="flex-shrink-0 w-[280px] md:w-[320px] relative z-10 py-2">
+        <motion.div className="flex-shrink-0 w-[320px] md:w-[380px] relative z-10 py-2">
             <div className="relative overflow-hidden rounded-2xl border border-black/5 bg-white shadow-[0_2px_12px_rgba(27,181,162,0.10)] transition-all duration-300 group hover:bg-[#f8fffd]">
 
                 {/* ✅ BORDER FIXED COLOR */}
@@ -124,26 +213,26 @@ function CapabilityCard({ service }) {
                 <div className="relative z-10 flex">
 
                     {/* LEFT */}
-                    <div className="w-20 shrink-0 bg-[#f5fbfa] border-r border-black/5 flex items-center justify-center">
-                        <div className="w-11 h-11 rounded-xl bg-white border border-[#eef1f6] flex items-center justify-center shadow-sm">
+                    <div className="w-24 shrink-0 bg-[#f5fbfa] border-r border-black/5 flex items-center justify-center">
+                        <div className="w-14 h-14 rounded-xl bg-white border border-[#eef1f6] flex items-center justify-center shadow-sm">
                             {service.icon}
                         </div>
                     </div>
 
                     {/* RIGHT */}
-                    <div className="flex-1 min-w-0 px-4 py-4 flex flex-col justify-center">
+                    <div className="flex-1 min-w-0 px-6 py-5 flex flex-col justify-center">
 
                         {service.subtitle && (
-                            <span className="text-[9px] font-bold text-primary/50 uppercase tracking-widest mb-1 block">
+                            <span className="text-[10px] font-bold text-primary/50 uppercase tracking-widest mb-2 block">
                                 {service.subtitle}
                             </span>
                         )}
 
-                        <h3 className="font-display font-bold text-dark text-[15px] leading-tight group-hover:text-primary transition-colors duration-300">
+                        <h3 className="font-display font-bold text-dark text-[17px] leading-tight group-hover:text-primary transition-colors duration-300">
                             {service.title}
                         </h3>
 
-                        <p className="text-dark/50 text-[12px] leading-relaxed mt-1.5 group-hover:text-dark/70 transition-colors duration-300 break-words">
+                        <p className="text-dark/50 text-[13px] leading-relaxed mt-2 group-hover:text-dark/70 transition-colors duration-300 break-words">
                             {description}
                         </p>
 

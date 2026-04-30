@@ -58,26 +58,39 @@ export default function RecentProjectsSection() {
                                         whileInView={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.6 }}
                                         viewport={{ once: true, margin: '-100px' }}
-                                        className="group cursor-pointer rounded-3xl bg-white border border-gray-100 shadow-[0_4px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(27,181,162,0.12)] hover:border-primary/20 transition-all duration-500 flex flex-col p-8 sm:p-12 relative overflow-hidden"
+                                        className="group cursor-pointer rounded-3xl bg-white border border-gray-100 shadow-[0_4px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(27,181,162,0.12)] hover:border-primary/20 hover:bg-primary transition-all duration-500 flex flex-col p-8 sm:p-12 relative overflow-hidden"
                                     >
-                                        <div className="absolute -top-32 -right-32 w-64 h-64 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-500 pointer-events-none" />
+                                        {/* Graph boxes background - grid covering whole card with fade from all borders */}
+                                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-3xl">
+                                            <div 
+                                                className="absolute inset-0"
+                                                style={{
+                                                    backgroundImage: `linear-gradient(90deg, rgba(255,255,255,0.25) 1px, transparent 1px), linear-gradient(rgba(255,255,255,0.25) 1px, transparent 1px)`,
+                                                    backgroundSize: '15px 15px',
+                                                    maskImage: 'radial-gradient(ellipse at center, black 0%, black 60%, transparent 100%)',
+                                                    WebkitMaskImage: 'radial-gradient(ellipse at center, black 0%, black 60%, transparent 100%)',
+                                                }}
+                                            />
+                                        </div>
 
-                                        <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-[10px] font-bold tracking-widest uppercase text-primary w-fit mb-6 relative z-10">
+                                        <div className="absolute -top-32 -right-32 w-64 h-64 bg-primary/5 rounded-full blur-3xl group-hover:bg-white/10 transition-colors duration-500 pointer-events-none" />
+
+                                        <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 group-hover:bg-white/20 text-[10px] font-bold tracking-widest uppercase text-primary group-hover:text-white w-fit mb-6 relative z-10 transition-colors duration-500">
                                             {project.category}
                                         </div>
 
-                                        <h4 className="font-display text-3xl sm:text-4xl font-bold text-dark group-hover:text-primary transition-colors leading-[1.2] mb-5 relative z-10">
+                                        <h4 className="font-display text-3xl sm:text-4xl font-bold text-dark group-hover:text-white transition-colors leading-[1.2] mb-5 relative z-10 duration-500">
                                             {project.title}
                                         </h4>
 
-                                        <p className="text-base sm:text-lg font-medium text-dark/60 leading-relaxed mb-10 flex-1 relative z-10">
+                                        <p className="text-base sm:text-lg font-medium text-dark/60 group-hover:text-white/80 leading-relaxed mb-10 flex-1 relative z-10 transition-colors duration-500">
                                             {project.excerpt}
                                         </p>
 
                                         <div className="mt-auto flex items-center justify-between relative z-10">
                                             <Link
                                                 href="/projects"
-                                                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-dark group-hover:text-primary transition-colors"
+                                                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-dark group-hover:text-white transition-colors duration-500"
                                             >
                                                 Read Case Study
                                                 <Icon
@@ -87,11 +100,11 @@ export default function RecentProjectsSection() {
                                                 />
                                             </Link>
 
-                                            <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center group-hover:bg-primary border border-gray-100 group-hover:border-primary transition-all duration-300 shadow-sm">
+                                            <div className="w-12 h-12 rounded-2xl bg-gray-50 group-hover:bg-white flex items-center justify-center group-hover:border-white border border-gray-100 transition-all duration-300 shadow-sm">
                                                 <Icon
                                                     icon="mdi:rocket-launch"
                                                     width={20}
-                                                    className="text-dark/30 group-hover:text-white transition-colors duration-300"
+                                                    className="text-dark/30 group-hover:text-primary transition-colors duration-300"
                                                 />
                                             </div>
                                         </div>
