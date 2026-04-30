@@ -9,7 +9,7 @@ export const metadata = {
   },
 
   description:
-    'BugHex is a software development agency delivering scalable web, mobile, and AI solutions. We specialize in Flutter, React Native, Laravel, Node.js, and custom software development for startups and enterprises.',
+    'BugHex is a software development agency delivering scalable web, mobile, and AI solutions. We specialize in Flutter, React Native, React.js, Next.js, Laravel, Node.js, Android/iOS, and custom software development for startups and enterprises.',
 
   keywords: [
     'BugHex',
@@ -38,7 +38,7 @@ export const metadata = {
   openGraph: {
     title: 'BugHex | Software Development Agency',
     description:
-      'A software development agency building scalable web, mobile, and AI-powered solutions with modern technologies.',
+    'BugHex is a software development agency delivering scalable web, mobile, and AI solutions. We specialize in Flutter, React Native, React.js, Next.js, Laravel, Node.js, Android/iOS, and custom software development for startups and enterprises.',
     url: 'https://www.thebughex.com',
     siteName: 'BugHex',
     images: [
