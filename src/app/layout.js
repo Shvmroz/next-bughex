@@ -1,18 +1,20 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'BugHex — Development Agency',
-  description: 'Premium development agency specializing in Flutter, React Native, JavaScript, Laravel, PHP, Android, iOS, Node.js, and AI solutions.',
-  keywords: 'flutter, react native, javascript, laravel, php, android, ios, nodejs, ai, development agency',
+  title: 'Bughex — Software Development Agency',
+  description:'Bughex is a software development agency delivering scalable web, mobile, and AI solutions. We specialize in Flutter, React Native, React.js, Next.js, Laravel, Node.js, Android/iOS, and custom software development for startups and enterprises.',
+  keywords: 'flutter, react native, react js, next js, javascript, laravel, php, android, ios, nodejs, ai, development agency',
   icons: {
     icon: '/favicon.png',
   },
   openGraph: {
-    title: 'BugHex — Development Agency',
-    description: 'We build exceptional digital products. Flutter, React Native, AI, and beyond.',
+    title: 'Bughex — Software Development Agency',
+    description:'Bughex is a software development agency delivering scalable web, mobile, and AI solutions. We specialize in Flutter, React Native, React.js, Next.js, Laravel, Node.js, Android/iOS, and custom software development for startups and enterprises.',
     type: 'website',
   },
 };
+
+
 
 export default function RootLayout({ children }) {
   return (
