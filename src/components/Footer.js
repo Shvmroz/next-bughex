@@ -28,6 +28,7 @@ export default function Footer() {
             loop
             muted
             playsInline
+            preload="auto"
             className="w-full h-full object-cover opacity-60"
           >
             <source src="/video/footer_video.mp4" type="video/mp4" />

@@ -29,6 +29,7 @@ export default function RecentProjectsSection() {
                             loop
                             muted
                             playsInline
+                            preload="auto"
                             className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
                         >
                             <source src="/video/recent_project_video.mp4" type="video/mp4" />

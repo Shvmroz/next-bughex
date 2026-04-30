@@ -10,6 +10,7 @@ export default function HeroSection() {
         muted
         loop
         playsInline
+        preload="auto"
         className="absolute top-0 left-0 w-full h-full object-cover z-0 pointer-events-none opacity-60"
       >
         <source src="/video/hero_section_video.mp4" type="video/mp4" />

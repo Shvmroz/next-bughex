@@ -125,7 +125,7 @@ export default function AboutPage() {
                 scale: blob2Scale,
                 opacity: blobOpacity,
               }}
-              className="absolute w-[500px] h-[500px] bg-[#1bb5a2]/20 rounded-full blur-[100px] -z-10"
+              className="absolute w-[500px] h-[500px] bg-[#1bb5a2]/20 rounded-full blur-[50px] -z-10"
             />
 
             <motion.div
@@ -135,7 +135,7 @@ export default function AboutPage() {
                 scale: blob3Scale,
                 opacity: blobOpacity,
               }}
-              className="absolute w-[200px] h-[200px] bg-[#b302ff]/20 rounded-full blur-[100px] -z-10"
+              className="absolute w-[200px] h-[200px] bg-[#CDEB63]/30 rounded-full blur-[50px] -z-10"
             />
 
             <div className="relative max-w-5xl mx-auto px-4 sm:px-6 text-center w-full">
