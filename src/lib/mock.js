@@ -128,7 +128,8 @@ export const leaders = [
     nameFirst: 'Umair',
     nameLast: 'Hashmi',
     role: 'Flutter Lead & Client Relations Manager',
-    linkedin: 'https://www.linkedin.com/in/umair-hashmi'
+    linkedin: 'https://www.linkedin.com/in/umair-hashmi',
+    image: 'team/umair-hashmi.png'
   },
   {
     nameFirst: 'Ammar',
@@ -151,9 +152,9 @@ export const leaders = [
   {
     nameFirst: 'Shamroz',
     nameLast: 'Khan',
-    image: '/shamroz-khan.png',
     role: 'Frontend Lead & Head of UI/UX',
-    linkedin: 'https://www.linkedin.com/in/shvmroz'
+    linkedin: 'https://www.linkedin.com/in/shvmroz',
+    image: 'team/shamroz-khan.png',
   },
 ];
 

@@ -107,7 +107,7 @@ export default function LeadershipSection() {
                                         <img
                                             src={leader.image}
                                             alt={leader.nameFirst}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-fill"
                                         />
                                     ) : (
                                         <Icon icon="mdi:account" width={80} className="text-gray-200" />
