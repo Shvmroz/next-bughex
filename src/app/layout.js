@@ -1,17 +1,82 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'BugHex — Development Agency',
-  description: 'Premium development agency specializing in Flutter, React Native, JavaScript, Laravel, PHP, Android, iOS, Node.js, and AI solutions.',
-  keywords: 'flutter, react native, javascript, laravel, php, android, ios, nodejs, ai, development agency',
+  metadataBase: new URL('https://www.thebughex.com'),
+
+  title: {
+    default: 'BugHex | Software Development Agency',
+    template: '%s | BugHex',
+  },
+
+  description:
+    'BugHex is a software development agency delivering scalable web, mobile, and AI solutions. We specialize in Flutter, React Native, Laravel, Node.js, and custom software development for startups and enterprises.',
+
+  keywords: [
+    'BugHex',
+    'software development agency',
+    'custom software development',
+    'web development company',
+    'mobile app development',
+    'flutter development',
+    'react native development',
+    'laravel development',
+    'nodejs development',
+    'AI software solutions',
+    'full stack development',
+  ],
+
+  authors: [{ name: 'BugHex' }],
+  creator: 'BugHex',
+  publisher: 'BugHex',
+
   icons: {
     icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/apple-touch-icon.png',
   },
+
   openGraph: {
-    title: 'BugHex — Development Agency',
-    description: 'We build exceptional digital products. Flutter, React Native, AI, and beyond.',
+    title: 'BugHex | Software Development Agency',
+    description:
+      'A software development agency building scalable web, mobile, and AI-powered solutions with modern technologies.',
+    url: 'https://www.thebughex.com',
+    siteName: 'BugHex',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'BugHex Software Development Agency',
+      },
+    ],
     type: 'website',
+    locale: 'en_US',
   },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'BugHex | Software Development Agency',
+    description:
+      'Software development agency for web, mobile, and AI solutions.',
+    images: ['/og-image.png'],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+
+  alternates: {
+    canonical: 'https://www.thebughex.com',
+  },
+
+  category: 'technology',
 };
 
 export default function RootLayout({ children }) {
