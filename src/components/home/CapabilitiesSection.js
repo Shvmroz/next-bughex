@@ -15,6 +15,10 @@ export default function CapabilitiesSection({
   const animationFrameRef = useRef(null);
   const velocityRef = useRef(0);
 
+  const isDraggingRef = useRef(false);
+  const lastXRef = useRef(0);
+  const lastDeltaRef = useRef(0);
+
   const [renderX, setRenderX] = useState(0);
 
   const cardWidth = 344;
@@ -22,61 +26,115 @@ export default function CapabilitiesSection({
   const itemCount = items.length;
   const loopWidth = itemCount * (cardWidth + gap);
 
-  // ✅ Smooth animation loop (NO React re-render spam)
   useEffect(() => {
     const animate = () => {
-      // base speed
       let speed = 0.6;
 
-      // apply manual velocity (wheel)
       if (velocityRef.current !== 0) {
         speed += velocityRef.current;
-        velocityRef.current *= 0.92; // friction
-        if (Math.abs(velocityRef.current) < 0.01) {
-          velocityRef.current = 0;
-        }
+        velocityRef.current *= 0.92;
+        if (Math.abs(velocityRef.current) < 0.01) velocityRef.current = 0;
       }
 
       scrollRef.current += speed;
-
-      // ✅ seamless loop (no visible reset)
-      if (scrollRef.current >= loopWidth) {
-        scrollRef.current -= loopWidth;
-      }
-      if (scrollRef.current < 0) {
-        scrollRef.current += loopWidth;
-      }
+      if (scrollRef.current >= loopWidth) scrollRef.current -= loopWidth;
+      if (scrollRef.current < 0) scrollRef.current += loopWidth;
 
       setRenderX(scrollRef.current);
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
     animationFrameRef.current = requestAnimationFrame(animate);
-
     return () => cancelAnimationFrame(animationFrameRef.current);
   }, [loopWidth]);
 
-  // ✅ Smooth wheel interaction (no jumps)
+  // ── WHEEL ──
   useEffect(() => {
     const handleWheel = (e) => {
       if (!containerRef.current) return;
-
       const rect = containerRef.current.getBoundingClientRect();
       if (e.clientY < rect.top || e.clientY > rect.bottom) return;
-
       e.preventDefault();
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      velocityRef.current += delta * 0.02;
+    };
 
-      // add velocity instead of jumping
-      velocityRef.current += e.deltaY * 0.02;
+    const el = containerRef.current;
+    if (el) el.addEventListener('wheel', handleWheel, { passive: false });
+    return () => { if (el) el.removeEventListener('wheel', handleWheel); };
+  }, []);
+
+  // ── MOUSE DRAG ──
+  useEffect(() => {
+    const onMouseDown = (e) => {
+      isDraggingRef.current = true;
+      lastXRef.current = e.clientX;
+      lastDeltaRef.current = 0;
+      velocityRef.current = 0;
+    };
+
+    const onMouseMove = (e) => {
+      if (!isDraggingRef.current) return;
+      const delta = e.clientX - lastXRef.current;
+      lastDeltaRef.current = delta;
+      scrollRef.current -= delta;
+      lastXRef.current = e.clientX;
+    };
+
+    const onMouseUp = () => {
+      if (!isDraggingRef.current) return;
+      isDraggingRef.current = false;
+      // fling based on last drag delta
+      velocityRef.current = -lastDeltaRef.current * 0.3;
     };
 
     const el = containerRef.current;
     if (el) {
-      el.addEventListener('wheel', handleWheel, { passive: false });
+      el.addEventListener('mousedown', onMouseDown);
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onMouseUp);
     }
 
     return () => {
-      if (el) el.removeEventListener('wheel', handleWheel);
+      if (el) el.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+    };
+  }, []);
+
+  // ── TOUCH DRAG ──
+  useEffect(() => {
+    const onTouchStart = (e) => {
+      lastXRef.current = e.touches[0].clientX;
+      lastDeltaRef.current = 0;
+      velocityRef.current = 0;
+    };
+
+    const onTouchMove = (e) => {
+      const delta = e.touches[0].clientX - lastXRef.current;
+      lastDeltaRef.current = delta;
+      scrollRef.current -= delta;
+      lastXRef.current = e.touches[0].clientX;
+    };
+
+    const onTouchEnd = () => {
+      // fling based on last touch delta
+      velocityRef.current = -lastDeltaRef.current * 0.3;
+    };
+
+    const el = containerRef.current;
+    if (el) {
+      el.addEventListener('touchstart', onTouchStart, { passive: true });
+      el.addEventListener('touchmove', onTouchMove, { passive: true });
+      el.addEventListener('touchend', onTouchEnd);
+    }
+
+    return () => {
+      if (el) {
+        el.removeEventListener('touchstart', onTouchStart);
+        el.removeEventListener('touchmove', onTouchMove);
+        el.removeEventListener('touchend', onTouchEnd);
+      }
     };
   }, []);
 
@@ -99,7 +157,10 @@ export default function CapabilitiesSection({
         </p>
       </div>
 
-      <div className="relative overflow-hidden" ref={containerRef}>
+      <div
+        className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none"
+        ref={containerRef}
+      >
         <div className="absolute top-1/2 left-0 w-full h-[1px] -translate-y-1/2 pointer-events-none z-0">
           <div className="w-full h-full bg-gradient-to-r from-transparent via-primary/25 to-transparent border-t border-dashed border-primary/20" />
         </div>
@@ -125,12 +186,10 @@ function CapabilityCard({ service }) {
 
   const hexToRgba = (hex, opacity = 0.5) => {
     if (!hex) return `rgba(27,181,162,${opacity})`;
-
     const bigint = parseInt(hex.replace('#', ''), 16);
     const r = (bigint >> 16) & 255;
     const g = (bigint >> 8) & 255;
     const b = bigint & 255;
-
     return `rgba(${r}, ${g}, ${b}, ${opacity})`;
   };
 
