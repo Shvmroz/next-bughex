@@ -135,25 +135,25 @@ export const leaders = [
   {
     nameFirst: 'Ammar',
     nameLast: 'Yousaf',
-    role: 'Mobile App Developer (Full Stack) & Head of Global Marketing',
+    role: 'React Native Specialist & Head of Global Marketing',
     linkedin: 'https://www.linkedin.com/in/ammar-yousaf-react-native-53321a19a'
   },
   {
     nameFirst: 'Atif',
     nameLast: 'Raza',
-    role: 'Backend Engineering Specialist & Head of AI',
+    role: 'Backend Specialist & Head of AI',
     linkedin: 'https://www.linkedin.com/in/atif-raza-7a6855217'
   },
   {
     nameFirst: 'Moeen',
     nameLast: 'U Din',
-    role: 'Full Stack Developer & Head of DevOps',
+    role: 'Full-Stack Developer & Head of DevOps',
     linkedin: 'https://www.linkedin.com/in/moeen-u-din'
   },
   {
     nameFirst: 'Shamroz',
     nameLast: 'Khan',
-    role: 'MERN Stack & Head of UI/UX',
+    role: 'Full-Stack Developer (MERN) & UI/UX Specialist',
     linkedin: 'https://www.linkedin.com/in/shvmroz',
     image: 'team/shamroz-khan.png',
   },
