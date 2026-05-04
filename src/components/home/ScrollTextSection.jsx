@@ -114,7 +114,8 @@ export default function ScrollTextSection() {
   return (
     <section className="relative bg-black" data-theme="dark">
       <div
-        className="h-screen overflow-hidden"
+        className="overflow-hidden"
+        style={{ height: '140vh' }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
@@ -193,7 +194,7 @@ export default function ScrollTextSection() {
                 <motion.div
                   animate={{ opacity: i === current ? 1 : 0.12 }}
                   transition={{ duration: 0.35 }}
-                  className="w-px bg-primary"
+                  className="w-[3px] bg-primary"
                   style={{ height: 48 }}
                 />
               </button>

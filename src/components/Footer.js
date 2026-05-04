@@ -7,7 +7,7 @@ import { footerData, socialLinks, siteMeta, contactSectionContent } from '@/lib/
 import Logo from './Logo';
 
 export default function Footer() {
-  const email = contactSectionContent.contactInfo.find(info => info.label === 'Email')?.value || 'hello@bughex.dev';
+  const email =  'hello@bughex.dev';
 
   const allSocials = [
     ...socialLinks,
