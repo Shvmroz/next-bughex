@@ -122,7 +122,8 @@ export const leaders = [
     nameFirst: 'Zain',
     nameLast: 'Sherazi',
     role: 'Project Lead & Android Specialist',
-    linkedin: 'https://www.linkedin.com/in/syed-zain-ul-abidin-sherazi'
+    linkedin: 'https://www.linkedin.com/in/syed-zain-ul-abidin-sherazi',
+    image: 'team/zain-sherazi.png',
   },
   {
     nameFirst: 'Umair',
