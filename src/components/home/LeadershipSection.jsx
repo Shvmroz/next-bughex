@@ -82,7 +82,7 @@ export default function LeadershipSection() {
                 {leaders.map((leader, i) => (
                     <motion.div
                         key={i}
-                        className="min-w-[220px] md:min-w-[260px] snap-center group"
+                        className="min-w-[220px] md:min-w-[260px] snap-center group cursor-pointer"
                         initial={{ opacity: 0, scale: 0.9, y: 30 }}
                         whileInView={{ opacity: 1, scale: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: i * 0.05 }}
@@ -92,13 +92,12 @@ export default function LeadershipSection() {
                         {/* IMAGE CARD */}
                         <div className="rounded-t-3xl overflow-hidden bg-white">
 
-                            <div className="aspect-[4/5] bg-[#FAFBFC] hover:bg-primary flex items-center justify-center relative overflow-hidden">
+                            <div className="aspect-[4/5] bg-[#FAFBFC] group-hover:bg-primary flex items-center justify-center relative overflow-hidden transition-colors duration-500">
 
                                 {/*  GRAPH BACKGROUND EFFECT */}
                                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
                                     {/* grid lines */}
                                     <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:16px_16px] opacity-25" />
-
                                 </div>
 
                                 {/* IMAGE / ICON */}
@@ -107,10 +106,10 @@ export default function LeadershipSection() {
                                         <img
                                             src={leader.image}
                                             alt={leader.nameFirst}
-                                            className="w-full h-full object-fill"
+                                            className="w-full h-full object-fill transition-all duration-500 drop-shadow-none group-hover:drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]"
                                         />
                                     ) : (
-                                        <Icon icon="mdi:account" width={80} className="text-gray-200" />
+                                        <Icon icon="mdi:account" width={80} className="text-gray-200 transition-all duration-500 drop-shadow-none group-hover:drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]" />
                                     )}
                                 </div>
 
