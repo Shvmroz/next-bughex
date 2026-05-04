@@ -133,16 +133,16 @@ export const leaders = [
     image: 'team/umair-hashmi.png'
   },
   {
-    nameFirst: 'Ammar',
-    nameLast: 'Yousaf',
-    role: 'React Native Specialist & Head of Global Marketing',
-    linkedin: 'https://www.linkedin.com/in/ammar-yousaf-react-native-53321a19a'
-  },
-  {
     nameFirst: 'Atif',
     nameLast: 'Raza',
     role: 'Backend Specialist & Head of AI',
     linkedin: 'https://www.linkedin.com/in/atif-raza-7a6855217'
+  },
+  {
+    nameFirst: 'Ammar',
+    nameLast: 'Yousaf',
+    role: 'React Native Specialist & Head of Global Marketing',
+    linkedin: 'https://www.linkedin.com/in/ammar-yousaf-react-native-53321a19a'
   },
   {
     nameFirst: 'Moeen',
@@ -153,7 +153,7 @@ export const leaders = [
   {
     nameFirst: 'Shamroz',
     nameLast: 'Khan',
-    role: 'Full-Stack Developer (MERN) & UI/UX Specialist',
+    role: 'MERN Developer & UI/UX Specialist',
     linkedin: 'https://www.linkedin.com/in/shvmroz',
     image: 'team/shamroz-khan.png',
   },
