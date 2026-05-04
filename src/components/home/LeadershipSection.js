@@ -125,7 +125,7 @@ export default function LeadershipSection() {
 
                             <div className="flex items-start justify-between gap-3">
 
-                                <h3 className="text-2xl font-extrabold text-dark leading-tight truncate">
+                                <h3 className="text-xl md:text-2xl font-extrabold text-dark leading-tight">
                                     {leader.nameFirst}{' '}
                                     <span className="text-primary">{leader.nameLast}</span>
                                 </h3>
