@@ -55,7 +55,7 @@ export default function Footer() {
         </div>
       </section>
       
-      <footer data-theme="dark" data-nav-blur="true" className="bg-[#0a0a0f] text-white pt-10 md:pt-32 pb-6 shadow-sm relative overflow-hidden">
+      <footer data-theme="dark" data-nav-blur="true" className="bg-[#0a0a0f] text-white pt-32 pb-6 shadow-sm relative overflow-hidden">
         {/* Background Decorative Element */}
         <div
           className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full opacity-[0.03] blur-[120px] pointer-events-none"
@@ -63,10 +63,10 @@ export default function Footer() {
         />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 mb-8 lg:mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 mb-16">
 
             {/* BRAND COLUMN */}
-            <div className="lg:col-span-4 space-y-5 lg:space-y-10">
+            <div className="lg:col-span-4 space-y-10">
               <Link href="/" className="inline-block" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
                 <Logo staticLogo={true} isDark={false} />
               </Link>
@@ -94,13 +94,13 @@ export default function Footer() {
 
             {/* LINKS COLUMNS */}
             <div className="lg:col-span-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 lg:gap-x-8 lg:gap-y-12">
+              <div className="grid grid-cols-4 gap-x-8 gap-y-12">
                 {Object.entries(footerData).map(([title, links]) => (
-                  <div key={title} className="space-y-4 lg:space-y-8">
+                  <div key={title} className="space-y-8">
                     <h4 className="text-[10px] font-bold tracking-[0.3em] text-white/30 uppercase">
                       {title}
                     </h4>
-                    <ul className="space-y-2.5 lg:space-y-4">
+                    <ul className="space-y-4">
                       {links.map((link) => (
                         <li key={link.label}>
                           {title === 'Services' || title === 'Industries' ? (

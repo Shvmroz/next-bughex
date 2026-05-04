@@ -159,31 +159,6 @@ export const leaders = [
   },
 ];
 
-// ─── CONTACT SECTION ──────────────────────────────────────
-export const contactSectionContent = {
-  preText: 'Ready to build?',
-  title: 'Start Your Project',
-  subtitle: 'Ready to build something extraordinary? Let\'s talk about your vision.',
-  bodyText:
-    'Whether you need a Flutter app, a complex backend, or an AI-powered solution, BugHex has the expertise to bring your vision to life. We work with startups and enterprises alike.',
-  contactInfo: [
-    { icon: 'mdi:email-outline', label: 'Email', value: 'hello@bughex.dev' },
-    { icon: 'mdi:map-marker-outline', label: 'Location', value: 'Remote — Worldwide' },
-    { icon: 'mdi:clock-outline', label: 'Response Time', value: 'Within 24 hours' },
-  ],
-  serviceOptions: [
-    'Flutter Development',
-    'React Native',
-    'JavaScript / React',
-    'Laravel / PHP',
-    'Node.js Backend',
-    'iOS / Android',
-    'AI Solutions',
-  ],
-  successTitle: 'Message Sent!',
-  successSubtext: "We'll get back to you within 24 hours.",
-};
-
 // ─── STATS ────────────────────────────────────────────────
 export const stats = [
   { value: '150+', label: 'Projects Delivered' },
@@ -483,35 +458,6 @@ export const insightsPageContent = {
   searchPlaceholder: 'Search insights...',
   emptyState: 'No insights found for your search.',
   categories: ['All', 'Flutter', 'AI & ML', 'Mobile Development', 'Backend'],
-};
-
-// ─── CONTACT PAGE ─────────────────────────────────────────
-export const contactPageContent = {
-  preText: 'Get In Touch',
-  title: 'Let\'s Build',
-  titleHighlight: 'Together',
-  subtitle: 'Have a project in mind? We\'d love to hear about it.',
-  formTitle: 'Send Us a Message',
-  formSubtitle: 'Fill out the form and we\'ll get back to you within 24 hours.',
-  infoTitle: 'Contact Information',
-  infoBody:
-    'Whether you need a Flutter app, a complex backend, or an AI-powered solution, BugHex has the expertise to bring your vision to life.',
-  contactInfo: [
-    { icon: 'mdi:email-outline', label: 'Email', value: 'hello@bughex.dev' },
-    { icon: 'mdi:map-marker-outline', label: 'Location', value: 'Remote — Worldwide' },
-    { icon: 'mdi:clock-outline', label: 'Response Time', value: 'Within 24 hours' },
-  ],
-  serviceOptions: [
-    'Flutter Development',
-    'React Native',
-    'JavaScript / React',
-    'Laravel / PHP',
-    'Node.js Backend',
-    'iOS / Android',
-    'AI Solutions',
-  ],
-  successTitle: 'Message Sent!',
-  successSubtext: "We'll get back to you within 24 hours.",
 };
 
 // ─── CAPABILITIES PAGE ─────────────────────────────────────────
