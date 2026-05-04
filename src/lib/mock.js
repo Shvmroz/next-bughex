@@ -5,7 +5,7 @@
 // ─── SITE META ────────────────────────────────────────────
 export const siteMeta = {
   name: 'BugHex',
-  tagline: 'Launching Ideas Into Real Products',
+  tagline: 'Launching Ideas Into Real Products. We combine engineering excellence with design thinking to build world-class digital products that scale.',
   subTagline: 'From Zero to Product — Fast & Smart',
   copyright: `© ${new Date().getFullYear()} Bughex Ltd. All Rights Reserved.`,
 };
@@ -223,17 +223,33 @@ export const testimonials = [
 // ─── FOOTER ───────────────────────────────────────────────
 export const footerData = {
   Services: [
-    'Digital Consulting & Strategy',
-    'Digital Commerce',
-    'Business Applications',
-    'Cloud Operations & Migration',
-    'Cloud Applications',
-    'Development & Integrations',
-    'Managed Services',
+    { label: 'Flutter Development', icon: 'logos:flutter' },
+    { label: 'React Native', icon: 'logos:react' },
+    { label: 'React / Next.js', icon: 'logos:nextjs-icon' },
+    { label: 'Node.js Backend', icon: 'logos:nodejs-icon' },
+    { label: 'Laravel / PHP', icon: 'logos:laravel' },
+    { label: 'iOS Development', icon: 'logos:swift' },
+    { label: 'Android Development', icon: 'logos:android-icon' },
   ],
-  Industries: ['Communications', 'Banking & Financial Services', 'Public Sector', 'Health', 'Retail'],
-  Insights: ['Case Studies', 'Newsroom', 'Whitepapers', 'Blogs'],
-  'Quick Links': ['Who we are', 'Careers', 'Our Leadership', 'Investor Relation', 'Financial Reports'],
+  Industries: [
+    { label: 'FinTech', icon: 'mdi:bank-outline' },
+    { label: 'Healthcare', icon: 'mdi:heart-pulse' },
+    { label: 'E-Commerce', icon: 'mdi:shopping-outline' },
+    { label: 'Education', icon: 'mdi:school-outline' },
+    { label: 'Real Estate', icon: 'mdi:home-city-outline' },
+    { label: 'Logistics', icon: 'mdi:truck-outline' },
+    { label: 'SaaS', icon: 'mdi:cloud-outline' },
+  ],
+  Insights: [
+    { label: 'Case Studies', href: '/projects' },
+    { label: 'Blogs', href: '/projects' },
+  ],
+  'Quick Links': [
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/about' },
+    { label: 'Projects', href: '/projects' },
+    { label: 'Contact', href: '/contact' },
+  ],
 };
 
 export const socialLinks = [

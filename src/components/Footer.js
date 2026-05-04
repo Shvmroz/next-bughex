@@ -21,7 +21,7 @@ export default function Footer() {
 
   return (
     <>
-      <section data-theme="dark" data-nav-blur="true" className="py-32 bg-[#0a0a0f] relative overflow-hidden">
+      <section data-theme="dark" data-nav-blur="true" className="py-28 bg-[#0a0a0f] relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <video
             autoPlay
@@ -62,7 +62,7 @@ export default function Footer() {
         />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 mb-16">
 
             {/* BRAND COLUMN */}
             <div className="lg:col-span-4 space-y-10">
@@ -71,8 +71,7 @@ export default function Footer() {
               </Link>
 
               <p className="text-white/40 text-base leading-relaxed max-w-sm font-medium">
-                {siteMeta.tagline}. We combine engineering excellence with design thinking to build world-class digital products that scale.
-              </p>
+                {siteMeta.tagline}</p>
 
               <div className="flex flex-wrap gap-4">
                 {allSocials.map((social) => (
@@ -94,7 +93,7 @@ export default function Footer() {
 
             {/* LINKS COLUMNS */}
             <div className="lg:col-span-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12">
+              <div className="grid grid-cols-4 gap-x-8 gap-y-12">
                 {Object.entries(footerData).map(([title, links]) => (
                   <div key={title} className="space-y-8">
                     <h4 className="text-[10px] font-bold tracking-[0.3em] text-white/30 uppercase">
@@ -102,14 +101,23 @@ export default function Footer() {
                     </h4>
                     <ul className="space-y-4">
                       {links.map((link) => (
-                        <li key={link}>
-                          <Link
-                            href="#"
-                            className="text-sm text-white/50 hover:text-primary transition-colors duration-200 flex items-center gap-2 group"
-                          >
-                            <span className="w-0 h-px bg-primary transition-all duration-300 group-hover:w-2" />
-                            {link}
-                          </Link>
+                        <li key={link.label}>
+                          {title === 'Services' || title === 'Industries' ? (
+                            // Plain text with icon, no hover, no link
+                            <span className="text-sm text-white/40 flex items-center gap-2.5">
+                              <Icon icon={link.icon} width={16} className="flex-shrink-0 opacity-70" />
+                              {link.label}
+                            </span>
+                          ) : (
+                            // Insights & Quick Links — clickable
+                            <Link
+                              href={link.href}
+                              className="text-sm text-white/50 hover:text-primary transition-colors duration-200 flex items-center gap-2 group"
+                            >
+                              <span className="w-0 h-px bg-primary transition-all duration-300 group-hover:w-2" />
+                              {link.label}
+                            </Link>
+                          )}
                         </li>
                       ))}
                     </ul>
@@ -120,8 +128,8 @@ export default function Footer() {
           </div>
 
           {/* BOTTOM BAR */}
-          <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row justify-center items-center">
-            <p className="text-[11px] text-white/20 font-bold tracking-[0.2em] uppercase">
+          <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-center items-center">
+            <p className="text-[11px] text-white/50 uppercase">
               {siteMeta.copyright}
             </p>
           </div>
