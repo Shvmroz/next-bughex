@@ -138,14 +138,6 @@ export default function ContactSection({ isPage = false }) {
           isPage ? "pt-36 pb-24" : "py-16 md:py-32"
         }`}
       >
-        {/* SECTION HEADER */}
-        <div className="flex items-center gap-3 mb-16">
-          <div className="w-8 h-px bg-primary" />
-          <span className="text-[10px] font-bold tracking-[0.35em] text-primary uppercase">
-            Get In Touch
-          </span>
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24">
           {/* LEFT SIDE */}
           <div>

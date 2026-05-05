@@ -7,7 +7,7 @@ import { footerData, socialLinks, siteMeta, contactSectionContent } from '@/lib/
 import Logo from './Logo';
 
 export default function Footer() {
-  const email =  'hello@bughex.dev';
+  const email = 'hello@bughex.dev';
 
   const allSocials = [
     ...socialLinks,
@@ -54,7 +54,7 @@ export default function Footer() {
           </Link>
         </div>
       </section>
-      
+
       <footer data-theme="dark" data-nav-blur="true" className="bg-[#0a0a0f] text-white pt-32 pb-6 shadow-sm relative overflow-hidden">
         {/* Background Decorative Element */}
         <div
@@ -94,7 +94,8 @@ export default function Footer() {
 
             {/* LINKS COLUMNS */}
             <div className="lg:col-span-8">
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">                {Object.entries(footerData).map(([title, links]) => (
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+                {Object.entries(footerData).map(([title, links]) => (
                   <div key={title} className="space-y-8">
                     <h4 className="text-[10px] font-bold tracking-[0.3em] text-white/30 uppercase">
                       {title}
