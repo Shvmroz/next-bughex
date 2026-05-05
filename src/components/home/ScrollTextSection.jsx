@@ -51,7 +51,7 @@ function SlideContent({ slide }) {
   const restOfTitle = parts.join(" ");
 
   return (
-    <div className="flex flex-col justify-center pl-8 md:pl-16 lg:pl-20 h-full">
+    <div className="flex flex-col justify-center pl-4 md:pl-16 lg:pl-20 h-full">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" />
         <span className="text-[11px] font-bold tracking-[0.4em] text-primary uppercase">
@@ -115,7 +115,7 @@ export default function ScrollTextSection() {
     <section className="relative bg-black" data-theme="dark">
       <div
         className="overflow-hidden"
-        style={{ height: '140vh' }}
+        style={{ height: '120vh' }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
@@ -256,7 +256,7 @@ export default function ScrollTextSection() {
         </div>
 
         {/* MOBILE: Bottom dot navigation */}
-        <div className="md:hidden absolute bottom-8 left-0 right-0 flex items-center justify-center gap-3 z-10">
+        <div className="md:hidden absolute bottom-[72px] left-0 right-0 flex items-center justify-center gap-3 z-10">
           <button
             onClick={() => handleManualNav(prev)}
             disabled={current === 0}

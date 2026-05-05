@@ -191,7 +191,7 @@ export default function ContactSection({ isPage = false }) {
 
           {/* RIGHT SIDE FORM */}
           <div className="relative">
-            <div className="bg-white border border-gray-100 rounded-3xl shadow-lg p-8 relative overflow-hidden">
+            <div className="bg-white border border-gray-100 rounded-3xl shadow-lg p-4 md:p-8 relative overflow-hidden">
 
               <AnimatePresence mode="wait">
 
