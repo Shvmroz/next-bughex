@@ -245,10 +245,8 @@ export const socialLinks = [
 export const projectsPageContent = {
   title: 'Our',
   titleHighlight: 'Projects',
-  subtitle: 'Insights, case studies, and deep dives into BugHex creations.',
-  searchPlaceholder: 'Search articles...',
-  emptyState: 'No articles found for your search.',
-  categories: ['All', 'Flutter', 'AI & ML', 'Mobile Development', 'Backend'],
+  subtitle: 'Explore our latest projects, innovative solutions, and real-world digital experiences crafted by BugHex.', searchPlaceholder: 'Search projects...',
+  emptyState: 'No projects found for your search.',
 };
 
 // ─── CAPABILITIES PAGE ─────────────────────────────────────────

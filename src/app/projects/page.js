@@ -49,7 +49,7 @@ export default function ProjectsPage() {
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
       <main className="flex-grow">
-        <section className="pt-32 pb-16 relative overflow-hidden">
+        <section className="pt-32 pb-8 md:pb-16 relative overflow-hidden">
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
@@ -93,8 +93,35 @@ export default function ProjectsPage() {
               />
             </motion.div>
 
+            {/* ── MOBILE: filter dropdown ── */}
             <motion.div
-              className="flex flex-wrap gap-3 justify-center"
+              className="flex md:hidden max-w-md mx-auto mb-8 relative"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              <div className="relative w-full">
+                <select
+                  value={activeCategory}
+                  onChange={(e) => setActiveCategory(e.target.value)}
+                  className="w-full appearance-none px-5 py-3 pr-10 rounded-full bg-white border border-gray-200 shadow-sm text-dark/80 text-sm focus:outline-none focus:border-primary/50 transition-colors font-semibold cursor-pointer"
+                >
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
+                {/* chevron icon */}
+                <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
+                  <svg className="w-4 h-4 text-dark/40" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* ── DESKTOP: badge pills ── */}
+            <motion.div
+              className="hidden md:flex flex-wrap gap-3 justify-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
