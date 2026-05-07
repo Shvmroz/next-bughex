@@ -43,14 +43,11 @@ export default function ProjectCard({ project, index }) {
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
             ) : (
-              <div
-                className="w-full h-full flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, rgba(24,214,191,0.12), rgba(24,214,191,0.03))' }}
-              >
-                <div className="absolute inset-0 grid-bg opacity-50" />
-                <span className="relative z-10 text-5xl text-primary/30 group-hover:text-white/30 transition-colors duration-500">
-                  {project.category?.charAt(0)}
-                </span>
+              <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-gray-50">
+                <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v13.5a1.5 1.5 0 001.5 1.5z" />
+                </svg>
+                <span className="text-xs text-gray-300 font-medium">No image</span>
               </div>
             )}
             {/* Overlay tint on hover */}

@@ -8,7 +8,7 @@ import { Icon } from '@iconify/react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProjectCard from '@/components/projects/ProjectCard';
-import { detail_project, api_projects_list } from '@/DAL/api';
+import { api_project_detail, api_projects_list } from '@/DAL/api';
 import { useRouter } from 'next/navigation';
 
 export default function ProjectDetailPage({ params }) {
@@ -39,7 +39,7 @@ export default function ProjectDetailPage({ params }) {
 
     const get_project_detail = async () => {
       setLoading(true);
-      const result = await detail_project(slug);
+      const result = await api_project_detail(slug);
       const data = result?.data ?? result;
 
       if (data && !data.code && !data.message) {

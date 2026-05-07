@@ -14,6 +14,7 @@ export const siteMeta = {
 export const navLinks = [
   { label: 'WHO WE ARE', href: '/about', hasDropdown: false },
   { label: 'PROJECTS', href: '/projects', hasDropdown: true },
+  { label: 'BLOGS', href: '/blogs', hasDropdown: false },
   { label: 'CONTACT', href: '/contact', hasDropdown: false },
 ];
 
@@ -217,12 +218,13 @@ export const footerData = {
   ],
   Insights: [
     { label: 'Case Studies', href: '/projects' },
-    { label: 'Blogs', href: '/projects' },
+    { label: 'Blogs', href: '/blogs' },
   ],
   'Quick Links': [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
     { label: 'Projects', href: '/projects' },
+    { label: 'Blogs', href: '/blogs' },
     { label: 'Contact', href: '/contact' },
   ],
 };

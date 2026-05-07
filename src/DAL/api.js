@@ -8,6 +8,14 @@ export const api_blogs_list = () => {
     return invokeApi(requestObj);
 };
 
+export const api_blog_detail = (id) => {
+    const requestObj = {
+        path: `api/blogs/${id}`,
+        method: "GET"
+    };
+    return invokeApi(requestObj);
+};
+
 export const api_projects_list = () => {
     const requestObj = {
         path: `api/projects`,
@@ -16,11 +24,12 @@ export const api_projects_list = () => {
     return invokeApi(requestObj);
 };
 
-export const detail_project = (id) => {
+export const api_project_detail = (id) => {
     const requestObj = {
         path: `api/projects/${id}`,
         method: "GET"
     };
     return invokeApi(requestObj);
 };
+
 
