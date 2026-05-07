@@ -19,7 +19,6 @@ export async function invokeApi({
     },
   };
 
-  // Add body for POST, PUT, DELETE
   if (["POST", "PUT", "DELETE"].includes(method.toUpperCase())) {
     config.data = postData;
   }
@@ -38,7 +37,6 @@ export async function invokeApi({
     console.log("<===Api-Error===>", { path, status, message: data });
 
     if (status === 401) {
-      // Do NOT reload — just return the error so the caller can handle it gracefully
       console.warn("Unauthorized request:", path);
     }
 
