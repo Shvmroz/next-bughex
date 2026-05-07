@@ -17,10 +17,10 @@ export default function ProjectCard({ project, index }) {
       className="group"
     >
       <Link href={`/projects/${project.id}`} className="block h-full">
-        <div className="relative rounded-3xl bg-white border border-gray-100 shadow-[0_4px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(27,181,162,0.12)] hover:border-primary/20 hover:bg-primary transition-all duration-500 flex flex-col overflow-hidden h-full">
+        <div className="relative rounded-xl bg-white border border-gray-100 shadow-[0_4px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(27,181,162,0.12)] hover:border-primary/20 hover:bg-primary transition-all duration-500 flex flex-col overflow-hidden h-full">
 
           {/* Grid overlay on hover */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-3xl z-0">
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-xl z-0">
             <div
               className="absolute inset-0"
               style={{
@@ -34,7 +34,7 @@ export default function ProjectCard({ project, index }) {
           <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/5 rounded-full blur-3xl group-hover:bg-white/10 transition-colors duration-500 pointer-events-none z-0" />
 
           {/* Thumbnail */}
-          <div className="relative w-full h-48 overflow-hidden rounded-t-3xl z-10 shrink-0">
+          <div className="relative w-full h-48 overflow-hidden rounded-t-xl z-10 shrink-0">
             {thumbnail ? (
               <Image
                 src={thumbnail}
@@ -101,14 +101,8 @@ export default function ProjectCard({ project, index }) {
             <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100 group-hover:border-white/20 transition-colors duration-500">
               {project.client ? (
                 <div className="flex items-center gap-2">
-                  <div
-                    className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-dark shrink-0"
-                    style={{ background: 'linear-gradient(135deg, #18D6BF, #4de8d4)' }}
-                  >
-                    {project.client.charAt(0)}
-                  </div>
-                  <p className="text-xs text-dark/70 group-hover:text-white/80 font-medium transition-colors duration-500">
-                    {project.client}
+                  <p className="text-xs text-dark/70 group-hover:text-white/80 font-medium transition-colors duration-500 capitalize">
+                    Client: {project.client}
                   </p>
                 </div>
               ) : (

@@ -164,7 +164,7 @@ export default function ContactSection({ isPage = false }) {
                     key={social.name}
                     href={social.href}
                     whileHover={{ y: -5 }}
-                    className="w-12 h-12 rounded-2xl bg-white border border-gray-200 flex items-center justify-center relative overflow-hidden group"
+                    className="w-12 h-12 rounded-xl bg-white border border-gray-200 flex items-center justify-center relative overflow-hidden group"
                   >
                     <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
@@ -183,7 +183,7 @@ export default function ContactSection({ isPage = false }) {
 
           {/* RIGHT SIDE FORM */}
           <div className="relative">
-            <div className="bg-white border border-gray-100 rounded-3xl shadow-lg p-4 md:p-8 relative overflow-hidden">
+            <div className="bg-white border border-gray-100 rounded-xl shadow-lg p-4 md:p-8 relative overflow-hidden">
 
               <AnimatePresence mode="wait">
 

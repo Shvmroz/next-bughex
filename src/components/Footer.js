@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Icon } from "@iconify/react";
 import { motion } from 'framer-motion';
-import { footerData, socialLinks, siteMeta, contactSectionContent } from '@/lib/mock';
+import { footerData, socialLinks, siteMeta } from '@/lib/mock';
 import Logo from './Logo';
 
 export default function Footer() {
@@ -55,7 +55,7 @@ export default function Footer() {
         </div>
       </section>
 
-      <footer data-theme="dark" data-nav-blur="true" className="bg-[#0a0a0f] text-white pt-32 pb-6 shadow-sm relative overflow-hidden">
+      <footer data-theme="dark" data-nav-blur="true" className="bg-[#0a0a0f] text-white pt-12 md:pt-32 pb-6 shadow-sm relative overflow-hidden">
         {/* Background Decorative Element */}
         <div
           className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full opacity-[0.03] blur-[120px] pointer-events-none"

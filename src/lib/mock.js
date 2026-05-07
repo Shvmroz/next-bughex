@@ -198,13 +198,13 @@ export const testimonials = [
 // ─── FOOTER ───────────────────────────────────────────────
 export const footerData = {
   Services: [
-    { label: 'Flutter Development', icon: 'logos:flutter' },
+    { label: 'Flutter', icon: 'logos:flutter' },
     { label: 'React Native', icon: 'logos:react' },
     { label: 'React / Next.js', icon: 'logos:nextjs-icon' },
-    { label: 'Node.js Backend', icon: 'logos:nodejs-icon' },
+    { label: 'Node.js', icon: 'logos:nodejs-icon' },
     { label: 'Laravel / PHP', icon: 'logos:laravel' },
-    { label: 'iOS Development', icon: 'logos:swift' },
-    { label: 'Android Development', icon: 'logos:android-icon' },
+    { label: 'iOS', icon: 'logos:apple-app-store' },
+    { label: 'Android', icon: 'logos:android-icon' },
   ],
   Industries: [
     { label: 'FinTech', icon: 'mdi:bank-outline' },
