@@ -46,13 +46,6 @@ export default function HeroSection() {
             <br />
             Products That <span className="text-gradient-animated">Matter</span>
           </motion.h1>
-
-          <div className="mt-8">
-            <LetsTalkFloating
-              forceVisible={true}
-              className="relative z-[999]"
-            />
-          </div>
         </motion.div>
       </div>
     </section>
