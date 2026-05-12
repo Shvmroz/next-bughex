@@ -13,6 +13,16 @@ export default function LetsTalkFloating({
   const [isVisible, setIsVisible] = useState(forceVisible);
   const [isOpen, setIsOpen] = useState(false);
   const pillRef = useRef(null);
+  const [collapsedWidth, setCollapsedWidth] = useState("140px");
+
+  useEffect(() => {
+    const updateWidth = () => {
+      setCollapsedWidth(window.innerWidth < 768 ? "110px" : "140px");
+    };
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
 
   const socialLinks = [
     {
@@ -131,7 +141,7 @@ export default function LetsTalkFloating({
               layout
               initial={false}
               animate={{
-                width: isOpen ? "auto" : "140px",
+                width: isOpen ? "auto" : collapsedWidth,
               }}
               transition={{
                 type: "spring",
@@ -139,7 +149,8 @@ export default function LetsTalkFloating({
                 damping: 30,
                 mass: 0.8,
               }}
-              className="relative flex items-center h-11 md:h-12 px-1.5 rounded-full bg-white/90 backdrop-blur-xl border border-black/5 cursor-pointer select-none z-10 overflow-hidden min-w-[140px]"
+              className="relative flex items-center h-11 md:h-12 px-1.5 rounded-full bg-white/90 backdrop-blur-xl border border-black/5 cursor-pointer select-none z-10 overflow-hidden"
+              style={{ minWidth: isOpen ? "auto" : collapsedWidth }}
               onClick={handleToggle}
             >
               <div className="flex items-center px-1 overflow-hidden h-full w-full">

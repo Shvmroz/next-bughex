@@ -27,20 +27,30 @@ export default function HeroSection() {
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="relative"
         >
-          <motion.div
-            className="absolute -inset-10 bg-primary/20 blur-[100px] rounded-full -z-10"
-            animate={{
-              opacity: [0.3, 0.6, 0.3],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          />
+          <div className="absolute -inset-20 flex items-center justify-center -z-10 overflow-hidden">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              className="w-[150%] h-[150%] bg-[conic-gradient(from_0deg,transparent_20%,#1bb5a2_50%,transparent_80%)] opacity-30 blur-[120px]"
+            />
+          </div>
 
           <motion.h1
             className="font-display text-4xl md:text-7xl lg:text-[100px] font-bold leading-[1] mb-8 tracking-tighter text-white"
             initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            animate={{
+              opacity: 1,
+              y: [0, -15, 0],
+            }}
+            transition={{
+              opacity: { delay: 0.3, duration: 1 },
+              y: {
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1.3, // Start bobbing after entry
+              },
+            }}
           >
             We Build <span className="text-gradient-animated">Digital</span>
             <br />
