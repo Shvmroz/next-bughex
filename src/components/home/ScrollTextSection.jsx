@@ -232,7 +232,7 @@ export default function ScrollTextSection() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M15 19l-7-7 7-7"
+                d="M5 15l7-7 7 7"
               />
             </svg>
           </button>
@@ -266,7 +266,7 @@ export default function ScrollTextSection() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M9 5l7 7-7 7"
+                d="M19 9l-7 7-7-7"
               />
             </svg>
           </button>

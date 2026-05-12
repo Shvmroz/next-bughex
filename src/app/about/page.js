@@ -193,45 +193,36 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* MOBILE NAVIGATION - Up arrow top-center, down arrow bottom-center */}
-            {/* UP - Top Center */}
-            <div className="md:hidden absolute top-6 left-0 right-0 flex justify-center z-40">
+            {/* MOBILE NAVIGATION - At the absolute bottom of the section (Matches ScrollTextSection) */}
+            <div className="md:hidden absolute bottom-12 left-0 right-0 flex items-center justify-center gap-8 z-40">
               <button
                 onClick={() => handleManualNav(prev)}
                 disabled={activeIndex === 0}
-                className="group relative flex items-center justify-center w-12 h-12 rounded-full
-                bg-white/5 border border-dark/10 backdrop-blur-md
-                hover:bg-primary/10 hover:border-primary/50
-                transition-all duration-300 disabled:opacity-20 hover:scale-110 active:scale-95"
+                className="p-4 text-dark/30 hover:text-primary transition-colors disabled:opacity-5"
               >
-                <svg className="w-6 h-6 text-dark/50 group-hover:text-primary transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
                 </svg>
               </button>
-            </div>
 
-            {/* DOWN + DOTS - Bottom Center */}
-            <div className="md:hidden absolute bottom-8 left-0 right-0 flex flex-col items-center gap-4 z-40">
               <div className="flex gap-2.5">
                 {storySlides.map((_, i) => (
                   <div
                     key={i}
                     className={`h-1.5 rounded-full transition-all duration-500 ${i === activeIndex
-                        ? 'w-8 bg-primary shadow-[0_0_10px_rgba(27,181,162,0.5)]'
-                        : 'w-2 bg-dark/15'
+                      ? 'w-8 bg-primary shadow-[0_0_10px_rgba(27,181,162,0.5)]'
+                      : 'w-2 bg-dark/15'
                       }`}
                   />
                 ))}
               </div>
+
               <button
                 onClick={() => handleManualNav(next)}
                 disabled={activeIndex === TOTAL - 1}
-                className="group relative flex items-center justify-center w-12 h-12 rounded-full
-                bg-white/5 border border-dark/10 backdrop-blur-md
-                hover:bg-primary/10 hover:border-primary/50
-                transition-all duration-300 disabled:opacity-20 hover:scale-110 active:scale-95"
+                className="p-4 text-dark/30 hover:text-primary transition-colors disabled:opacity-5"
               >
-                <svg className="w-6 h-6 text-dark/50 group-hover:text-primary transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
