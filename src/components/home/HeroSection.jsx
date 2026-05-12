@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import HeroVisualEffect from "./HeroVisualEffect";
+import LetsTalkFloating from "./LetsTalkFloating";
 
 export default function HeroSection() {
   return (
@@ -46,44 +47,12 @@ export default function HeroSection() {
             Products That <span className="text-gradient-animated">Matter</span>
           </motion.h1>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{
-              opacity: 1,
-              y: [0, -10, 0],
-            }}
-            transition={{
-              opacity: { delay: 0.6, duration: 0.8 },
-              y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-            }}
-            className="mt-4"
-          >
-            <Link
-              href="/contact"
-              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white font-semibold transition-all hover:bg-white hover:text-dark hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-            >
-              <span className="relative z-10">Let's Talk</span>
-              <div className="relative z-10 w-8 h-8 rounded-full bg-primary flex items-center justify-center group-hover:bg-dark transition-colors">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="text-white group-hover:text-primary transition-colors"
-                >
-                  <path
-                    d="M5 12h14M12 5l7 7-7 7"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
-            </Link>
-          </motion.div>
+          <div className="mt-8">
+            <LetsTalkFloating
+              forceVisible={true}
+              className="relative z-[999]"
+            />
+          </div>
         </motion.div>
       </div>
     </section>

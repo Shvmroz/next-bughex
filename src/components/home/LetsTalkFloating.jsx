@@ -6,8 +6,11 @@ import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 
-export default function LetsTalkFloating() {
-  const [isVisible, setIsVisible] = useState(false);
+export default function LetsTalkFloating({
+  forceVisible = false,
+  className = "fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[9999]",
+}) {
+  const [isVisible, setIsVisible] = useState(forceVisible);
   const [isOpen, setIsOpen] = useState(false);
   const pillRef = useRef(null);
 
@@ -39,6 +42,11 @@ export default function LetsTalkFloating() {
   const pathname = usePathname();
 
   useEffect(() => {
+    if (forceVisible) {
+      setIsVisible(true);
+      return;
+    }
+
     const handleScroll = () => {
       // Hide on contact page
       if (pathname === "/contact") {
@@ -108,7 +116,7 @@ export default function LetsTalkFloating() {
           initial={{ opacity: 0, scale: 0.8, y: 50 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 50 }}
-          className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[9999]"
+          className={className}
         >
           {/* Animated Border Container */}
           <div className="relative p-[1.5px] rounded-full overflow-hidden shadow-2xl">
