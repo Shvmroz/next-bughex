@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { Icon } from "@iconify/react";
+import Image from "next/image";
 
 export default function LetsTalkFloating() {
   const [isVisible, setIsVisible] = useState(false);
@@ -124,21 +125,35 @@ export default function LetsTalkFloating() {
                       className="flex items-center gap-2 w-full"
                     >
                       <div className="w-8 h-8 md:w-9 md:h-9 bg-white rounded-full flex items-center justify-center shadow-lg shrink-0 overflow-hidden">
-                        <motion.img
-                          src="/bughex-logo.png"
-                          alt="Logo"
-                          animate={{ rotateY: 360 }}
+                        <motion.div
+                          whileHover={{ rotateY: 360 }}
+                          animate={{ rotateY: [0, 360] }}
                           transition={{
-                            duration: 4,
-                            repeat: Infinity,
-                            ease: "linear",
+                            rotateY: {
+                              duration: 0.6,
+                              ease: "easeInOut",
+                              repeat: Infinity,
+                              repeatDelay: 2,
+                            },
                           }}
-                          className="w-5 h-5 md:w-6 md:h-6 object-contain"
-                          style={{ backfaceVisibility: "visible" }}
-                        />
+                          style={{
+                            backfaceVisibility: "visible",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Image
+                            src="/bughex-logo.png"
+                            alt="Logo"
+                            width={24}
+                            height={24}
+                            className="w-5 h-5 md:w-6 md:h-6 object-contain"
+                          />
+                        </motion.div>
                       </div>
                       <span className="text-[#1bb5a2] font-bold text-xs md:text-sm tracking-tight whitespace-nowrap pr-2">
-                        Let's Talk
+                        Let&apos;s Talk
                       </span>
                     </motion.div>
                   ) : (

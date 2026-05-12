@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
+import Image from "next/image";
 import { leaders, leadershipSectionContent } from "@/lib/mock";
 import SectionHeader from "./SectionHeader";
 
@@ -118,9 +119,11 @@ export default function LeadershipSection() {
 
                 <div className="relative z-10 w-full h-full">
                   {leader.image ? (
-                    <img
+                    <Image
                       src={leader.image}
                       alt={leader.nameFirst}
+                      width={300}
+                      height={400}
                       className="w-full h-full object-contain transition-all duration-500 drop-shadow-none group-hover:drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)]"
                     />
                   ) : (

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Icon } from "@iconify/react";
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { footerData, socialLinks, siteMeta } from '@/lib/mock';
 import Logo from './Logo';
 
@@ -87,7 +88,13 @@ export default function Footer() {
                     href={`mailto:${email}`}
                     className="group flex items-center gap-2 text-white/40 hover:text-primary transition-all duration-300 font-medium text-sm"
                   >
-                    <img src="/bughex-logo.png" className="w-[25px] h-[25px] object-contain opacity-60 group-hover:opacity-100 transition-opacity" alt="Bughex" />
+                    <Image
+                      src="/bughex-logo.png"
+                      width={25}
+                      height={25}
+                      className="w-[25px] h-[25px] object-contain opacity-60 group-hover:opacity-100 transition-opacity"
+                      alt="Bughex"
+                    />
                     {email}
                   </a>
                 </div>

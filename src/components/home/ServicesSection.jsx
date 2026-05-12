@@ -75,14 +75,12 @@ export default function ServicesSection() {
                   {/* Icon Area */}
                   <div className="w-16 h-16 rounded-2xl bg-[#f8fdfc] border border-gray-100 flex items-center justify-center mb-8 group-hover:bg-primary group-hover:border-primary transition-colors duration-500">
                     {service.icon ? (
-                      <img
+                      <Image
                         src={`${apiBaseURL}${service.icon}`}
                         alt={service.name}
+                        width={32}
+                        height={32}
                         className="w-8 h-8 object-contain transition-all duration-500 group-hover:filter group-hover:brightness-0 group-hover:invert"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = "/bug.png"; // Fallback
-                        }}
                       />
                     ) : (
                       <Icon

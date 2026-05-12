@@ -186,42 +186,42 @@ export const leaders = [
     nameLast: 'Sherazi',
     role: 'Project Management & Android Specialist',
     linkedin: 'https://www.linkedin.com/in/syed-zain-ul-abidin-sherazi',
-    image: 'team/zain-sherazi.png',
+    image: '/team/zain-sherazi.png',
   },
   {
     nameFirst: 'Umair',
     nameLast: 'Hashmi',
-    role: 'Flutter Specialist & Client Relations Management',
+    role: 'Flutter & Client Relations Management',
     linkedin: 'https://www.linkedin.com/in/umair-hashmi',
-    image: 'team/umair-hashmi.png'
+    image: '/team/umair-hashmi.png'
   },
   {
     nameFirst: 'Atif',
     nameLast: 'Raza',
     role: 'Backend Specialist & Head of AI',
     linkedin: 'https://www.linkedin.com/in/atif-raza-7a6855217'
-    // image: 'team/atif-raza.png',
+    // image: '/team/atif-raza.png',
   },
   {
     nameFirst: 'Ammar',
     nameLast: 'Yousaf',
-    role: 'React Native Specialist & Head of Global Marketing',
+    role: 'React Native & Head of Global Marketing',
     linkedin: 'https://www.linkedin.com/in/ammar-yousaf-react-native-53321a19a'
-    // image: 'team/ammar-yousaf.png',
+    // image: '/team/ammar-yousaf.png',
   },
   {
     nameFirst: 'Moeen',
     nameLast: 'U Din',
     role: 'Full-Stack Developer & Head of DevOps',
     linkedin: 'https://www.linkedin.com/in/moeen-u-din'
-    // image: 'team/moeen-u-din.png',
+    // image: '/team/moeen-u-din.png',
   },
   {
     nameFirst: 'Shamroz',
     nameLast: 'Khan',
     role: 'MERN Developer & UI/UX Specialist',
     linkedin: 'https://www.linkedin.com/in/shvmroz',
-    image: 'team/shamroz-khan.png',
+    image: '/team/shamroz-khan.png',
   },
 ];
 

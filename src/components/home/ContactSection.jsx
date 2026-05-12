@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { socialLinks } from "@/lib/mock";
+import Image from "next/image";
 import { api_contact_us } from "@/DAL/api";
 
 function FormField({
@@ -140,8 +141,10 @@ export default function ContactSection({ isPage = false }) {
                   href={`mailto:${email}`}
                   className="group flex items-center gap-3 text-dark/60 hover:text-primary transition-all duration-300 font-medium text-lg"
                 >
-                  <img
+                  <Image
                     src="/bughex-logo.png"
+                    width={25}
+                    height={25}
                     className="w-[25px] h-[25px] object-contain opacity-60 group-hover:opacity-100 transition-opacity"
                     alt="Bughex"
                   />

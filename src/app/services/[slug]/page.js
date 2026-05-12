@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactSection from "@/components/home/ContactSection";
@@ -93,10 +94,11 @@ export default function ServiceDetailPage() {
                                 className="relative"
                             >
                                 <div className="relative aspect-square md:aspect-[4/3] rounded-[40px] overflow-hidden shadow-2xl">
-                                    <img
+                                    <Image
                                         src={service.images?.[0] || '/bug.png'}
                                         alt={service.name}
-                                        className="w-full h-full object-cover"
+                                        fill
+                                        className="object-cover"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-dark/40 to-transparent" />
                                 </div>
