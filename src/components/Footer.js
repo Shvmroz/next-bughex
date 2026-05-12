@@ -54,7 +54,7 @@ export default function Footer() {
         />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 mb-10 md:mb-16">
 
             {/* BRAND COLUMN */}
             <div className="lg:col-span-4 space-y-10">
@@ -67,7 +67,7 @@ export default function Footer() {
 
               <div className="space-y-4">
                 <p className="text-[10px] font-bold tracking-[0.3em] text-white/30 uppercase">Connect With Us</p>
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-4">
+                <div className="flex items-center gap-x-3 md:gap-x-5 flex-nowrap overflow-x-auto no-scrollbar">
                   {socialLinks.map((social) => (
                     <a
                       key={social.name}
@@ -103,9 +103,9 @@ export default function Footer() {
 
             {/* LINKS COLUMNS */}
             <div className="lg:col-span-8">
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-6 md:gap-y-10">
                 {Object.entries(footerData).map(([title, links]) => (
-                  <div key={title} className="space-y-8">
+                  <div key={title} className="space-y-4 md:space-y-8">
                     <h4 className="text-[10px] font-bold tracking-[0.3em] text-white/30 uppercase">
                       {title}
                     </h4>

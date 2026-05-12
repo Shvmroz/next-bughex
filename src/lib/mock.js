@@ -197,7 +197,7 @@ export const leaders = [
   {
     nameFirst: 'Atif',
     nameLast: 'Raza',
-    role: 'Backend Specialist & Head of AI',
+    role: 'Backend Specialist & Head of AI and Node.js',
     linkedin: 'https://www.linkedin.com/in/atif-raza-7a6855217',
     image: '/team/atif-raza.png',
   },
@@ -218,7 +218,7 @@ export const leaders = [
   {
     nameFirst: 'Shamroz',
     nameLast: 'Khan',
-    role: 'MERN Developer & UI/UX Specialist',
+    role: 'MERN Stack Developer & UI/UX Specialist',
     linkedin: 'https://www.linkedin.com/in/shvmroz',
     image: '/team/shamroz-khan.png',
   },

@@ -31,13 +31,22 @@ export default function LeadershipSection() {
   const handleScroll = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 20);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 20);
+      // Use requestAnimationFrame for smoother state updates
+      requestAnimationFrame(() => {
+        setCanScrollLeft(scrollLeft > 20);
+        setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 20);
+      });
     }
   };
 
   useEffect(() => {
-    handleScroll();
+    const container = scrollRef.current;
+    if (container) {
+      // Passive listener for better scroll performance
+      container.addEventListener("scroll", handleScroll, { passive: true });
+      handleScroll();
+      return () => container.removeEventListener("scroll", handleScroll);
+    }
   }, []);
 
   return (
@@ -108,36 +117,38 @@ export default function LeadershipSection() {
             className="min-w-full sm:min-w-[220px] md:min-w-[260px] px-6 sm:px-0 snap-center group cursor-pointer"
             initial={{ opacity: 0, scale: 0.9, y: 30 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: i * 0.05 }}
+            transition={{ duration: 0.5, delay: i * 0.05, ease: "easeOut" }}
             viewport={{ once: true, margin: "0px -50px 0px -50px" }}
+            style={{ willChange: "transform, opacity" }}
           >
-            <div className="rounded-t-3xl overflow-hidden bg-white shadow-sm">
-              <div className="aspect-[4/5] bg-[#FAFBFC] group-hover:bg-primary flex items-center justify-center relative overflow-hidden transition-colors duration-500">
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+            <div className="rounded-t-3xl overflow-hidden bg-white shadow-sm border border-gray-100/50">
+              <div className="aspect-[4/5] bg-[#FAFBFC] group-hover:bg-primary flex items-center justify-center relative overflow-hidden transition-colors duration-300">
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:16px_1px] opacity-25" />
                 </div>
 
-                <div className="relative z-10 w-full h-full">
+                <div className="relative z-10 w-full h-full transform transition-transform duration-500 group-hover:scale-105">
                   {leader.image ? (
                     <Image
                       src={leader.image}
                       alt={leader.nameFirst}
                       width={300}
                       height={400}
-                      className="w-full h-full object-contain transition-all duration-500 drop-shadow-none group-hover:drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)]"
+                      className="w-full h-full object-contain"
+                      loading="lazy"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
                       <Icon
                         icon="mdi:account"
                         width={100}
-                        className="text-gray-200 transition-all duration-500"
+                        className="text-gray-200"
                       />
                     </div>
                   )}
                 </div>
 
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
               </div>
             </div>
 
