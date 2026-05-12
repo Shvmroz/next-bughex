@@ -59,11 +59,11 @@ function SlideContent({ slide }) {
         </span>
       </div>
 
-      <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] mb-8 tracking-tight max-w-3xl">
+      <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] md:leading-[1.05] mb-6 md:mb-8 tracking-tight max-w-3xl">
         {restOfTitle} <span className="text-gradient-animated">{lastWord}</span>
       </h2>
 
-      <p className="text-white/60 text-lg leading-relaxed font-medium max-w-xl">
+      <p className="text-white/60 text-base md:text-lg leading-relaxed font-medium max-w-xl">
         {slide.body}
       </p>
     </div>
@@ -92,7 +92,6 @@ export default function ScrollTextSection() {
     if (current < TOTAL - 1) goTo(current + 1);
   }, [current, goTo]);
 
-  // ── Auto-advance every 2s, loops back to first slide ──────────────────────
   useEffect(() => {
     if (paused) return;
     timerRef.current = setTimeout(() => {
@@ -102,24 +101,21 @@ export default function ScrollTextSection() {
     return () => clearTimeout(timerRef.current);
   }, [current, paused]);
 
-  // Manual nav: temporarily pause auto-play for 5s then resume
   const handleManualNav = useCallback((fn) => {
     clearTimeout(timerRef.current);
     setPaused(true);
     fn();
     setTimeout(() => setPaused(false), 5000);
   }, []);
-  // ──────────────────────────────────────────────────────────────────────────
 
   return (
     <section className="relative bg-black" data-theme="dark">
       <div
         className="overflow-hidden"
-        style={{ height: '120vh' }}
+        style={{ height: "110vh" }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        {/* VIDEO BACKGROUND */}
         <div className="absolute inset-0 z-0">
           <video
             autoPlay
@@ -135,7 +131,6 @@ export default function ScrollTextSection() {
           </video>
         </div>
 
-        {/* OVERLAY GRADIENTS */}
         <div
           className="absolute inset-0 z-[1] pointer-events-none"
           style={{
@@ -143,101 +138,66 @@ export default function ScrollTextSection() {
               "linear-gradient(to bottom, rgba(10,10,15,0.8) 0%, rgba(10,10,15,0.4) 40%, rgba(10,10,15,0.7) 100%)",
           }}
         />
-        <div
-          className="absolute inset-0 z-[1] pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(27,181,162,0.08) 0%, transparent 70%)",
-          }}
-        />
 
         <div className="w-full h-full max-w-7xl mx-auto px-6 flex items-stretch relative z-10">
-          {/* LEFT: Process indicator + vertical nav */}
           <div className="hidden md:flex flex-col items-center justify-center w-16 flex-shrink-0 gap-5">
-            {/* UP navigation arrow */}
-            <div className="hidden md:flex flex-col items-center justify-center w-16 flex-shrink-0">
-              <button
-                onClick={() => handleManualNav(prev)}
-                disabled={current === 0}
-                aria-label="Previous slide"
-                className="group relative flex items-center justify-center w-12 h-12 rounded-full 
-               bg-white/5 border border-white/10 backdrop-blur-md
-               hover:bg-primary/10 hover:border-primary/50
-               transition-all duration-300
-               disabled:opacity-20 disabled:cursor-not-allowed
-               hover:scale-110 active:scale-95"
+            <button
+              onClick={() => handleManualNav(prev)}
+              disabled={current === 0}
+              className="group relative flex items-center justify-center w-12 h-12 rounded-full 
+             bg-white/5 border border-white/10 backdrop-blur-md hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 disabled:opacity-20 hover:scale-110 active:scale-95"
+            >
+              <svg
+                className="w-6 h-6 text-white/70 group-hover:text-primary transition-colors"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.5}
               >
-                <span className="absolute inset-0 rounded-full bg-primary/10 blur-md opacity-0 group-hover:opacity-100 transition" />
-                <svg
-                  className="w-6 h-6 text-white/70 group-hover:text-primary transition-colors duration-300 relative z-10"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M5 15l7-7 7 7"
-                  />
-                </svg>
-              </button>
-            </div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 15l7-7 7 7"
+                />
+              </svg>
+            </button>
 
-            {slides.map((_, i) => (
+            {Array.from({ length: TOTAL }).map((_, i) => (
               <button
                 key={i}
                 onClick={() => handleManualNav(() => goTo(i))}
-                aria-label={`Go to slide ${i + 1}`}
                 className="flex items-center justify-center"
               >
                 <motion.div
                   animate={{ opacity: i === current ? 1 : 0.12 }}
-                  transition={{ duration: 0.35 }}
                   className="w-[3px] bg-primary"
                   style={{ height: 48 }}
                 />
               </button>
             ))}
-            <p
-              className="text-[9px] text-primary font-bold tracking-[0.3em] mt-6 uppercase whitespace-nowrap"
-              style={{ writingMode: "vertical-rl" }}
-            >
-              Bughex
-            </p>
 
-            {/* DOWN navigation arrow */}
-            <div className="hidden md:flex flex-col items-center justify-center w-16 flex-shrink-0">
-              <button
-                onClick={() => handleManualNav(next)}
-                disabled={current === TOTAL - 1}
-                aria-label="Next slide"
-                className="group relative flex items-center justify-center w-12 h-12 rounded-full 
-               bg-white/5 border border-white/10 backdrop-blur-md
-               hover:bg-primary/10 hover:border-primary/50
-               transition-all duration-300
-               disabled:opacity-20 disabled:cursor-not-allowed
-               hover:scale-110 active:scale-95"
+            <button
+              onClick={() => handleManualNav(next)}
+              disabled={current === TOTAL - 1}
+              className="group relative flex items-center justify-center w-12 h-12 rounded-full 
+             bg-white/5 border border-white/10 backdrop-blur-md hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 disabled:opacity-20 hover:scale-110 active:scale-95"
+            >
+              <svg
+                className="w-6 h-6 text-white/70 group-hover:text-primary transition-colors"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.5}
               >
-                <span className="absolute inset-0 rounded-full bg-primary/10 blur-md opacity-0 group-hover:opacity-100 transition" />
-                <svg
-                  className="w-6 h-6 text-white/70 group-hover:text-primary transition-colors duration-300 relative z-10"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-            </div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
           </div>
 
-          {/* CENTER: Animated slide content */}
           <div className="flex-1 relative overflow-hidden">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
@@ -255,62 +215,58 @@ export default function ScrollTextSection() {
           </div>
         </div>
 
-        {/* MOBILE: Bottom dot navigation */}
-        <div className="md:hidden absolute bottom-[72px] left-0 right-0 flex items-center justify-center gap-3 z-10">
+        {/* MOBILE NAVIGATION - At the absolute bottom of the section */}
+        <div className="md:hidden absolute bottom-12 left-0 right-0 flex items-center justify-center gap-8 z-20">
           <button
             onClick={() => handleManualNav(prev)}
             disabled={current === 0}
-            className="p-2 text-white/40 hover:text-primary transition-colors disabled:opacity-20"
+            className="p-4 text-white/40 hover:text-primary transition-colors disabled:opacity-5"
           >
             <svg
-              className="w-5 h-5"
+              className="w-8 h-8"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}
+              strokeWidth={1.5}
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M5 15l7-7 7 7"
+                d="M15 19l-7-7 7-7"
               />
             </svg>
           </button>
 
-          <div className="flex gap-2">
-            {slides.map((_, i) => (
-              <button
+          {/* Dots */}
+          <div className="flex gap-2.5">
+            {Array.from({ length: TOTAL }).map((_, i) => (
+              <div
                 key={i}
-                onClick={() => handleManualNav(() => goTo(i))}
-                className="transition-all duration-300"
-              >
-                <motion.div
-                  animate={{
-                    width: i === current ? 20 : 6,
-                    opacity: i === current ? 1 : 0.3,
-                  }}
-                  className="h-1.5 rounded-full bg-primary"
-                />
-              </button>
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === current
+                    ? "w-8 bg-primary shadow-[0_0_10px_rgba(27,181,162,0.5)]"
+                    : "w-2 bg-white/20"
+                }`}
+              />
             ))}
           </div>
 
           <button
             onClick={() => handleManualNav(next)}
             disabled={current === TOTAL - 1}
-            className="p-2 text-white/40 hover:text-primary transition-colors disabled:opacity-20"
+            className="p-4 text-white/40 hover:text-primary transition-colors disabled:opacity-5"
           >
             <svg
-              className="w-5 h-5"
+              className="w-8 h-8"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}
+              strokeWidth={1.5}
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M19 9l-7 7-7-7"
+                d="M9 5l7 7-7 7"
               />
             </svg>
           </button>

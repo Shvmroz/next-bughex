@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -38,21 +38,40 @@ const storySlides = [
   },
 ];
 
+const TOTAL = storySlides.length;
+
 export default function AboutPage() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const timerRef = useRef(null);
+
+  const goTo = useCallback((index) => {
+    setDirection(index > activeIndex ? 1 : -1);
+    setActiveIndex(index);
+  }, [activeIndex]);
+
+  const prev = useCallback(() => {
+    goTo(activeIndex > 0 ? activeIndex - 1 : TOTAL - 1);
+  }, [activeIndex, goTo]);
+
+  const next = useCallback(() => {
+    goTo((activeIndex + 1) % TOTAL);
+  }, [activeIndex, goTo]);
 
   // Auto-slide logic
   useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % storySlides.length);
-    }, 5000); // Increased to 5s
-    return () => clearInterval(timer);
-  }, [activeIndex]); // Reset timer whenever index changes (manual or auto)
+    timerRef.current = setInterval(next, 5000);
+    return () => clearInterval(timerRef.current);
+  }, [next]);
 
-  // Calculate progress for background effect (0 to 1)
-  const progress = activeIndex / (storySlides.length - 1);
+  const handleManualNav = (fn) => {
+    clearInterval(timerRef.current);
+    fn();
+    timerRef.current = setInterval(next, 5000);
+  };
 
-  // Background Blob Mapping (Simulating the scroll effect with the timer)
+  const progress = activeIndex / (TOTAL - 1);
+
   const blobStyles = {
     blob1: {
       left: `${-10 + progress * 80}%`,
@@ -76,7 +95,6 @@ export default function AboutPage() {
       <Header />
 
       <main className="flex-grow">
-        {/* HERO STORY - NO SCROLL REQUIRED */}
         <section className="relative bg-[#FAFBFC] overflow-hidden">
           <div
             className="flex items-center justify-center relative z-20"
@@ -85,7 +103,7 @@ export default function AboutPage() {
               marginTop: `${NAV_HEIGHT}px`,
             }}
           >
-            {/* Animated Background Gradients synced with activeIndex */}
+            {/* Animated Background Gradients */}
             <motion.div
               animate={{
                 left: blobStyles.blob1.left,
@@ -114,45 +132,109 @@ export default function AboutPage() {
               className="absolute w-[200px] h-[200px] bg-[#CDEB63]/30 rounded-full blur-[50px] -z-10"
             />
 
-            {/* Vertical Slide Controls - RIGHT SIDE */}
-            <div className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-40">
+            {/* VERTICAL NAVIGATION - Desktop Right Side (matches ScrollTextSection style) */}
+            <div className="hidden md:flex absolute right-12 top-1/2 -translate-y-1/2 flex-col items-center gap-5 z-40">
               <button
-                onClick={() => setActiveIndex((prev) => (prev > 0 ? prev - 1 : storySlides.length - 1))}
-                className="w-12 h-12 rounded-full border border-white/60 bg-white/40 backdrop-blur-md shadow-sm flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all text-dark/40 hover:border-primary/40 group"
+                onClick={() => handleManualNav(prev)}
+                disabled={activeIndex === 0}
+                className="group relative flex items-center justify-center w-12 h-12 rounded-full
+                bg-white/5 border border-dark/10 backdrop-blur-md
+                hover:bg-primary/10 hover:border-primary/50
+                transition-all duration-300 disabled:opacity-20 hover:scale-110 active:scale-95"
               >
-                <Icon icon="solar:alt-arrow-up-linear" width={24} className="group-hover:-translate-y-0.5 transition-transform" />
+                <svg className="w-6 h-6 text-dark/50 group-hover:text-primary transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+                </svg>
               </button>
-              <div className="h-px w-6 mx-auto bg-dark/5" />
+
+              {storySlides.map((_, i) => (
+                <button key={i} onClick={() => handleManualNav(() => goTo(i))} className="flex items-center justify-center">
+                  <motion.div
+                    animate={{ opacity: i === activeIndex ? 1 : 0.12 }}
+                    className="w-[3px] bg-primary"
+                    style={{ height: 48 }}
+                  />
+                </button>
+              ))}
+
               <button
-                onClick={() => setActiveIndex((prev) => (prev + 1) % storySlides.length)}
-                className="w-12 h-12 rounded-full border border-white/60 bg-white/40 backdrop-blur-md shadow-sm flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all text-dark/40 hover:border-primary/40 group"
+                onClick={() => handleManualNav(next)}
+                disabled={activeIndex === TOTAL - 1}
+                className="group relative flex items-center justify-center w-12 h-12 rounded-full
+                bg-white/5 border border-dark/10 backdrop-blur-md
+                hover:bg-primary/10 hover:border-primary/50
+                transition-all duration-300 disabled:opacity-20 hover:scale-110 active:scale-95"
               >
-                <Icon icon="solar:alt-arrow-down-linear" width={24} className="group-hover:translate-y-0.5 transition-transform" />
+                <svg className="w-6 h-6 text-dark/50 group-hover:text-primary transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
               </button>
             </div>
 
             <div className="relative max-w-5xl mx-auto px-6 text-center w-full">
               <div className="relative flex items-center justify-center min-h-[300px]">
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
                     key={storySlides[activeIndex].id}
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: direction * 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -30 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    exit={{ opacity: 0, y: direction * -20 }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     className="absolute inset-0 flex flex-col items-center justify-center"
                   >
-                    <p className="text-dark/70 font-medium leading-snug text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl px-4">
-                      <span className="block font-bold text-dark mb-4 text-4xl sm:text-5xl md:text-6xl tracking-tight">
-                        {storySlides[activeIndex].title}
-                      </span>
-                      <span className="block text-base sm:text-lg md:text-2xl max-w-2xl mx-auto">
-                        {storySlides[activeIndex].body}
-                      </span>
+                    <h2 className="font-display font-bold text-dark mb-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight">
+                      {storySlides[activeIndex].title}
+                    </h2>
+                    <p className="text-dark/70 text-lg sm:text-xl md:text-2xl font-medium leading-relaxed max-w-2xl mx-auto">
+                      {storySlides[activeIndex].body}
                     </p>
                   </motion.div>
                 </AnimatePresence>
               </div>
+            </div>
+
+            {/* MOBILE NAVIGATION - Up arrow top-center, down arrow bottom-center */}
+            {/* UP - Top Center */}
+            <div className="md:hidden absolute top-6 left-0 right-0 flex justify-center z-40">
+              <button
+                onClick={() => handleManualNav(prev)}
+                disabled={activeIndex === 0}
+                className="group relative flex items-center justify-center w-12 h-12 rounded-full
+                bg-white/5 border border-dark/10 backdrop-blur-md
+                hover:bg-primary/10 hover:border-primary/50
+                transition-all duration-300 disabled:opacity-20 hover:scale-110 active:scale-95"
+              >
+                <svg className="w-6 h-6 text-dark/50 group-hover:text-primary transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+                </svg>
+              </button>
+            </div>
+
+            {/* DOWN + DOTS - Bottom Center */}
+            <div className="md:hidden absolute bottom-8 left-0 right-0 flex flex-col items-center gap-4 z-40">
+              <div className="flex gap-2.5">
+                {storySlides.map((_, i) => (
+                  <div
+                    key={i}
+                    className={`h-1.5 rounded-full transition-all duration-500 ${i === activeIndex
+                        ? 'w-8 bg-primary shadow-[0_0_10px_rgba(27,181,162,0.5)]'
+                        : 'w-2 bg-dark/15'
+                      }`}
+                  />
+                ))}
+              </div>
+              <button
+                onClick={() => handleManualNav(next)}
+                disabled={activeIndex === TOTAL - 1}
+                className="group relative flex items-center justify-center w-12 h-12 rounded-full
+                bg-white/5 border border-dark/10 backdrop-blur-md
+                hover:bg-primary/10 hover:border-primary/50
+                transition-all duration-300 disabled:opacity-20 hover:scale-110 active:scale-95"
+              >
+                <svg className="w-6 h-6 text-dark/50 group-hover:text-primary transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
             </div>
           </div>
         </section>

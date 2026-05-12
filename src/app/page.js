@@ -12,7 +12,7 @@ import ContactSection from '@/components/home/ContactSection';
 import ScrollTextSection from '@/components/home/ScrollTextSection';
 import RecentProjectsSection from '@/components/home/RecentProjectsSection';
 import { Icon } from '@iconify/react';
-import FloatingSocials from '@/components/home/FloatingSocials';
+import LetsTalkFloating from '@/components/home/LetsTalkFloating';
 
 import { capabilities } from '@/lib/mock';
 
@@ -52,7 +52,7 @@ export default function HomePage() {
           <ContactSection />
         </main>
         <Footer />
-        <FloatingSocials />
+        <LetsTalkFloating />
       </motion.div>
     </>
   );

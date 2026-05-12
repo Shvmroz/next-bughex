@@ -42,8 +42,8 @@ export default function RecentProjectsSection() {
           />
         </div>
 
-        {/* MOBILE HERO BANNER */}
-        <div className="lg:hidden mt-10 mb-2 mx-6 rounded-xl overflow-hidden relative h-52 shadow-xl">
+        {/* MOBILE HERO BANNER - Increased height for sm screen */}
+        <div className="lg:hidden mt-10 mb-2 mx-6 rounded-xl overflow-hidden relative h-64 sm:h-72 shadow-xl">
           <div className="absolute inset-0 bg-dark z-0" />
           <video
             autoPlay
@@ -58,10 +58,10 @@ export default function RecentProjectsSection() {
           <div className="absolute inset-0 bg-primary/20 mix-blend-overlay z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent z-10" />
           <div className="absolute bottom-6 left-6 right-6 z-20">
-            <h3 className="text-2xl font-display font-bold text-white leading-tight">
+            <h3 className="text-2xl sm:text-3xl font-display font-bold text-white leading-tight">
               Our Digital Portfolio
             </h3>
-            <p className="text-white/70 text-sm font-medium mt-1">
+            <p className="text-white/70 text-sm sm:text-base font-medium mt-1">
               Scalable, visually spectacular products.
             </p>
           </div>
@@ -70,19 +70,21 @@ export default function RecentProjectsSection() {
         {/* ── MOBILE CAROUSEL ── */}
         <div className="lg:hidden mt-6 relative">
           <div
-            className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 pl-6"
+            className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-proximity pb-8 pl-6"
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",
               WebkitOverflowScrolling: "touch",
               scrollPaddingLeft: "1.5rem",
+              touchAction: "auto",
             }}
           >
             {projects.map((project, index) => (
               <div
                 key={project.id}
-                className="snap-start shrink-0 w-[80vw] max-w-[320px]"
+                className="snap-start shrink-0 w-[85vw] max-w-[340px] h-full"
               >
+                {/* Ensure the card container doesn't force internal scrolling */}
                 <ProjectCard project={project} index={index} />
               </div>
             ))}

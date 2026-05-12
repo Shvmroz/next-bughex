@@ -15,9 +15,9 @@ export default function LeadershipSection() {
   const scroll = (direction) => {
     if (scrollRef.current) {
       const container = scrollRef.current;
-      const firstCard = container.querySelector(".snap-center");
-      if (firstCard) {
-        const cardWidth = firstCard.offsetWidth + 32; // card width + gap-8 (32px)
+      const card = container.querySelector(".snap-center");
+      if (card) {
+        const cardWidth = card.offsetWidth + (window.innerWidth < 640 ? 0 : 32);
         const scrollTo =
           direction === "left"
             ? container.scrollLeft - cardWidth
@@ -30,8 +30,8 @@ export default function LeadershipSection() {
   const handleScroll = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 50); // Small threshold
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 50);
+      setCanScrollLeft(scrollLeft > 20);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 20);
     }
   };
 
@@ -43,44 +43,46 @@ export default function LeadershipSection() {
     <section className="py-12 md:py-24 bg-[#FAFBFC] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         {/* HEADER */}
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-0y">
-          <SectionHeader title={leadershipSectionContent.title} align="left" />
+        <div className="flex flex-row justify-between items-end mb-10 md:mb-16">
+          <div className="flex-1 text-left">
+            <SectionHeader
+              title={leadershipSectionContent.title}
+              align="left"
+              noMargin
+            />
+          </div>
 
-          {/* Animated Slider Controls */}
-          <div className="flex gap-3 justify-end mt-2 sm:mt-0">
-            <motion.button
-              whileHover={
-                canScrollLeft
-                  ? { scale: 1.05, backgroundColor: "rgba(27, 181, 162, 0.05)" }
-                  : {}
-              }
-              whileTap={canScrollLeft ? { scale: 0.95 } : {}}
+          {/* Slider Controls - Integrated for all screens */}
+          <div className="flex gap-5 md:gap-7 items-center mb-1">
+            <button
               onClick={() => scroll("left")}
-              className={`w-11 h-11 rounded-xl border flex items-center justify-center transition-all duration-300 ${
+              className={`transition-all duration-300 hover:scale-110 active:scale-95 ${
                 canScrollLeft
-                  ? "border-primary text-primary cursor-pointer"
-                  : "border-gray-100 text-gray-200 cursor-not-allowed"
+                  ? "text-primary cursor-pointer"
+                  : "text-gray-200 cursor-not-allowed"
               }`}
             >
-              <Icon icon="mdi:arrow-left" width={20} />
-            </motion.button>
+              <Icon
+                icon="ph:arrow-left-light"
+                width={32}
+                className="md:w-10 md:h-10"
+              />
+            </button>
 
-            <motion.button
-              whileHover={
-                canScrollRight
-                  ? { scale: 1.05, backgroundColor: "rgba(27, 181, 162, 0.05)" }
-                  : {}
-              }
-              whileTap={canScrollRight ? { scale: 0.95 } : {}}
+            <button
               onClick={() => scroll("right")}
-              className={`w-11 h-11 rounded-xl border flex items-center justify-center transition-all duration-300 ${
+              className={`transition-all duration-300 hover:scale-110 active:scale-95 ${
                 canScrollRight
-                  ? "border-primary text-primary cursor-pointer"
-                  : "border-gray-100 text-gray-200 cursor-not-allowed"
+                  ? "text-primary cursor-pointer"
+                  : "text-gray-200 cursor-not-allowed"
               }`}
             >
-              <Icon icon="mdi:arrow-right" width={20} />
-            </motion.button>
+              <Icon
+                icon="ph:arrow-right-light"
+                width={32}
+                className="md:w-10 md:h-10"
+              />
+            </button>
           </div>
         </div>
       </div>
@@ -89,56 +91,56 @@ export default function LeadershipSection() {
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="flex gap-8 overflow-x-auto pb-12 scrollbar-hide snap-x"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        className="flex gap-0 sm:gap-8 overflow-x-auto pb-8 sm:pb-12 scrollbar-hide snap-x snap-proximity"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          WebkitOverflowScrolling: "touch",
+          touchAction: "auto",
+        }}
       >
-        {/* LARGE SPACER TO START FROM OFFSET (Half Screen-ish) */}
-        <div className="min-w-[40vw] flex-shrink-0 pointer-events-none" />
+        <div className="hidden sm:block min-w-[40vw] flex-shrink-0 pointer-events-none" />
 
         {leaders.map((leader, i) => (
           <motion.div
             key={i}
-            className="min-w-[220px] md:min-w-[260px] snap-center group cursor-pointer"
+            className="min-w-full sm:min-w-[220px] md:min-w-[260px] px-6 sm:px-0 snap-center group cursor-pointer"
             initial={{ opacity: 0, scale: 0.9, y: 30 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.6, delay: i * 0.05 }}
-            viewport={{ once: true, margin: "0px -100px 0px -100px" }}
+            viewport={{ once: true, margin: "0px -50px 0px -50px" }}
           >
-            {/* IMAGE CARD */}
-            <div className="rounded-t-3xl overflow-hidden bg-white">
+            <div className="rounded-t-3xl overflow-hidden bg-white shadow-sm">
               <div className="aspect-[4/5] bg-[#FAFBFC] group-hover:bg-primary flex items-center justify-center relative overflow-hidden transition-colors duration-500">
-                {/*  GRAPH BACKGROUND EFFECT */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                  {/* grid lines */}
-                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:16px_16px] opacity-25" />
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:16px_1px] opacity-25" />
                 </div>
 
-                {/* IMAGE / ICON */}
-                <div className="relative z-10">
+                <div className="relative z-10 w-full h-full">
                   {leader.image ? (
                     <img
                       src={leader.image}
                       alt={leader.nameFirst}
-                      className="w-full h-full object-fill transition-all duration-500 drop-shadow-none group-hover:drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]"
+                      className="w-full h-full object-contain transition-all duration-500 drop-shadow-none group-hover:drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)]"
                     />
                   ) : (
-                    <Icon
-                      icon="mdi:account"
-                      width={80}
-                      className="text-gray-200 transition-all duration-500 drop-shadow-none group-hover:drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]"
-                    />
+                    <div className="w-full h-full flex items-center justify-center">
+                      <Icon
+                        icon="mdi:account"
+                        width={100}
+                        className="text-gray-200 transition-all duration-500"
+                      />
+                    </div>
                   )}
                 </div>
 
-                {/* gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent" />
               </div>
             </div>
 
-            {/* INFO SECTION */}
-            <div className="px-2 pt-4">
+            <div className="px-4 pt-5 bg-white rounded-b-3xl pb-6 border-t border-gray-50 shadow-sm">
               <div className="flex items-start justify-between gap-3">
-                <h3 className="text-xl md:text-2xl font-extrabold text-dark leading-tight">
+                <h3 className="text-xl sm:text-2xl font-extrabold text-dark leading-tight">
                   {leader.nameFirst}{" "}
                   <span className="text-primary">{leader.nameLast}</span>
                 </h3>
@@ -150,21 +152,20 @@ export default function LeadershipSection() {
                 >
                   <Icon
                     icon="mdi:linkedin"
-                    width={28}
+                    width={26}
                     className="text-dark hover:text-[#0A66C2] transition-colors"
                   />
                 </Link>
               </div>
 
-              <p className="text-base text-dark/60 mt-2 font-medium font-mono">
+              <p className="text-sm md:text-base text-dark/60 mt-1 font-medium font-mono">
                 {leader.role}
               </p>
             </div>
           </motion.div>
         ))}
 
-        {/* END SPACER */}
-        <div className="min-w-[20vw] flex-shrink-0" />
+        <div className="hidden sm:block min-w-[20vw] flex-shrink-0" />
       </div>
     </section>
   );

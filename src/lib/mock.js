@@ -200,18 +200,21 @@ export const leaders = [
     nameLast: 'Raza',
     role: 'Backend Specialist & Head of AI',
     linkedin: 'https://www.linkedin.com/in/atif-raza-7a6855217'
+    // image: 'team/atif-raza.png',
   },
   {
     nameFirst: 'Ammar',
     nameLast: 'Yousaf',
     role: 'React Native Specialist & Head of Global Marketing',
     linkedin: 'https://www.linkedin.com/in/ammar-yousaf-react-native-53321a19a'
+    // image: 'team/ammar-yousaf.png',
   },
   {
     nameFirst: 'Moeen',
     nameLast: 'U Din',
     role: 'Full-Stack Developer & Head of DevOps',
     linkedin: 'https://www.linkedin.com/in/moeen-u-din'
+    // image: 'team/moeen-u-din.png',
   },
   {
     nameFirst: 'Shamroz',
