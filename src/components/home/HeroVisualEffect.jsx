@@ -7,6 +7,7 @@ export default function HeroVisualEffect({
   secondaryColor = "#ffffff",
   particleOpacity = 0.4,
   glowOpacity = 0.18,
+  
 }) {
   const canvasRef = useRef(null);
   const mouse = useRef({ x: 0, y: 0, active: false });
