@@ -99,13 +99,13 @@ export default function Header() {
   const dropdownBg =
     isDarkTheme && (activeDropdown || menuOpen)
       ? 'bg-black/60 backdrop-blur-md border-white/10'
-      : 'bg-white border-gray-100';
+      : 'bg-white border-gray-200/60 shadow-xl';
 
 
   const textColor = isDarkTheme ? 'text-white hover:text-primary' : 'text-dark hover:text-primary';
   const chevronColor = isDarkTheme ? 'stroke-white' : 'stroke-dark/60';
-  const dropdownTextColor = isDarkTheme && activeDropdown ? 'text-white' : 'text-dark';
-  const dropdownSubColor = isDarkTheme && activeDropdown ? 'text-white/50' : 'text-dark/40';
+  const dropdownTextColor = isDarkTheme && activeDropdown ? 'text-white' : 'text-dark/90';
+  const dropdownSubColor = isDarkTheme && activeDropdown ? 'text-white/60' : 'text-dark/60';
   const hamburgerLines = isDarkTheme ? 'bg-white' : 'bg-dark';
 
   const showScrollBar = scrolled && !activeDropdown && !menuOpen;

@@ -11,6 +11,7 @@ import LeadershipSection from '@/components/home/LeadershipSection';
 import ContactSection from '@/components/home/ContactSection';
 import ScrollTextSection from '@/components/home/ScrollTextSection';
 import RecentProjectsSection from '@/components/home/RecentProjectsSection';
+import ServicesSection from '@/components/home/ServicesSection';
 import { Icon } from '@iconify/react';
 import { capabilities } from '@/lib/mock';
 
@@ -44,7 +45,7 @@ export default function HomePage() {
           <HeroSection />
           <TechSlider />
           <RecentProjectsSection />
-
+          <ServicesSection />
           <LeadershipSection />
           <ScrollTextSection />
           <ContactSection />
