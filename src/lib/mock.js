@@ -296,6 +296,7 @@ export const footerData = {
 export const socialLinks = [
   { name: 'LinkedIn', icon: 'mdi:linkedin', href: 'https://www.linkedin.com/company/the-bughex', hoverColor: '#0A66C2' },
   { name: 'Facebook', icon: 'mdi:facebook', href: 'https://www.facebook.com/thebughex', hoverColor: '#1877F2' },
+  { name: 'WhatsApp', icon: 'mdi:whatsapp', href: 'https://wa.me/923156861473', hoverColor: '#25D366' },
 ];
 
 

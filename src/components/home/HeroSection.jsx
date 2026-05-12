@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export default function HeroSection() {
   return (
@@ -17,27 +17,17 @@ export default function HeroSection() {
       </video>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-16 pb-12 md:pt-24 md:pb-16 flex flex-col items-center text-center">
-
-
         <motion.h1
           className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6 max-w-5xl text-white"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.7 }}
         >
-          We Build{' '}
-          <span className="text-gradient-animated">Digital</span>
+          We Build <span className="text-gradient-animated">Digital</span>
           <br />
-          Products That{' '}
-          <span className="text-gradient-animated">Matter</span>
+          Products That <span className="text-gradient-animated">Matter</span>
         </motion.h1>
-
-
       </div>
-
     </section>
   );
 }
-
-
-

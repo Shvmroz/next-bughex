@@ -8,7 +8,8 @@ export async function invokeApi({
   headers = {},
   postData = {},
 }) {
-  const url = baseURL + path;
+  const base = baseURL || "";
+  const url = base.endsWith("/") || path.startsWith("/") ? `${base}${path}` : `${base}/${path}`;
 
   const config = {
     method,
