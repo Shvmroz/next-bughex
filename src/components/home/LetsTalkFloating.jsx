@@ -54,7 +54,7 @@ export default function LetsTalkFloating({
         return;
       }
 
-      const shouldShow = window.scrollY > 300;
+      const shouldShow = true;
 
       // Hide in footer or contact section
       const footer = document.querySelector("footer");
