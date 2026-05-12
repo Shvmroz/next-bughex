@@ -18,7 +18,7 @@ export default function RecentProjectsSection() {
       Array.isArray(result) ||
       Array.isArray(result?.data)
     ) {
-      const list = Array.isArray(result) ? result : (result?.data ?? []);
+      const list = Array.isArray(result) ? result : result?.data ?? [];
       setProjects(list.slice(0, 3));
     } else {
       console.error("Failed to load recent projects:", result.message);
@@ -138,7 +138,8 @@ export default function RecentProjectsSection() {
                 </motion.div>
               ))
             ) : (
-              <div className="flex items-center justify-center py-20 text-center w-full">
+              <div className="flex items-center justify-center py-20 text-center w-full text-gray-500 gap-2">
+                <Icon icon="solar:bug-bold-duotone" width="24" height="24" />
                 No Projects Found
               </div>
             )}

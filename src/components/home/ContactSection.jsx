@@ -2,37 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { socialLinks } from "@/lib/mock";
-
-const contactSectionContent = {
-  preText: "Ready to build?",
-  title: "Start Your Project",
-  subtitle:
-    "Ready to build something extraordinary? Let's talk about your vision.",
-  bodyText:
-    "Whether you need a Flutter app, a complex backend, or an AI-powered solution, BugHex has the expertise to bring your vision to life. We work with startups and enterprises alike.",
-  contactInfo: [
-    { icon: "mdi:email-outline", label: "Email", value: "hello@bughex.dev" },
-    {
-      icon: "mdi:map-marker-outline",
-      label: "Location",
-      value: "Remote — Worldwide",
-    },
-    {
-      icon: "mdi:clock-outline",
-      label: "Response Time",
-      value: "Within 24 hours",
-    },
-  ],
-  serviceOptions: [
-    "Flutter Development",
-    "React Native",
-    "JavaScript / React",
-    "Laravel / PHP",
-    "Node.js Backend",
-    "iOS / Android",
-    "AI Solutions",
-  ],
-};
+import { api_contact_us } from "@/DAL/api";
 
 function FormField({
   label,
@@ -64,7 +34,7 @@ function FormField({
           required={required}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          className="w-full px-5 py-4 rounded-xl bg-[#F8F9FA] border border-gray-200 text-sm resize-none outline-none focus:bg-white focus:border-primary focus:shadow-[0_0_0_3px_rgba(27,181,162,0.08)] transition"
+          className="w-full px-4 py-2 rounded-[4px] bg-[#F8F9FA] border border-gray-200 text-sm outline-none focus:bg-white focus:border-primary focus:shadow-[0_0_0_3px_rgba(27,181,162,0.08)] transition placeholder:text-gray-400/60"
         />
       ) : (
         <input
@@ -75,7 +45,7 @@ function FormField({
           required={required}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          className="w-full px-5 py-4 rounded-xl bg-[#F8F9FA] border border-gray-200 text-sm outline-none focus:bg-white focus:border-primary focus:shadow-[0_0_0_3px_rgba(27,181,162,0.08)] transition"
+          className="w-full px-4 py-2 rounded-[4px] bg-[#F8F9FA] border border-gray-200 text-sm outline-none focus:bg-white focus:border-primary focus:shadow-[0_0_0_3px_rgba(27,181,162,0.08)] transition placeholder:text-gray-400/60"
         />
       )}
     </div>
@@ -83,50 +53,39 @@ function FormField({
 }
 
 export default function ContactSection({ isPage = false }) {
-  const c = contactSectionContent;
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    service: [],
+    subject: "",
     message: "",
+    phone: "",
   });
 
   const [submitted, setSubmitted] = useState(false);
-  const [openService, setOpenService] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const dropdownRef = useRef(null);
-
-  // close dropdown on outside click
-  useEffect(() => {
-    const handleClick = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setOpenService(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, []);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await api_contact_us(formData);
+
+      if (res && !res.code) {
+        setSubmitted(true);
+      } else {
+        setError(res?.message || "Failed to send message. Please try again.");
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const email =
-    c.contactInfo?.find((i) => i.label === "Email")?.value ||
-    "hello@bughex.dev";
-
-  const allSocials = [
-    ...(socialLinks || []),
-    {
-      name: "Email",
-      icon: "mdi:email",
-      href: `mailto:${email}`,
-      hoverColor: "#1bb5a2",
-    },
-  ];
+  const email = "hr@thebughex.com";
 
   return (
     <section id="contact" className="w-full bg-white relative overflow-hidden">
@@ -152,60 +111,76 @@ export default function ContactSection({ isPage = false }) {
               solution — we’re here to engineer it.
             </p>
 
-            {/* SOCIALS */}
-            <div>
-              <p className="text-[10px] font-bold text-dark/30 uppercase tracking-widest mb-5">
+            {/* SOCIALS & CONTACT MERGED */}
+            <div className="space-y-4">
+              <p className="text-[10px] font-bold text-dark/30 uppercase tracking-[0.3em]">
                 Connect With Us
               </p>
 
-              <div className="flex gap-3">
-                {allSocials.map((social) => (
-                  <motion.a
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-4">
+                {socialLinks.map((social) => (
+                  <a
                     key={social.name}
                     href={social.href}
-                    whileHover={{ y: -5 }}
-                    className="w-12 h-12 rounded-xl bg-white border border-gray-200 flex items-center justify-center relative overflow-hidden group"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-all duration-300 hover:scale-110 active:opacity-70"
                   >
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
-                      style={{ background: social.hoverColor }}
-                    />
                     <Icon
                       icon={social.icon}
-                      width={22}
-                      className="relative z-10 group-hover:text-white transition"
+                      width={30}
+                      style={{ color: social.hoverColor }}
                     />
-                  </motion.a>
+                  </a>
                 ))}
+                <span className="text-[10px] text-dark/30 uppercase font-bold px-2">
+                  or
+                </span>
+                <a
+                  href={`mailto:${email}`}
+                  className="group flex items-center gap-3 text-dark/60 hover:text-primary transition-all duration-300 font-medium text-lg"
+                >
+                  <img
+                    src="/bughex-logo.png"
+                    className="w-[25px] h-[25px] object-contain opacity-60 group-hover:opacity-100 transition-opacity"
+                    alt="Bughex"
+                  />
+                  {email}
+                </a>
               </div>
             </div>
           </div>
 
           {/* RIGHT SIDE FORM */}
           <div className="relative">
-            <div className="bg-white border border-gray-100 rounded-xl shadow-lg p-4 md:p-8 relative overflow-hidden">
-
+            <div className="bg-white border border-gray-100 rounded-xl shadow-lg p-4 md:p-6 relative overflow-hidden">
               <AnimatePresence mode="wait">
-
                 {!submitted ? (
                   <motion.form
                     key="form"
                     onSubmit={handleSubmit}
                     className="space-y-6"
                   >
+                    {error && (
+                      <div className="p-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-sm flex items-center gap-3">
+                        <Icon icon="mdi:alert-circle" width={20} />
+                        {error}
+                      </div>
+                    )}
 
-                    {/* NAME + EMAIL */}
+                    {/* NAME */}
+                    <FormField
+                      label="Full Name"
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
+                      placeholder="Enter your name"
+                      required
+                    />
+
+                    {/* EMAIL + PHONE */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <FormField
-                        label="Full Name"
-                        value={formData.name}
-                        onChange={(e) =>
-                          setFormData({ ...formData, name: e.target.value })
-                        }
-                        placeholder="John Doe"
-                        required
-                      />
-
                       <FormField
                         label="Email Address"
                         type="email"
@@ -213,90 +188,32 @@ export default function ContactSection({ isPage = false }) {
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
                         }
-                        placeholder="john@example.com"
+                        placeholder="e.g. your@name.com"
+                        required
+                      />
+
+                      <FormField
+                        label="Phone Number"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) =>
+                          setFormData({ ...formData, phone: e.target.value })
+                        }
+                        placeholder="e.g. +44 123 456 7890"
                         required
                       />
                     </div>
 
-                    {/* MULTI SELECT DROPDOWN */}
-                    <div className="relative" ref={dropdownRef}>
-                      <label className="block text-[10px] font-bold tracking-widest uppercase text-dark/40 mb-3">
-                        What do you need?
-                      </label>
-
-                      {/* BUTTON */}
-                      <button
-                        type="button"
-                        onClick={() => setOpenService(!openService)}
-                        className="w-full px-5 py-4 rounded-xl bg-[#F8F9FA] border border-gray-200 text-left text-sm flex justify-between items-center"
-                      >
-                        {formData.service.length > 0
-                          ? formData.service.join(", ")
-                          : "Select services"}
-
-                        <Icon
-                          icon="mdi:chevron-down"
-                          width={18}
-                          className={`transition-transform ${
-                            openService ? "rotate-180" : ""
-                          }`}
-                        />
-                      </button>
-
-                      {/* DROPDOWN */}
-                      <AnimatePresence>
-                        {openService && (
-                          <motion.div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            className="absolute z-20 mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-xl p-2 max-h-64 overflow-y-auto"
-                          >
-                            {c.serviceOptions.map((opt) => {
-                              const selected =
-                                formData.service.includes(opt);
-
-                              return (
-                                <button
-                                  key={opt}
-                                  type="button"
-                                  onClick={() => {
-                                    setFormData((prev) => {
-                                      const exists =
-                                        prev.service.includes(opt);
-
-                                      return {
-                                        ...prev,
-                                        service: exists
-                                          ? prev.service.filter(
-                                              (s) => s !== opt
-                                            )
-                                          : [...prev.service, opt],
-                                      };
-                                    });
-                                  }}
-                                  className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm transition ${
-                                    selected
-                                      ? "bg-primary/10 text-primary"
-                                      : "hover:bg-gray-50 text-dark/70"
-                                  }`}
-                                >
-                                  <span>{opt}</span>
-
-                                  {selected && (
-                                    <Icon
-                                      icon="mdi:check"
-                                      width={18}
-                                      className="text-primary"
-                                    />
-                                  )}
-                                </button>
-                              );
-                            })}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
+                    {/* SUBJECT */}
+                    <FormField
+                      label="Subject"
+                      value={formData.subject}
+                      onChange={(e) =>
+                        setFormData({ ...formData, subject: e.target.value })
+                      }
+                      placeholder="e.g. Mobile App, UI/UX Design"
+                      required
+                    />
 
                     {/* MESSAGE */}
                     <FormField
@@ -309,55 +226,79 @@ export default function ContactSection({ isPage = false }) {
                           message: e.target.value,
                         })
                       }
-                      placeholder="Describe your idea..."
+                      placeholder="Tell us about your project or idea.."
                       required
                     />
 
-                    {/* YOUR ORIGINAL BUTTON (UNCHANGED) */}
                     <button
                       type="submit"
-                      className="btn w-full h-[48px] text-[11px] tracking-[0.2em] shadow-lg group"
+                      disabled={loading}
+                      className={`btn w-full h-[48px] text-[11px] tracking-[0.2em] shadow-lg group ${
+                        loading ? "opacity-70 cursor-not-allowed" : ""
+                      }`}
                     >
                       <i className="animation"></i>
 
                       <span className="relative z-10 flex items-center justify-center gap-2">
-                        SUBMIT INQUIRY
-                        <Icon
-                          icon="mdi:arrow-right"
-                          width={16}
-                          className="transition-transform group-hover:translate-x-1"
-                        />
+                        {loading ? (
+                          <>
+                            <Icon
+                              icon="mdi:loading"
+                              className="animate-spin"
+                              width={16}
+                            />
+                            SENDING...
+                          </>
+                        ) : (
+                          <>
+                            SUBMIT INQUIRY
+                            <Icon
+                              icon="mdi:arrow-right"
+                              width={16}
+                              className="transition-transform group-hover:translate-x-1"
+                            />
+                          </>
+                        )}
                       </span>
 
                       <i className="animation"></i>
                     </button>
-
                   </motion.form>
                 ) : (
                   <motion.div className="text-center py-20">
-                    <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Icon icon="mdi:check-bold" width={40} className="text-primary" />
+                    <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                      <Icon
+                        icon="mdi:check-bold"
+                        width={40}
+                        className="text-primary"
+                      />
                     </div>
-
-                    <h3 className="text-3xl font-bold mb-3">
+                    <h3 className="text-2xl font-bold mb-2">
                       Message Received
                     </h3>
 
                     <p className="text-dark/50 mb-6">
-                      We’ll get back to you within 24 hours.
+                      Our team will contact you shortly.
                     </p>
 
                     <button
-                      onClick={() => setSubmitted(false)}
-                      className="text-primary text-xs font-bold tracking-[0.2em] uppercase border-b border-primary/30"
+                      onClick={() => {
+                        setSubmitted(false);
+                        setFormData({
+                          name: "",
+                          email: "",
+                          subject: "",
+                          message: "",
+                          phone: "",
+                        });
+                      }}
+                      className="text-primary hover:text-teal-600 text-xs font-bold tracking-[0.2em] uppercase border-b border-primary/30 transition-colors"
                     >
                       Send Another Message
                     </button>
                   </motion.div>
                 )}
-
               </AnimatePresence>
-
             </div>
           </div>
         </div>

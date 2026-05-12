@@ -8,15 +8,24 @@ export const api_blogs_list = () => {
     return invokeApi(requestObj);
 };
 
-export const api_blog_detail = (id) => {
+export const api_blog_detail = (slug) => {
     const requestObj = {
-        path: `api/blogs/${id}`,
+        path: `api/blogs/slug/${slug}`,
+        method: "GET"
+    };
+    return invokeApi(requestObj);
+};
+
+export const api_services_list = () => {
+    const requestObj = {
+        path: `api/services`,
         method: "GET"
     };
     return invokeApi(requestObj);
 };
 
 export const api_projects_list = () => {
+
     const requestObj = {
         path: `api/projects`,
         method: "GET"
@@ -31,5 +40,15 @@ export const api_project_detail = (id) => {
     };
     return invokeApi(requestObj);
 };
+
+export const api_contact_us = (postData) => {
+    const requestObj = {
+        path: `api/contact-us`,
+        method: "POST",
+        postData
+    };
+    return invokeApi(requestObj);
+};
+
 
 

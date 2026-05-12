@@ -13,19 +13,81 @@ export const siteMeta = {
 // ─── NAVIGATION ───────────────────────────────────────────
 export const navLinks = [
   { label: 'WHO WE ARE', href: '/about', hasDropdown: false },
-  { label: 'PROJECTS', href: '/projects', hasDropdown: true },
+  { label: 'SERVICES', href: '/services', hasDropdown: true },
+  { label: 'PROJECTS', href: '/projects', hasDropdown: false },
   { label: 'BLOGS', href: '/blogs', hasDropdown: false },
   { label: 'CONTACT', href: '/contact', hasDropdown: false },
 ];
 
 export const megaMenuData = {
-  'PROJECTS': [
-    { title: 'E-Commerce Solutions', subtitle: 'Modern sales platforms', href: '/projects' },
-    { title: 'AI & ML Products', subtitle: 'Intelligent automation', href: '/projects' },
-    { title: 'Enterprise Apps', subtitle: 'Scaling business operations', href: '/projects' },
-    { title: 'Mobile Ecosystems', subtitle: 'Flutter & Native experiences', href: '/projects' },
+  'SERVICES': [
+    {
+      category: 'Mobile Development',
+      items: [
+        { label: 'iOS App Development', href: '/services/ios-development' },
+        { label: 'Android App Development', href: '/services/android-development' },
+        { label: 'Cross-Platform Apps', href: '/services/cross-platform-apps' },
+      ]
+    },
+    {
+      category: 'Web Development',
+      items: [
+        { label: 'Frontend Development', href: '/services/frontend-development' },
+        { label: 'Backend Development', href: '/services/backend-development' },
+        { label: 'Full Stack Development', href: '/services/full-stack-development' },
+      ]
+    },
+    {
+      category: 'Custom Software',
+      items: [
+        { label: 'Enterprise Solutions', href: '/services/enterprise-solutions' },
+        { label: 'SaaS Development', href: '/services/saas-development' },
+        { label: 'API Development', href: '/services/api-development' },
+      ]
+    },
+    {
+      category: 'Design & UX',
+      items: [
+        { label: 'UI/UX Design', href: '/services/ui-ux-design' },
+        { label: 'Wireframing', href: '/services/wireframing' },
+        { label: 'Prototyping', href: '/services/prototyping' },
+      ]
+    },
+    {
+      category: 'Game Development',
+      items: [
+        { label: '2D Game Development', href: '/services/2d-game-development' },
+        { label: '3D Game Development', href: '/services/3d-game-development' },
+        { label: 'Unity Development', href: '/services/unity-development' },
+      ]
+    },
+    {
+      category: 'Artificial Intelligence',
+      items: [
+        { label: 'Machine Learning', href: '/services/machine-learning' },
+        { label: 'Natural Language Processing', href: '/services/natural-language-processing' },
+        { label: 'Computer Vision', href: '/services/computer-vision' },
+      ]
+    },
+    {
+      category: 'Cloud Services',
+      items: [
+        { label: 'AWS Solutions', href: '/services/aws-solutions' },
+        { label: 'Azure Integration', href: '/services/azure-integration' },
+        { label: 'Google Cloud', href: '/services/google-cloud' },
+      ]
+    },
+    {
+      category: 'Blockchain Development',
+      items: [
+        { label: 'Smart Contract Development', href: '/services/smart-contract-development' },
+        { label: 'DeFi Applications', href: '/services/defi-applications' },
+        { label: 'NFT Marketplace', href: '/services/nft-marketplace' },
+      ]
+    }
   ],
 };
+
 
 // ─── HERO SECTION ─────────────────────────────────────────
 export const heroContent = {
@@ -198,7 +260,7 @@ export const testimonials = [
 
 // ─── FOOTER ───────────────────────────────────────────────
 export const footerData = {
-  Services: [
+  Technologies: [
     { label: 'Flutter', icon: 'logos:flutter' },
     { label: 'React Native', icon: 'logos:react' },
     { label: 'React / Next.js', icon: 'logos:nextjs-icon' },
@@ -223,25 +285,19 @@ export const footerData = {
   'Quick Links': [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
+    { label: 'Services', href: '/#services' },
     { label: 'Projects', href: '/projects' },
+
     { label: 'Blogs', href: '/blogs' },
     { label: 'Contact', href: '/contact' },
   ],
 };
 
 export const socialLinks = [
-  { name: 'LinkedIn', icon: 'mdi:linkedin', href: '#', hoverColor: '#0A66C2' },
-  {
-    name: 'Instagram',
-    icon: 'mdi:instagram',
-    href: '#',
-    hoverColor:
-      'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
-    isGradient: true,
-  },
-  { name: 'Facebook', icon: 'mdi:facebook', href: '#', hoverColor: '#1877F2' },
-
+  { name: 'LinkedIn', icon: 'mdi:linkedin', href: 'https://www.linkedin.com/company/the-bughex', hoverColor: '#0A66C2' },
+  { name: 'Facebook', icon: 'mdi:facebook', href: 'https://www.facebook.com/thebughex', hoverColor: '#1877F2' },
 ];
+
 
 // ─── PROJECTS PAGE ────────────────────────────────────────
 export const projectsPageContent = {

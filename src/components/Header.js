@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from './Logo';
 import { navLinks, megaMenuData } from '@/lib/mock';
+import { api_services_list } from '@/DAL/api';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -14,7 +15,32 @@ export default function Header() {
   const [winWidth, setWinWidth] = useState(0);
   const [isDarkSection, setIsDarkSection] = useState(false);
   const [isBlurSection, setIsBlurSection] = useState(false);
+  const [dynamicServices, setDynamicServices] = useState([]);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const result = await api_services_list();
+        const list = Array.isArray(result) ? result : result?.data ?? [];
+        setDynamicServices(list);
+      } catch (err) {
+        console.error("Header services fetch failed:", err);
+      }
+    };
+    fetchServices();
+  }, []);
+
+  const menuWithServices = {
+    ...megaMenuData,
+    'SERVICES': dynamicServices.map(s => ({
+      category: s.name,
+      items: (s.technologies || []).map(t => ({
+        label: t,
+        href: '/services'
+      }))
+    }))
+  };
 
   const isHeroPage = pathname === '/';
   const { scrollYProgress } = useScroll();
@@ -66,13 +92,15 @@ export default function Header() {
     : (isDarkTheme && !activeDropdown && !menuOpen)
       ? 'bg-transparent border-transparent'
       : (isDarkTheme && (activeDropdown || menuOpen))
-        ? 'bg-black/80 backdrop-blur-md border-white/10'
+        ? 'bg-black/60 backdrop-blur-md border-white/10'
         : 'bg-white border-gray-100 shadow-sm';
+
 
   const dropdownBg =
     isDarkTheme && (activeDropdown || menuOpen)
-      ? 'bg-black/80 backdrop-blur-md border-white/10'
+      ? 'bg-black/60 backdrop-blur-md border-white/10'
       : 'bg-white border-gray-100';
+
 
   const textColor = isDarkTheme ? 'text-white hover:text-primary' : 'text-dark hover:text-primary';
   const chevronColor = isDarkTheme ? 'stroke-white' : 'stroke-dark/60';
@@ -193,10 +221,10 @@ export default function Header() {
         </div>
       </motion.header>
 
-      {/* MEGA MENU DROPDOWN */}
       <AnimatePresence>
-        {activeDropdown && megaMenuData[activeDropdown] && (
+        {activeDropdown && menuWithServices[activeDropdown] && (
           <motion.div
+
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -204,25 +232,34 @@ export default function Header() {
             className={`absolute top-[70px] left-0 right-0 z-40 border-b shadow-2xl ${dropdownBg}`}
             onMouseEnter={() => setActiveDropdown(activeDropdown)}
           >
-            <div className="max-w-7xl mx-auto px-12 py-14">
-              <div className="grid grid-cols-2 gap-x-16 gap-y-8">
-                {megaMenuData[activeDropdown].map((item, idx) => (
+            <div className="max-w-7xl mx-auto px-12 py-8">
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-12">
+                {menuWithServices[activeDropdown].map((group, idx) => (
                   <motion.div
-                    key={item.title}
-                    initial={{ opacity: 0, x: -16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.05, duration: 0.2 }}
+                    key={group.category}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.05, duration: 0.3 }}
+                    className="space-y-6"
                   >
-                    <Link href={item.href || '#'} className="group inline-block">
-                      <h4
-                        className={`text-2xl font-bold transition-colors duration-200 tracking-tight group-hover:text-primary ${dropdownTextColor}`}
-                      >
-                        {item.title}
-                      </h4>
-                      <p className={`text-sm mt-1 font-medium ${dropdownSubColor}`}>
-                        {item.subtitle}
-                      </p>
-                    </Link>
+                    <h3 className={`text-lg font-bold border-b border-gray-100 pb-4 tracking-tight ${dropdownTextColor}`}>
+                      {group.category}
+                    </h3>
+                    <ul className="space-y-4">
+                      {group.items.map((item) => (
+                        <li key={item.label}>
+                          <Link
+                            href={item.href}
+                            onClick={() => setActiveDropdown(null)}
+                            className={`text-[13px] font-medium flex items-center gap-2 group transition-all duration-300 ${dropdownSubColor} hover:text-primary`}
+                          >
+                            <span className="w-0 h-px bg-primary transition-all duration-300 group-hover:w-3" />
+                            {item.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   </motion.div>
                 ))}
               </div>

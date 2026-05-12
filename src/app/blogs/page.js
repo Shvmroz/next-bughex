@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import BlogCard from '@/components/blogs/BlogCard';
 import { api_blogs_list } from '@/DAL/api';
+import { Icon } from '@iconify/react';
 
 export default function BlogsPage() {
   const [blogs, setBlogs] = useState([]);
@@ -92,8 +93,9 @@ export default function BlogsPage() {
                 placeholder="Search blogs..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full px-5 py-3 rounded-full bg-white border border-gray-200 shadow-sm text-dark/80 text-sm focus:outline-none focus:border-primary/50 transition-colors placeholder-dark/30"
+                className="w-full px-4 py-2 rounded-[4px] bg-[#F8F9FA] border border-gray-200 text-sm outline-none focus:bg-white focus:border-primary focus:shadow-[0_0_0_3px_rgba(27,181,162,0.08)] transition placeholder:text-gray-400/60"
               />
+
             </motion.div>
 
             {/* ── MOBILE: filter dropdown ── */}
@@ -132,11 +134,10 @@ export default function BlogsPage() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-sm transition-all duration-300 ${
-                    activeCategory === cat
-                      ? 'bg-primary border border-primary text-white font-semibold shadow-md'
-                      : 'bg-white border border-gray-200 text-dark/60 hover:border-primary/50 hover:text-primary'
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm transition-all duration-300 ${activeCategory === cat
+                    ? 'bg-primary border border-primary text-white font-semibold shadow-md'
+                    : 'bg-white border border-gray-200 text-dark/60 hover:border-primary/50 hover:text-primary'
+                    }`}
                 >
                   {cat}
                 </button>
@@ -161,13 +162,11 @@ export default function BlogsPage() {
                 ))}
               </div>
             ) : (
-              <motion.div
-                className="text-center py-20"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-              >
-                <p className="text-dark/40 text-lg">No blogs found.</p>
-              </motion.div>
+
+              <div className="flex items-center justify-center py-20 text-center w-full text-gray-500 gap-2">
+                <Icon icon="solar:bug-bold-duotone" width="24" height="24" />
+                No Blogs Found
+              </div>
             )}
           </div>
         </section>

@@ -7,17 +7,7 @@ import { footerData, socialLinks, siteMeta } from '@/lib/mock';
 import Logo from './Logo';
 
 export default function Footer() {
-  const email = 'hello@bughex.dev';
-
-  const allSocials = [
-    ...socialLinks,
-    {
-      name: 'Email',
-      icon: 'mdi:email',
-      href: `mailto:${email}`,
-      hoverColor: '#1bb5a2'
-    }
-  ];
+  const email = 'hr@thebughex.com';
 
   return (
     <>
@@ -74,21 +64,33 @@ export default function Footer() {
               <p className="text-white/40 text-base leading-relaxed max-w-sm font-medium">
                 {siteMeta.tagline}</p>
 
-              <div className="flex flex-wrap gap-4">
-                {allSocials.map((social) => (
-                  <motion.a
-                    key={social.name}
-                    href={social.href}
-                    className="w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-white/30 transition-all duration-300 hover:text-white hover:border-primary/50 group relative overflow-hidden"
-                    whileHover={{ y: -5 }}
+              <div className="space-y-4">
+                <p className="text-[10px] font-bold tracking-[0.3em] text-white/30 uppercase">Connect With Us</p>
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-4">
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-all duration-300 hover:scale-110 active:opacity-70"
+                    >
+                      <Icon
+                        icon={social.icon}
+                        width={30}
+                        style={{ color: social.hoverColor }}
+                      />
+                    </a>
+                  ))}
+                  <span className="text-[13px] text-white/30 uppercase font-bold px-1">or</span>
+                  <a
+                    href={`mailto:${email}`}
+                    className="group flex items-center gap-2 text-white/40 hover:text-primary transition-all duration-300 font-medium text-sm"
                   >
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
-                      style={{ background: social.hoverColor }}
-                    />
-                    <Icon icon={social.icon} width={22} className="relative z-10" />
-                  </motion.a>
-                ))}
+                    <img src="/bughex-logo.png" className="w-[25px] h-[25px] object-contain opacity-60 group-hover:opacity-100 transition-opacity" alt="Bughex" />
+                    {email}
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -103,7 +105,7 @@ export default function Footer() {
                     <ul className="space-y-4">
                       {links.map((link) => (
                         <li key={link.label}>
-                          {title === 'Services' || title === 'Industries' ? (
+                          {title === 'Technologies' || title === 'Industries' ? (
                             // Plain text with icon, no hover, no link
                             <span className="text-sm text-white/40 flex items-center gap-2.5">
                               <Icon icon={link.icon} width={16} className="flex-shrink-0 opacity-70" />
@@ -112,7 +114,7 @@ export default function Footer() {
                           ) : (
                             // Insights & Quick Links — clickable
                             <Link
-                              href={link.href}
+                              href={link.href || '#'}
                               className="text-sm text-white/50 hover:text-primary transition-colors duration-200 flex items-center gap-2 group"
                             >
                               <span className="w-0 h-px bg-primary transition-all duration-300 group-hover:w-2" />
@@ -130,7 +132,7 @@ export default function Footer() {
 
           {/* BOTTOM BAR */}
           <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-center items-center">
-            <p className="text-[11px] text-white/50 uppercase">
+            <p className="text-[11px] text-white/30 uppercase">
               {siteMeta.copyright}
             </p>
           </div>
