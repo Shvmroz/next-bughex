@@ -1,15 +1,16 @@
 import './globals.css';
+import LetsTalkFloating from '@/components/home/LetsTalkFloating';
 
 export const metadata = {
   title: 'Bughex — Software Development Agency',
-  description:'Bughex is a software development agency delivering scalable web, mobile, and AI solutions. We specialize in Flutter, React Native, React.js, Next.js, Laravel, Node.js, Android/iOS, and custom software development for startups and enterprises.',
+  description: 'Bughex is a software development agency delivering scalable web, mobile, and AI solutions. We specialize in Flutter, React Native, React.js, Next.js, Laravel, Node.js, Android/iOS, and custom software development for startups and enterprises.',
   keywords: 'flutter, react native, react js, next js, javascript, laravel, php, android, ios, nodejs, ai, development agency',
   icons: {
     icon: '/favicon.png',
   },
   openGraph: {
     title: 'Bughex — Software Development Agency',
-    description:'Bughex is a software development agency delivering scalable web, mobile, and AI solutions. We specialize in Flutter, React Native, React.js, Next.js, Laravel, Node.js, Android/iOS, and custom software development for startups and enterprises.',
+    description: 'Bughex is a software development agency delivering scalable web, mobile, and AI solutions. We specialize in Flutter, React Native, React.js, Next.js, Laravel, Node.js, Android/iOS, and custom software development for startups and enterprises.',
     type: 'website',
   },
 };
@@ -27,7 +28,10 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <LetsTalkFloating />
+      </body>
     </html>
   );
 }

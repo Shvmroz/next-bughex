@@ -3,7 +3,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ServicesSection from "@/components/home/ServicesSection";
-import LetsTalkFloating from "@/components/home/LetsTalkFloating";
 import { motion } from "framer-motion";
 
 export default function ServicesPage() {
@@ -20,7 +19,6 @@ export default function ServicesPage() {
                 </motion.div>
             </main>
             <Footer />
-            <LetsTalkFloating />
         </div>
     );
 }

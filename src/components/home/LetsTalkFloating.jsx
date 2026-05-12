@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 
@@ -35,16 +36,36 @@ export default function LetsTalkFloating() {
     href: "#contact",
   };
 
+  const pathname = usePathname();
+
   useEffect(() => {
     const handleScroll = () => {
+      // Hide on contact page
+      if (pathname === "/contact") {
+        setIsVisible(false);
+        return;
+      }
+
       const shouldShow = window.scrollY > 300;
+
+      // Hide in footer or contact section
       const footer = document.querySelector("footer");
-      let inFooterArea = false;
+      const contactSection = document.querySelector("#contact");
+
+      let inTargetArea = false;
+
       if (footer) {
         const rect = footer.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 50) inFooterArea = true;
+        if (rect.top < window.innerHeight - 50) inTargetArea = true;
       }
-      setIsVisible(shouldShow && !inFooterArea);
+
+      if (contactSection) {
+        const rect = contactSection.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50 && rect.bottom > 50)
+          inTargetArea = true;
+      }
+
+      setIsVisible(shouldShow && !inTargetArea);
     };
 
     const handleClickOutside = (event) => {

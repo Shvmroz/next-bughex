@@ -16,7 +16,6 @@ export const navLinks = [
   { label: 'SERVICES', href: '/services', hasDropdown: true },
   { label: 'PROJECTS', href: '/projects', hasDropdown: false },
   { label: 'BLOGS', href: '/blogs', hasDropdown: false },
-  { label: 'CONTACT', href: '/contact', hasDropdown: false },
 ];
 
 export const megaMenuData = {
@@ -199,22 +198,22 @@ export const leaders = [
     nameFirst: 'Atif',
     nameLast: 'Raza',
     role: 'Backend Specialist & Head of AI',
-    linkedin: 'https://www.linkedin.com/in/atif-raza-7a6855217'
-    // image: '/team/atif-raza.png',
+    linkedin: 'https://www.linkedin.com/in/atif-raza-7a6855217',
+    image: '/team/atif-raza.png',
   },
   {
     nameFirst: 'Ammar',
     nameLast: 'Yousaf',
     role: 'React Native & Head of Global Marketing',
-    linkedin: 'https://www.linkedin.com/in/ammar-yousaf-react-native-53321a19a'
-    // image: '/team/ammar-yousaf.png',
+    linkedin: 'https://www.linkedin.com/in/ammar-yousaf-react-native-53321a19a',
+    image: '/team/ammar-yousaf.png',
   },
   {
     nameFirst: 'Moeen',
     nameLast: 'U Din',
     role: 'Full-Stack Developer & Head of DevOps',
-    linkedin: 'https://www.linkedin.com/in/moeen-u-din'
-    // image: '/team/moeen-u-din.png',
+    linkedin: 'https://www.linkedin.com/in/moeen-u-din',
+    image: '/team/moeen-u-din.png',
   },
   {
     nameFirst: 'Shamroz',
