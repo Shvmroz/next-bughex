@@ -17,7 +17,7 @@ export default function LetsTalkFloating({
 
   useEffect(() => {
     const updateWidth = () => {
-      setCollapsedWidth(window.innerWidth < 768 ? "110px" : "140px");
+      setCollapsedWidth(window.innerWidth < 768 ? "120px" : "140px");
     };
     updateWidth();
     window.addEventListener("resize", updateWidth);
