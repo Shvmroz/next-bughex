@@ -58,6 +58,9 @@ export default function LetsTalkFloating({
     }
 
     const handleScroll = () => {
+      // Close if open on scroll
+      setIsOpen(false);
+
       // Hide on contact page
       if (pathname === "/contact") {
         setIsVisible(false);
@@ -139,48 +142,35 @@ export default function LetsTalkFloating({
             <motion.div
               ref={pillRef}
               layout
-              initial={false}
               animate={{
                 width: isOpen ? "auto" : collapsedWidth,
               }}
               transition={{
-                type: "spring",
-                stiffness: 400,
-                damping: 30,
-                mass: 0.8,
+                duration: 0.25,
+                ease: "easeOut",
               }}
-              className="relative flex items-center h-11 md:h-12 px-1.5 rounded-full bg-white/90 backdrop-blur-xl border border-black/5 cursor-pointer select-none z-10 overflow-hidden"
-              style={{ minWidth: isOpen ? "auto" : collapsedWidth }}
+              className="relative flex items-center h-11 md:h-12 bg-white/95 backdrop-blur-md rounded-full border border-black/5 shadow-2xl cursor-pointer overflow-hidden z-10"
               onClick={handleToggle}
             >
-              <div className="flex items-center px-1 overflow-hidden h-full w-full">
-                <AnimatePresence initial={false} mode="wait">
+              <div className="relative flex items-center w-full h-full px-2">
+                <AnimatePresence>
                   {!isOpen ? (
                     <motion.div
                       key="collapsed"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      transition={{ duration: 0.15 }}
-                      className="flex items-center gap-2 w-full"
+                      transition={{ duration: 0.2 }}
+                      className="flex items-center gap-2 md:gap-3 w-full pr-3 md:pr-4"
                     >
-                      <div className="w-8 h-8 md:w-9 md:h-9 bg-white rounded-full flex items-center justify-center shadow-lg shrink-0 overflow-hidden">
+                      <div className="w-8 h-8 md:w-9 md:h-9 bg-white rounded-full flex items-center justify-center shadow-sm ml-1 shrink-0 overflow-hidden">
                         <motion.div
-                          whileHover={{ rotateY: 360 }}
                           animate={{ rotateY: [0, 360] }}
                           transition={{
-                            rotateY: {
-                              duration: 0.6,
-                              ease: "easeInOut",
-                              repeat: Infinity,
-                              repeatDelay: 2,
-                            },
-                          }}
-                          style={{
-                            backfaceVisibility: "visible",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
+                            duration: 0.8,
+                            ease: "easeInOut",
+                            repeat: Infinity,
+                            repeatDelay: 2,
                           }}
                         >
                           <Image
@@ -192,7 +182,7 @@ export default function LetsTalkFloating({
                           />
                         </motion.div>
                       </div>
-                      <span className="text-[#1bb5a2] font-bold text-xs md:text-sm tracking-tight whitespace-nowrap pr-2">
+                      <span className="text-[#1bb5a2] font-bold text-xs md:text-sm tracking-tight whitespace-nowrap">
                         Let&apos;s Talk
                       </span>
                     </motion.div>
@@ -202,48 +192,43 @@ export default function LetsTalkFloating({
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="flex items-center gap-4 md:gap-6 px-3 py-1"
+                      transition={{ duration: 0.2, delay: 0.2 }}
+                      className="flex items-center gap-4 md:gap-6 px-3 md:px-4 whitespace-nowrap"
                     >
-                      {/* Socials */}
-                      <div className="flex items-center gap-4 md:gap-5">
+                      <div className="flex items-center gap-3 md:gap-5">
                         {socialLinks.map((link) => (
                           <motion.a
                             key={link.name}
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            whileHover={{ scale: 1.2 }}
+                            whileHover={{ scale: 1.1 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="flex items-center justify-center shrink-0"
+                            className="flex items-center justify-center hover:opacity-70 transition-opacity"
                           >
                             <Icon
                               icon={link.icon}
-                              className={`${
+                              className={
                                 link.isExtraLarge
-                                  ? "w-7 h-7 md:w-8 md:h-8"
-                                  : "w-6 h-6 md:w-7 md:h-7"
-                              } transition-transform`}
+                                  ? "w-6 h-6 md:w-8 md:h-8"
+                                  : "w-5 h-5 md:w-7 md:h-7"
+                              }
                             />
                           </motion.a>
                         ))}
                       </div>
-
-                      {/* Mail + HR Address */}
                       <motion.a
                         href={mailLink.href}
                         onClick={(e) => handleLinkClick(e, mailLink.href)}
-                        className="flex items-center justify-center shrink-0 border-l border-black/10 pl-4 md:pl-6 ml-0.5"
+                        className="flex items-center gap-2 md:gap-3 border-l border-black/10 pl-3 md:pl-6"
                       >
-                        <div className="flex items-center gap-2 md:gap-4">
-                          <Icon
-                            icon={mailLink.icon}
-                            className="w-7 h-7 md:w-8 md:h-8"
-                          />
-                          <span className="text-black lg:text-[#1bb5a2] lg:font-bold text-xs md:text-sm tracking-tight whitespace-nowrap font-normal">
-                            hr@bughex.com
-                          </span>
-                        </div>
+                        <Icon
+                          icon={mailLink.icon}
+                          className="w-6 h-6 md:w-8 md:h-8"
+                        />
+                        <span className="text-[#1bb5a2] font-bold text-xs md:text-sm tracking-tight">
+                          hr@bughex.com
+                        </span>
                       </motion.a>
                     </motion.div>
                   )}

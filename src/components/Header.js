@@ -92,13 +92,13 @@ export default function Header() {
     : (isDarkTheme && !activeDropdown && !menuOpen)
       ? 'bg-transparent border-transparent'
       : (isDarkTheme && (activeDropdown || menuOpen))
-        ? 'bg-black/60 backdrop-blur-md border-white/10'
+        ? 'bg-black/90 backdrop-blur-md border-white/5'
         : 'bg-white border-gray-100 shadow-sm';
 
 
   const dropdownBg =
     isDarkTheme && (activeDropdown || menuOpen)
-      ? 'bg-black/60 backdrop-blur-md border-white/10'
+      ? 'bg-black/90 backdrop-blur-md border-white/5'
       : 'bg-white border-gray-200/60 shadow-xl';
 
 
@@ -275,7 +275,7 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className={`lg:hidden absolute top-[70px] left-0 right-0 z-40 border-b shadow-2xl overflow-hidden ${isDarkTheme ? 'bg-black/80 backdrop-blur-md border-white/10' : 'bg-white/95 backdrop-blur-xl border-gray-100'}`}
+            className={`lg:hidden absolute top-[70px] left-0 right-0 z-40 border-b shadow-2xl overflow-hidden ${isDarkTheme ? 'bg-black/90 backdrop-blur-md border-white/5' : 'bg-white/95 backdrop-blur-xl border-gray-100'}`}
           >
             <div className="px-8 py-8 flex flex-col gap-2">
               {navLinks.map((link) => (
