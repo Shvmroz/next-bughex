@@ -150,22 +150,17 @@ export default function RecentProjectsSection() {
 
         {/* VIEW ALL BUTTON - below scroller on all screens */}
         <motion.div
-          className="flex mt-12 justify-end w-full px-6"
+          className="flex mt-12 justify-center sm:justify-end w-full px-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
           <Link href="/projects" className="w-full sm:w-auto">
-            <button className="btn w-full sm:w-auto h-[48px] px-12 text-xs tracking-[0.2em] shadow-xl group">
-              <span className="relative z-10 flex items-center justify-center gap-3">
-                VIEW ALL PROJECTS
-                <Icon
-                  icon="mdi:arrow-top-right"
-                  width={18}
-                  className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
-                />
-              </span>
+            <button className="btn w-full sm:w-auto justify-center gap-3">
+              <i className="animation"></i>
+              VIEW ALL PROJECTS
+              <i className="animation"></i>
             </button>
           </Link>
         </motion.div>
