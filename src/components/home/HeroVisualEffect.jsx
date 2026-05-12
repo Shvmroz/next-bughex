@@ -5,12 +5,15 @@ import React, { useRef, useEffect } from "react";
 export default function HeroVisualEffect({
   primaryColor = "#1bb5a2",
   secondaryColor = "#ffffff",
+  darkColor = "#000000",
+  lightColor = "#63f3e1",
   particleOpacity = 0.4,
   glowOpacity = 0.18,
-  
 }) {
   const canvasRef = useRef(null);
   const mouse = useRef({ x: 0, y: 0, active: false });
+
+  const particlesRef = useRef([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -19,19 +22,23 @@ export default function HeroVisualEffect({
     const ctx = canvas.getContext("2d");
     let animationFrameId;
 
-    let particles = [];
     function initParticles() {
-      particles = [];
-      const particleCount = Math.floor((canvas.width * canvas.height) / 10000);
+      particlesRef.current = [];
+      const particleCount = Math.floor((canvas.width * canvas.height) / 18000); // Reduced density for cleaner look
       for (let i = 0; i < particleCount; i++) {
-        particles.push({
+        const colors = [primaryColor, secondaryColor, darkColor, lightColor];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+
+        particlesRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           baseX: Math.random() * canvas.width,
           baseY: Math.random() * canvas.height,
-          size: Math.random() * 2.5 + 1.2,
-          color: i % 2 === 0 ? primaryColor : secondaryColor,
-          opacity: Math.random() * 0.6 + 0.35,
+          size: Math.random() * 2.5 + 1.5,
+          color: color,
+          opacity: color === darkColor ? 0.15 : Math.random() * 0.5 + 0.3,
+          maxOpacity: color === darkColor ? 0.2 : Math.random() * 0.7 + 0.4,
+          currentOpacity: 0, // Start at 0 for fade-in
           density: Math.random() * 20 + 5,
           phase: Math.random() * Math.PI * 2,
         });
@@ -39,9 +46,16 @@ export default function HeroVisualEffect({
     }
 
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      initParticles();
+      const newWidth = window.innerWidth;
+      const newHeight = window.innerHeight;
+
+      if (canvas.width !== newWidth || canvas.height !== newHeight) {
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+        initParticles();
+      } else if (particlesRef.current.length === 0) {
+        initParticles();
+      }
     };
 
     const handleMouseMove = (e) => {
@@ -57,35 +71,8 @@ export default function HeroVisualEffect({
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // 1. Draw Holo Circle (Glow)
-      if (mouse.current.active) {
-        const gradient = ctx.createRadialGradient(
-          mouse.current.x,
-          mouse.current.y,
-          0,
-          mouse.current.x,
-          mouse.current.y,
-          300
-        );
-        gradient.addColorStop(
-          0,
-          `${primaryColor}${Math.floor(glowOpacity * 255)
-            .toString(16)
-            .padStart(2, "0")}`
-        );
-        gradient.addColorStop(
-          0.4,
-          `${primaryColor}${Math.floor((glowOpacity / 3) * 255)
-            .toString(16)
-            .padStart(2, "0")}`
-        );
-        gradient.addColorStop(1, `${primaryColor}00`);
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      }
-
       // 2. Animate Particles with Gravitational/Waves effect
-      particles.forEach((p) => {
+      particlesRef.current.forEach((p) => {
         // Slow floating movement
         p.phase += 0.005;
         const floatX = Math.sin(p.phase) * 3;
@@ -114,10 +101,15 @@ export default function HeroVisualEffect({
           p.y += (currentTargetY - p.y) * 0.02;
         }
 
+        // Fade in effect
+        if (p.currentOpacity < p.opacity) {
+          p.currentOpacity += 0.01;
+        }
+
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
-        ctx.globalAlpha = p.opacity * particleOpacity;
+        ctx.globalAlpha = p.currentOpacity * particleOpacity;
         ctx.fill();
         ctx.globalAlpha = 1;
       });
@@ -132,7 +124,14 @@ export default function HeroVisualEffect({
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [primaryColor, secondaryColor, particleOpacity, glowOpacity]);
+  }, [
+    primaryColor,
+    secondaryColor,
+    darkColor,
+    lightColor,
+    particleOpacity,
+    glowOpacity,
+  ]);
 
   return (
     <canvas

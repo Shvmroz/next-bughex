@@ -82,7 +82,7 @@ export default function LetsTalkFloating() {
       window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [pathname]);
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);

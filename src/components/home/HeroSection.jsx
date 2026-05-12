@@ -18,11 +18,13 @@ export default function HeroSection() {
         <source src="/video/hero_section_video.mp4" type="video/mp4" />
       </video>
 
-      {/* Holographic Interaction Layer */}
-      <HeroVisualEffect />
-
-      {/* Modern Vignette Overlay */}
-      <div className="absolute inset-0 z-[2] bg-radial-vignette pointer-events-none" />
+      {/* Modern Interaction Layer */}
+      <HeroVisualEffect
+        primaryColor="#1bb5a2"
+        secondaryColor="#ffffff"
+        darkColor="#000000"
+        lightColor="#63f3e1"
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-16 pb-12 md:pt-24 md:pb-16 flex flex-col items-center text-center">
         <motion.div
@@ -50,22 +52,8 @@ export default function HeroSection() {
             <br />
             Products That <span className="text-gradient-animated">Matter</span>
           </motion.h1>
-
-         
-      
         </motion.div>
       </div>
-
-      {/* Style for the vignette */}
-      <style jsx>{`
-        .bg-radial-vignette {
-          background: radial-gradient(
-            circle at center,
-            transparent 0%,
-            rgba(0, 0, 0, 0.4) 100%
-          );
-        }
-      `}</style>
     </section>
   );
 }
