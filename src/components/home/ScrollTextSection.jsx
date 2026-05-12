@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import HeroVisualEffect from "./HeroVisualEffect";
 
 const slides = [
   {
@@ -130,6 +131,9 @@ export default function ScrollTextSection() {
             />
           </video>
         </div>
+
+        {/* Holographic Interaction Layer */}
+        <HeroVisualEffect />
 
         <div
           className="absolute inset-0 z-[1] pointer-events-none"

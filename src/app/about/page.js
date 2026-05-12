@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CapabilitiesSection from "@/components/home/CapabilitiesSection";
+import HeroVisualEffect from "@/components/home/HeroVisualEffect";
 import { Icon } from "@iconify/react";
 import { capabilities } from "@/lib/mock";
 
@@ -130,6 +131,14 @@ export default function AboutPage() {
               }}
               transition={{ duration: 1.5, ease: "easeInOut" }}
               className="absolute w-[200px] h-[200px] bg-[#CDEB63]/30 rounded-full blur-[50px] -z-10"
+            />
+
+            {/* Holographic Interaction Layer */}
+            <HeroVisualEffect
+              primaryColor="#1bb5a2"
+              secondaryColor="#0a0a0a"
+              particleOpacity={0.2}
+              glowOpacity={0.1}
             />
 
             {/* VERTICAL NAVIGATION - Desktop Right Side (matches ScrollTextSection style) */}
