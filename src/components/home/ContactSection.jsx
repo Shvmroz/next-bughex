@@ -118,7 +118,7 @@ export default function ContactSection({ isPage = false }) {
                 Connect With Us
               </p>
 
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-4">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-3 md:gap-x-5 md:gap-y-4">
                 {socialLinks.map((social) => (
                   <a
                     key={social.name}
@@ -129,23 +129,23 @@ export default function ContactSection({ isPage = false }) {
                   >
                     <Icon
                       icon={social.icon}
-                      width={30}
+                      className="w-5 h-5 md:w-[30px] md:h-[30px]"
                       style={{ color: social.hoverColor }}
                     />
                   </a>
                 ))}
-                <span className="text-[10px] text-dark/30 uppercase font-bold px-2">
+                <span className="text-[10px] text-dark/30 uppercase font-bold px-1 md:px-2">
                   or
                 </span>
                 <a
                   href={`mailto:${email}`}
-                  className="group flex items-center gap-3 text-dark/60 hover:text-primary transition-all duration-300 font-medium text-lg"
+                  className="group flex items-center gap-2 md:gap-3 text-dark/60 hover:text-primary transition-all duration-300 font-medium text-sm md:text-lg"
                 >
                   <Image
                     src="/bughex-logo.png"
                     width={25}
                     height={25}
-                    className="w-[25px] h-[25px] object-contain opacity-60 group-hover:opacity-100 transition-opacity"
+                    className="w-[18px] h-[18px] md:w-[25px] md:h-[25px] object-contain opacity-60 group-hover:opacity-100 transition-opacity"
                     alt="Bughex"
                   />
                   {email}

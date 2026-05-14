@@ -67,14 +67,31 @@ export default function BlogDetailPage({ params }) {
             <>
                 <Header />
                 <main className="min-h-screen bg-white pt-32 pb-24">
-                    <div className="max-w-4xl mx-auto px-6 space-y-8 animate-pulse text-center">
-                        <div className="h-4 w-24 bg-gray-100 rounded-full mx-auto" />
-                        <div className="h-12 w-3/4 bg-gray-100 rounded-xl mx-auto" />
-                        <div className="h-6 w-1/2 bg-gray-100 rounded-xl mx-auto" />
-                        <div className="h-[400px] w-full bg-gray-100 rounded-3xl" />
-                        <div className="space-y-4 max-w-2xl mx-auto">
+                    <div className="max-w-4xl mx-auto px-6 space-y-6 text-center">
+                        {/* Back link */}
+                        <div className="h-4 w-28 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite] mx-auto" />
+                        {/* Category + date */}
+                        <div className="flex items-center justify-center gap-3">
+                            <div className="h-6 w-20 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                            <div className="h-4 w-24 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                        </div>
+                        {/* Title */}
+                        <div className="h-12 w-3/4 rounded-xl animate-[skeleton_1.8s_ease-in-out_infinite] mx-auto" />
+                        <div className="h-8 w-1/2 rounded-xl animate-[skeleton_1.8s_ease-in-out_infinite] mx-auto" />
+                        {/* Author row */}
+                        <div className="flex items-center justify-center gap-4">
+                            <div className="w-12 h-12 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite] shrink-0" />
+                            <div className="space-y-2 text-left">
+                                <div className="h-4 w-28 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                                <div className="h-3 w-16 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                            </div>
+                        </div>
+                        {/* Featured image */}
+                        <div className="h-[400px] w-full rounded-3xl animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                        {/* Content lines */}
+                        <div className="space-y-3 max-w-2xl mx-auto text-left">
                             {[...Array(8)].map((_, i) => (
-                                <div key={i} className="h-4 bg-gray-100 rounded-full w-full" />
+                                <div key={i} className={`h-4 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite] ${i % 3 === 2 ? 'w-4/6' : i % 3 === 1 ? 'w-5/6' : 'w-full'}`} />
                             ))}
                         </div>
                     </div>

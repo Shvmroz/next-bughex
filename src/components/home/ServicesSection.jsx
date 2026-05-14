@@ -49,32 +49,32 @@ export default function ServicesSection() {
 
         <div className="flex flex-col gap-10 md:gap-16 mt-10 md:mt-16">
           {loading ? (
-            // Skeleton — mirrors the real card layout
+            // YouTube-style skeleton with fade-pulse effect
             [...Array(3)].map((_, i) => (
               <div
                 key={i}
-                className="h-auto min-h-[450px] md:h-[550px] rounded-[1rem] md:rounded-[2rem] overflow-hidden relative animate-pulse bg-gray-100"
+                className="h-auto min-h-[450px] md:h-[550px] rounded-[1rem] md:rounded-[2rem] overflow-hidden relative animate-[skeleton_1.8s_ease-in-out_infinite]"
               >
-                {/* Fake image bg */}
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-300 via-gray-200 to-gray-100" />
-
-                {/* Fake content block — bottom aligned like real card */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-16 flex flex-col items-center md:items-start gap-4">
-                  {/* Icon + title row */}
-                  <div className="flex items-center gap-4 md:flex-col md:items-start w-full">
-                    <div className="w-10 h-10 md:w-16 md:h-16 rounded-xl bg-gray-300 shrink-0" />
-                    <div className="h-7 md:h-12 w-48 md:w-80 rounded-lg bg-gray-300" />
-                  </div>
+                {/* Content block — bottom aligned like real card */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-16 flex flex-col items-start gap-4">
+                  {/* Icon placeholder */}
+                  <div className="w-10 h-10 md:w-16 md:h-16 rounded-xl animate-[skeleton_1.8s_ease-in-out_infinite] shrink-0" />
+                  {/* Title placeholder */}
+                  <div className="h-7 md:h-10 w-48 md:w-80 rounded-lg animate-[skeleton_1.8s_ease-in-out_infinite]" />
                   {/* Description lines */}
                   <div className="w-full max-w-2xl space-y-2.5">
-                    <div className="h-4 rounded-full bg-gray-300 w-full" />
-                    <div className="h-4 rounded-full bg-gray-300 w-5/6" />
-                    <div className="h-4 rounded-full bg-gray-300 w-4/6" />
+                    <div className="h-4 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite] w-full" />
+                    <div className="h-4 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite] w-5/6" />
+                    <div className="h-4 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite] w-4/6" />
                   </div>
-                  {/* Tech chips */}
+                  {/* Tech chip placeholders */}
                   <div className="flex gap-2 flex-wrap">
-                    {[...Array(4)].map((_, j) => (
-                      <div key={j} className="h-7 w-20 rounded-full bg-gray-300" />
+                    {[80, 96, 72, 88].map((w, j) => (
+                      <div
+                        key={j}
+                        className="h-7 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]"
+                        style={{ width: w }}
+                      />
                     ))}
                   </div>
                 </div>

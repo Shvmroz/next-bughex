@@ -93,7 +93,7 @@ export default function BlogsPage() {
                 placeholder="Search blogs..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full px-4 py-2 rounded-[4px] bg-[#F8F9FA] border border-gray-200 text-sm outline-none focus:bg-white focus:border-primary focus:shadow-[0_0_0_3px_rgba(27,181,162,0.08)] transition placeholder:text-gray-400/60"
+                className="w-full px-4 py-2 rounded-full bg-[#F8F9FA] border border-gray-200 text-sm outline-none focus:bg-white focus:border-primary focus:shadow-[0_0_0_3px_rgba(27,181,162,0.08)] transition placeholder:text-gray-400/60"
               />
 
             </motion.div>
@@ -170,7 +170,46 @@ export default function BlogsPage() {
             {loading ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="rounded-3xl border border-gray-100 bg-gray-50 animate-pulse h-80" />
+                  <div
+                    key={i}
+                    className="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col"
+                  >
+                    {/* Thumbnail */}
+                    <div className="w-full h-52 animate-[skeleton_1.8s_ease-in-out_infinite] shrink-0" />
+
+                    {/* Body */}
+                    <div className="flex flex-col flex-1 px-6 pt-5 pb-6 gap-3">
+                      {/* Date + read time */}
+                      <div className="flex items-center gap-3">
+                        <div className="h-3.5 w-24 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                        <div className="w-1 h-1 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                        <div className="h-3.5 w-16 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                      </div>
+                      {/* Title */}
+                      <div className="h-6 w-5/6 rounded-lg animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                      <div className="h-6 w-3/4 rounded-lg animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                      {/* Excerpt lines */}
+                      <div className="space-y-2 flex-1">
+                        <div className="h-4 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite] w-full" />
+                        <div className="h-4 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite] w-5/6" />
+                        <div className="h-4 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite] w-4/6" />
+                      </div>
+                      {/* Tags */}
+                      <div className="flex gap-1.5">
+                        {[48, 64, 56, 40].map((w, j) => (
+                          <div key={j} className="h-6 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" style={{ width: w }} />
+                        ))}
+                      </div>
+                      {/* Author row */}
+                      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite] shrink-0" />
+                          <div className="h-3.5 w-24 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                        </div>
+                        <div className="h-3.5 w-16 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             ) : filtered.length > 0 ? (

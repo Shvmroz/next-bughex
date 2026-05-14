@@ -35,8 +35,41 @@ export default function ServiceDetailPage() {
     }, [params.slug]);
 
     if (loading) return (
-        <div className="h-screen flex items-center justify-center bg-white">
-            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+        <div className="min-h-screen flex flex-col bg-white">
+            <Header />
+            <main className="flex-grow pt-32 pb-24">
+                <div className="max-w-7xl mx-auto px-6">
+                    {/* Hero grid */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+                        {/* Left: text */}
+                        <div className="space-y-6">
+                            <div className="h-8 w-36 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                            <div className="h-16 w-4/5 rounded-2xl animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                            <div className="h-16 w-3/5 rounded-2xl animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                            <div className="space-y-3">
+                                <div className="h-5 w-full rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                                <div className="h-5 w-5/6 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                                <div className="h-5 w-4/6 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                            </div>
+                            <div className="h-14 w-48 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                        </div>
+                        {/* Right: image */}
+                        <div className="aspect-[4/3] rounded-[40px] animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                    </div>
+
+                    {/* Technologies section */}
+                    <div className="h-8 w-64 rounded-xl animate-[skeleton_1.8s_ease-in-out_infinite] mx-auto mb-12" />
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                        {[...Array(6)].map((_, i) => (
+                            <div key={i} className="p-6 rounded-2xl animate-[skeleton_1.8s_ease-in-out_infinite] flex flex-col items-center gap-4">
+                                <div className="w-12 h-12 rounded-xl bg-white/30" />
+                                <div className="h-3 w-16 rounded-full bg-white/30" />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </main>
+            <Footer />
         </div>
     );
 

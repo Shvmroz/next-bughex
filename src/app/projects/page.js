@@ -60,47 +60,28 @@ export default function ProjectsPage() {
           <div className="absolute inset-0 grid-bg opacity-30" />
 
           <div className="relative max-w-7xl mx-auto px-6 text-center">
-            <motion.h1
-              className="font-display text-4xl md:text-6xl font-bold text-dark mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
+            <h1 className="font-display text-4xl md:text-6xl font-bold text-dark mb-4">
               {projectsPageContent.title}{' '}
               <span className="text-gradient-animated">{projectsPageContent.titleHighlight}</span>
-            </motion.h1>
-            <motion.p
-              className="text-dark/60 text-lg max-w-xl mx-auto mb-10"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
+            </h1>
+            <p className="text-dark/60 text-lg max-w-xl mx-auto mb-10">
               {projectsPageContent.subtitle}
-            </motion.p>
+            </p>
 
-            <motion.div
-              className="max-w-md mx-auto mb-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
+            <div className="max-w-md mx-auto mb-8">
               <input
                 type="text"
                 placeholder={projectsPageContent.searchPlaceholder}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full px-4 py-2 rounded-[4px] bg-[#F8F9FA] border border-gray-200 text-sm outline-none focus:bg-white focus:border-primary focus:shadow-[0_0_0_3px_rgba(27,181,162,0.08)] transition placeholder:text-gray-400/60"
+                className="w-full px-4 py-2 rounded-full bg-[#F8F9FA] border border-gray-200 text-sm outline-none focus:bg-white focus:border-primary focus:shadow-[0_0_0_3px_rgba(27,181,162,0.08)] transition placeholder:text-gray-400/60"
               />
-
-            </motion.div>
+            </div>
 
             {/* ── MOBILE: filter icon + horizontal chips ── */}
-            <motion.div
+            <div
               className="flex md:hidden items-center gap-2 max-w-md mx-auto mb-2 md:mb-8 overflow-x-auto pb-1"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
             >
               {/* Filter / clear icon */}
               <button
@@ -122,41 +103,44 @@ export default function ProjectsPage() {
                 )}
               </button>
               {/* Chips */}
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
-                    activeCategory === cat
-                      ? 'bg-primary text-white shadow-sm'
-                      : 'bg-white border border-gray-200 text-dark/60'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </motion.div>
+              {loading
+                ? [64, 80, 72, 56, 88].map((w, i) => (
+                    <div key={i} className="shrink-0 h-8 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" style={{ width: w }} />
+                  ))
+                : categories.map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setActiveCategory(cat)}
+                      className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
+                        activeCategory === cat
+                          ? 'bg-primary text-white shadow-sm'
+                          : 'bg-white border border-gray-200 text-dark/60'
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+            </div>
 
             {/* ── DESKTOP: badge pills ── */}
-            <motion.div
-              className="hidden md:flex flex-wrap gap-3 justify-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-sm transition-all duration-300 ${activeCategory === cat
-                      ? 'bg-primary border border-primary text-white font-semibold shadow-md'
-                      : 'bg-white border border-gray-200 text-dark/60 hover:border-primary/50 hover:text-primary'
-                    }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </motion.div>
+            <div className="hidden md:flex flex-wrap gap-3 justify-center">
+              {loading
+                ? [64, 80, 72, 96, 56, 88].map((w, i) => (
+                    <div key={i} className="h-10 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" style={{ width: w }} />
+                  ))
+                : categories.map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setActiveCategory(cat)}
+                      className={`px-4 py-2 rounded-full text-sm transition-all duration-300 ${activeCategory === cat
+                          ? 'bg-primary border border-primary text-white font-semibold shadow-md'
+                          : 'bg-white border border-gray-200 text-dark/60 hover:border-primary/50 hover:text-primary'
+                        }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+            </div>
           </div>
         </section>
 
@@ -167,8 +151,39 @@ export default function ProjectsPage() {
                 {[...Array(6)].map((_, i) => (
                   <div
                     key={i}
-                    className="rounded-2xl border border-gray-100 bg-gray-50 animate-pulse h-80"
-                  />
+                    className="rounded-xl border border-gray-200 bg-white overflow-hidden flex flex-col"
+                  >
+                    {/* Thumbnail */}
+                    <div className="w-full aspect-[4/3] animate-[skeleton_1.8s_ease-in-out_infinite] shrink-0" />
+
+                    {/* Content */}
+                    <div className="flex flex-col flex-1 p-6 gap-3">
+                      {/* Badge + icon row */}
+                      <div className="flex items-center justify-between">
+                        <div className="h-6 w-24 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                        <div className="w-9 h-9 rounded-xl animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                      </div>
+                      {/* Title */}
+                      <div className="h-6 w-3/4 rounded-lg animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                      {/* Description lines */}
+                      <div className="space-y-2 flex-1">
+                        <div className="h-4 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite] w-full" />
+                        <div className="h-4 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite] w-5/6" />
+                        <div className="h-4 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite] w-4/6" />
+                      </div>
+                      {/* Tech chips */}
+                      <div className="flex gap-1.5">
+                        {[56, 72, 48].map((w, j) => (
+                          <div key={j} className="h-6 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" style={{ width: w }} />
+                        ))}
+                      </div>
+                      {/* Footer row */}
+                      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <div className="h-4 w-28 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                        <div className="h-4 w-10 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             ) : filtered.length > 0 ? (

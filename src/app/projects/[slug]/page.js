@@ -55,20 +55,35 @@ export default function ProjectDetailPage({ params }) {
     get_project_detail();
   }, [slug]);
 
-  // ── LOADING ──
   if (loading) {
     return (
       <>
         <Header />
         <main className="min-h-screen bg-white pt-32 pb-24">
-          <div className="max-w-4xl mx-auto px-6 space-y-6 animate-pulse">
-            <div className="h-4 w-24 bg-gray-100 rounded-full" />
-            <div className="h-10 w-3/4 bg-gray-100 rounded-xl" />
-            <div className="h-6 w-1/2 bg-gray-100 rounded-xl" />
-            <div className="h-64 w-full bg-gray-100 rounded-3xl" />
-            <div className="space-y-3">
-              {[...Array(5)].map((_, i) => (
-                <div key={i} className="h-4 bg-gray-100 rounded-full" />
+          <div className="max-w-4xl mx-auto px-6 space-y-6">
+            {/* Back link */}
+            <div className="h-4 w-28 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+            {/* Meta chips */}
+            <div className="flex gap-2">
+              <div className="h-6 w-20 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+              <div className="h-6 w-14 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" />
+            </div>
+            {/* Title */}
+            <div className="h-10 w-3/4 rounded-xl animate-[skeleton_1.8s_ease-in-out_infinite]" />
+            {/* Description */}
+            <div className="h-6 w-1/2 rounded-xl animate-[skeleton_1.8s_ease-in-out_infinite]" />
+            {/* Tech chips row */}
+            <div className="flex gap-2 flex-wrap pb-8 border-b border-gray-100">
+              {[72, 88, 64, 96, 56].map((w, i) => (
+                <div key={i} className="h-8 rounded-full animate-[skeleton_1.8s_ease-in-out_infinite]" style={{ width: w }} />
+              ))}
+            </div>
+            {/* Primary image */}
+            <div className="h-72 md:h-[480px] w-full rounded-3xl animate-[skeleton_1.8s_ease-in-out_infinite]" />
+            {/* Secondary images grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="h-40 rounded-2xl animate-[skeleton_1.8s_ease-in-out_infinite]" />
               ))}
             </div>
           </div>
