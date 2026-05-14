@@ -37,18 +37,17 @@ export default function ContactSection({ isPage = false }) {
     }
   };
 
+  const email = "hr@thebughex.com";
   return (
     <section
       id="contact"
       data-theme="dark"
       data-nav-blur="true"
-      className="w-full bg-[#0A0A0B] relative overflow-hidden pt-24 md:pt-40 pb-24 md:pb-40 font-sans"
+      className="w-full bg-[#0A0A0B] relative overflow-hidden pt-24 md:pt-36 pb-20 md:pb-36 font-sans"
     >
       {/* ── BLENDING GRADIENTS ── */}
-      {/* Top Blend - Fading in from ScrollTextSection (Black) */}
       <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-black to-transparent z-20 pointer-events-none" />
 
-      {/* Bottom Blend - Fading out to Footer (#0a0a0f) */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0a0a0f] to-transparent z-20 pointer-events-none" />
 
       {/* ── BACKGROUND ELEMENTS ── */}
@@ -56,9 +55,9 @@ export default function ContactSection({ isPage = false }) {
         className="absolute inset-0 opacity-[0.15] mix-blend-screen pointer-events-none"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(27,181,162,0.2) 1.5px, transparent 1.5px), 
-            linear-gradient(90deg, rgba(27,181,162,0.2) 1.5px, transparent 1.5px)
-          `,
+          linear-gradient(rgba(27,181,162,0.2) 1.5px, transparent 1.5px), 
+          linear-gradient(90deg, rgba(27,181,162,0.2) 1.5px, transparent 1.5px)
+        `,
           backgroundSize: "32px 32px",
         }}
       />
@@ -67,9 +66,9 @@ export default function ContactSection({ isPage = false }) {
       <div className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[130px] transition-all duration-[10s] pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 xl:gap-24 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 xl:gap-24 items-start relative">
           {/* ── LEFT COLUMN ── */}
-          <div className="lg:col-span-5 space-y-12">
+          <div className="lg:col-span-5 lg:sticky lg:top-1/2 lg:-translate-y-1/2 self-start space-y-12">
             <div className="space-y-6">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
@@ -95,43 +94,19 @@ export default function ContactSection({ isPage = false }) {
             </div>
 
             {/* Unified Contact Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="inline-flex flex-col sm:flex-row items-center gap-8 sm:gap-10 p-6 sm:p-8 rounded-[2.5rem] bg-black/40 backdrop-blur-md border border-white/5 shadow-2xl"
-            >
-              {/* Email Region */}
-              <a
-                href="mailto:hr@thebughex.com"
-                className="group flex items-center gap-4"
-              >
-                <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary/20 text-primary transition-transform duration-500 group-hover:scale-110">
-                  <Icon icon="solar:letter-bold-duotone" className="text-2xl" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] mb-1">
-                    Email Us
-                  </p>
-                  <p className="text-white/80 font-medium text-lg leading-none group-hover:text-primary transition-colors">
-                    hr@thebughex.com
-                  </p>
-                </div>
-              </a>
+            <div className="space-y-4">
+              <p className="text-[10px] font-bold tracking-[0.3em] text-white/30 uppercase">
+                Connect Us
+              </p>
 
-              {/* Vertical Divider (Desktop only) */}
-              <div className="hidden sm:block w-px h-10 bg-white/10" />
-
-              {/* Social Icons - Footer Style */}
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-x-2 md:gap-x-5 flex-nowrap overflow-x-auto no-scrollbar">
                 {socialLinks.map((social) => (
                   <a
                     key={social.name}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="transition-all duration-300 hover:scale-125 active:opacity-70"
+                    className="transition-all duration-300 hover:scale-110 active:opacity-70"
                   >
                     <Icon
                       icon={social.icon}
@@ -140,8 +115,26 @@ export default function ContactSection({ isPage = false }) {
                     />
                   </a>
                 ))}
+
+                <span className="text-[13px] text-white/30 uppercase font-bold px-1">
+                  or
+                </span>
+
+                <a
+                  href={`mailto:${email}`}
+                  className="group flex items-center gap-2 text-white/40 hover:text-primary transition-all duration-300 font-medium text-sm"
+                >
+                  <Image
+                    src="/bughex-logo.png"
+                    width={25}
+                    height={25}
+                    className="w-[25px] h-[25px] object-contain "
+                    alt="Bughex"
+                  />
+                  {email}
+                </a>
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* ── RIGHT COLUMN ── */}
@@ -151,9 +144,9 @@ export default function ContactSection({ isPage = false }) {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative p-1 md:p-2 rounded-[3rem] bg-gradient-to-br from-white/10 to-transparent border border-white/10 shadow-2xl backdrop-blur-2xl"
+              className="relative p-1 md:p-2 rounded-[2rem] md:rounded-[3rem] bg-gradient-to-br from-white/10 to-transparent border border-white/10 shadow-2xl backdrop-blur-2xl"
             >
-              <div className="bg-[#0A0A0B]/80 rounded-[2.5rem] p-8 md:p-12">
+              <div className="bg-[#0A0A0B]/80 rounded-[1.8rem] md:rounded-[2.7rem] py-6 px-4 md:p-12">
                 <AnimatePresence mode="wait">
                   {!submitted ? (
                     <motion.form
@@ -174,6 +167,7 @@ export default function ContactSection({ isPage = false }) {
                           placeholder="Enter Your Name"
                           required
                         />
+
                         <ModernInput
                           label="Email"
                           type="email"
@@ -199,11 +193,15 @@ export default function ContactSection({ isPage = false }) {
                           placeholder="eg. Mobile App, Web App"
                           required
                         />
+
                         <ModernInput
                           label="Contact Number (optional)"
                           value={formData.phone}
                           onChange={(e) =>
-                            setFormData({ ...formData, phone: e.target.value })
+                            setFormData({
+                              ...formData,
+                              phone: e.target.value,
+                            })
                           }
                           placeholder="eg. +44 xxxxxxx"
                         />
@@ -214,7 +212,10 @@ export default function ContactSection({ isPage = false }) {
                         textarea
                         value={formData.message}
                         onChange={(e) =>
-                          setFormData({ ...formData, message: e.target.value })
+                          setFormData({
+                            ...formData,
+                            message: e.target.value,
+                          })
                         }
                         placeholder="Share your idea..."
                         required
@@ -233,6 +234,7 @@ export default function ContactSection({ isPage = false }) {
                         className="btn w-fit px-10 h-[52px] group relative overflow-hidden transition-all duration-300 disabled:opacity-50"
                       >
                         <i className="animation" />
+
                         <span className="relative z-10 flex items-center justify-center gap-2">
                           {loading ? (
                             <Icon
@@ -249,6 +251,7 @@ export default function ContactSection({ isPage = false }) {
                             </>
                           )}
                         </span>
+
                         <i className="animation" />
                       </button>
                     </motion.form>
@@ -265,16 +268,19 @@ export default function ContactSection({ isPage = false }) {
                           className="text-5xl text-primary"
                         />
                       </div>
+
                       <div className="space-y-4">
                         <h3 className="text-4xl font-display font-bold text-white">
                           Transmission Received
                         </h3>
+
                         <p className="text-white/50 text-lg">
                           Our engineering team has received your briefing.{" "}
-                          <br /> Expect a response within one standard business
-                          day.
+                          <br />
+                          Expect a response within one standard business day.
                         </p>
                       </div>
+
                       <button
                         onClick={() => setSubmitted(false)}
                         className="text-primary font-bold text-xs tracking-widest uppercase border-b-2 border-primary/20 hover:border-primary transition-all pb-1"
