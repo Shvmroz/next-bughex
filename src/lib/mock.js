@@ -113,15 +113,13 @@ export const services = [
     title: 'Flutter Development',
     description:
       'Cross-platform apps with native performance. One codebase for iOS, Android, Web, and Desktop.',
-    icon: '◈',
     features: ['Single codebase', 'Native performance', 'Beautiful animations', '6-platform support'],
   },
   {
     id: 2,
     title: 'React Native',
     description:
-      'JavaScript-powered mobile apps with true native components and seamless platform integration.',
-    icon: '⬡',
+      'React Native apps with true native components and seamless platform integration.',
     features: ['Native components', 'Huge ecosystem', 'Hot reloading', 'JavaScript/TypeScript'],
   },
   {
@@ -129,7 +127,6 @@ export const services = [
     title: 'JavaScript / React',
     description:
       'Modern web applications with React, Next.js, and cutting-edge frontend technologies.',
-    icon: '◉',
     features: ['React & Next.js', 'TypeScript', 'Performance first', 'SEO optimized'],
   },
   {
@@ -137,7 +134,6 @@ export const services = [
     title: 'Laravel / PHP',
     description:
       'Robust, scalable backend systems with Laravel — the PHP framework for web artisans.',
-    icon: '⬢',
     features: ['RESTful APIs', 'Eloquent ORM', 'Queue systems', 'Authentication'],
   },
   {
@@ -145,15 +141,13 @@ export const services = [
     title: 'iOS Development',
     description:
       'Native iOS applications in Swift with pixel-perfect UI and Apple ecosystem integration.',
-    icon: '◆',
     features: ['Swift & SwiftUI', 'App Store ready', 'Core APIs', 'Apple ecosystem'],
   },
   {
     id: 6,
     title: 'Android Development',
     description:
-      'Native Android apps with Kotlin, Jetpack Compose, and Google Play Store deployment.',
-    icon: '◇',
+      'Native Android apps with React, Flutter, Android and deployment.',
     features: ['Kotlin & Compose', 'Material Design', 'Google Play', 'Background services'],
   },
   {
@@ -161,7 +155,6 @@ export const services = [
     title: 'Node.js Backend',
     description:
       'Scalable, high-performance backend APIs and microservices built on Node.js and Express.',
-    icon: '⬣',
     features: ['REST & GraphQL', 'Microservices', 'Real-time with WS', 'Cloud-native'],
   },
   {
@@ -169,7 +162,6 @@ export const services = [
     title: 'AI Solutions',
     description:
       'Intelligent automation and AI integration — chatbots, computer vision, and predictive analytics.',
-    icon: '◈',
     features: ['LLM integration', 'Computer vision', 'Data pipelines', 'Custom models'],
   },
 ];
@@ -334,7 +326,7 @@ export const capabilities = [
     stroke: '#61DAFB',
     title: 'React Native',
     subtitle: 'Native Mobile Apps',
-    body: 'Create fast mobile apps with near-native performance using React.',
+    body: 'Create fast mobile apps with near-native performance.',
   },
   {
     number: '04',
@@ -350,7 +342,7 @@ export const capabilities = [
     stroke: '#3DDC84',
     title: 'Android Development',
     subtitle: 'Google Platforms',
-    body: 'Develop reliable Android apps with Kotlin and development standards.',
+    body: 'Develop Android apps with Kotlin and development standards.',
   },
   {
     number: '06',
@@ -382,7 +374,7 @@ export const capabilities = [
     stroke: '#47A248',
     title: 'MongoDB',
     subtitle: 'NoSQL Database',
-    body: 'Design scalable NoSQL databases with flexible schemas and access.',
+    body: 'Design scalable NoSQL databases with flexible schemas.',
   },
   {
     number: '10',
@@ -390,6 +382,6 @@ export const capabilities = [
     stroke: '#00758F',
     title: 'MySQL',
     subtitle: 'Relational Database',
-    body: 'Build reliable relational databases with optimized queries consistency.',
+    body: 'Build reliable relational databases with optimized queries.',
   },
 ];

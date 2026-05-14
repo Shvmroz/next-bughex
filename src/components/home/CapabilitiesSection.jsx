@@ -183,6 +183,24 @@ export default function CapabilitiesSection({
 
 function CapabilityCard({ service }) {
   const description = service.description || service.body || '';
+  const cardRef = useRef(null);
+  const [mobileActive, setMobileActive] = useState(false);
+
+  // On mobile only: auto-activate when card is fully in view
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+
+    // Only run on touch devices (mobile)
+    if (window.matchMedia('(hover: hover)').matches) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setMobileActive(entry.isIntersecting),
+      { threshold: 1.0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const hexToRgba = (hex, opacity = 0.5) => {
     if (!hex) return `rgba(27,181,162,${opacity})`;
@@ -196,8 +214,8 @@ function CapabilityCard({ service }) {
   const strokeColor = hexToRgba(service.stroke || '#1bb5a2', 0.5);
 
   return (
-    <div className="flex-shrink-0 w-[280px] md:w-[380px] relative z-10 py-2">
-      <div className="relative overflow-hidden rounded-2xl border border-black/5 bg-white shadow-[0_2px_12px_rgba(27,181,162,0.10)] transition-all duration-300 group hover:bg-[#f8fffd]">
+    <div ref={cardRef} className="flex-shrink-0 w-[280px] md:w-[380px] relative z-10 py-2">
+      <div className={`relative overflow-hidden rounded-2xl border border-black/5 bg-white shadow-[0_2px_12px_rgba(27,181,162,0.10)] transition-all duration-300 group ${mobileActive ? 'bg-[#f8fffd] is-active' : ''}`}>
 
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-20">
           <motion.rect
@@ -213,12 +231,12 @@ function CapabilityCard({ service }) {
             strokeDasharray="120 120"
             animate={{ strokeDashoffset: [0, -240] }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className={`transition-opacity duration-300 ${mobileActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
           />
         </svg>
 
         <div
-          className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-700 pointer-events-none z-0"
+          className={`absolute inset-0 transition-opacity duration-700 pointer-events-none z-0 ${mobileActive ? 'opacity-[0.06]' : 'opacity-[0.03] group-hover:opacity-[0.06]'}`}
           style={{
             backgroundImage:
               'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
@@ -226,11 +244,11 @@ function CapabilityCard({ service }) {
           }}
         />
 
-        <div className="absolute -top-10 -left-10 w-28 h-28 bg-primary/[0.06] rounded-full blur-[55px] group-hover:bg-primary/12 transition-all duration-700 pointer-events-none z-0" />
+        <div className={`absolute -top-10 -left-10 w-28 h-28 rounded-full blur-[55px] transition-all duration-700 pointer-events-none z-0 ${mobileActive ? 'bg-primary/12' : 'bg-primary/[0.06] group-hover:bg-primary/12'}`} />
 
         <div className="relative z-10 flex">
           {/* Icon column */}
-          <div className="w-16 md:w-24 shrink-0 bg-[#f5fbfa] group-hover:bg-[#37d8bd] border-r border-black/5 flex items-center justify-center">
+          <div className={`w-16 md:w-24 shrink-0 border-r border-black/5 flex items-center justify-center transition-colors duration-300 ${mobileActive ? 'bg-[#37d8bd]' : 'bg-[#f5fbfa] group-hover:bg-[#37d8bd]'}`}>
             <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl bg-white border border-[#eef1f6] flex items-center justify-center shadow-sm">
               {service.icon}
             </div>
@@ -243,10 +261,10 @@ function CapabilityCard({ service }) {
                 {service.subtitle}
               </span>
             )}
-            <h3 className="font-display font-bold text-dark text-[15px] md:text-[17px] leading-tight group-hover:text-primary transition-colors duration-300">
+            <h3 className={`font-display font-bold text-dark text-[15px] md:text-[17px] leading-tight transition-colors duration-300 ${mobileActive ? 'text-primary' : 'group-hover:text-primary'}`}>
               {service.title}
             </h3>
-            <p className="text-dark/50 text-[12px] md:text-[13px] leading-relaxed mt-1.5 group-hover:text-dark/70 transition-colors duration-300 break-words">
+            <p className={`text-[12px] md:text-[13px] leading-relaxed mt-1.5 transition-colors duration-300 break-words ${mobileActive ? 'text-dark/70' : 'text-dark/50 group-hover:text-dark/70'}`}>
               {description}
             </p>
           </div>

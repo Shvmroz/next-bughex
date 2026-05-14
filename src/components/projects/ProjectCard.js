@@ -17,10 +17,10 @@ export default function ProjectCard({ project, index }) {
       className="group"
     >
       <Link href={`/projects/${project.id}`} className="block h-full">
-        <div className="relative rounded-xl bg-white border border-gray-100 shadow-[0_4px_30px_rgba(0,0,0,0.03)] hover:shadow-2xl hover:shadow-black/10 hover:border-primary transition-all duration-500 flex flex-col overflow-hidden h-full">
+        <div className="relative rounded-3xl bg-white border border-gray-100 shadow-[0_4px_30px_rgba(0,0,0,0.03)] hover:shadow-2xl hover:shadow-black/10 hover:border-primary transition-all duration-500 flex flex-col overflow-hidden h-full">
 
           {/* Grid overlay on hover - Gray Graph Effect */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-xl z-0">
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-3xl z-0">
             <div
               className="absolute inset-0"
               style={{

@@ -19,7 +19,7 @@ export default function RecentProjectsSection() {
       Array.isArray(result?.data)
     ) {
       const list = Array.isArray(result) ? result : result?.data ?? [];
-      setProjects(list.slice(0, 3));
+      setProjects(list.slice(0, 4));
     } else {
       console.error("Failed to load recent projects:", result.message);
     }
@@ -43,7 +43,7 @@ export default function RecentProjectsSection() {
         </div>
 
         {/* MOBILE HERO BANNER - Increased height for sm screen */}
-        <div className="lg:hidden mt-10 mb-2 mx-6 rounded-xl overflow-hidden relative h-64 sm:h-72 shadow-xl">
+        <div className="lg:hidden mt-10 mb-2 mx-6 rounded-3xl overflow-hidden relative h-64 sm:h-72 shadow-xl">
           <div className="absolute inset-0 bg-dark z-0" />
           <video
             autoPlay
@@ -104,7 +104,7 @@ export default function RecentProjectsSection() {
         {/* ── DESKTOP LAYOUT ── */}
         <div className="hidden lg:flex flex-row gap-16 mt-16 items-start relative px-6">
           {/* LEFT PANEL - STICKY VIDEO */}
-          <div className="lg:w-1/2 sticky top-32 rounded-xl overflow-hidden shadow-2xl h-[calc(100vh-160px)] min-h-[500px]">
+          <div className="lg:w-1/2 sticky top-32 rounded-3xl overflow-hidden shadow-2xl h-[calc(100vh-160px)] min-h-[500px]">
             <div className="absolute inset-0 bg-dark z-0" />
             <video
               autoPlay

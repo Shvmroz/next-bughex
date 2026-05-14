@@ -110,7 +110,7 @@ export default function ScrollTextSection() {
   }, []);
 
   return (
-    <section className="relative bg-black" data-theme="dark">
+    <section className="relative bg-black" data-theme="dark" data-nav-blur="true">
       <div
         className="overflow-hidden"
         style={{ height: "110vh" }}
@@ -123,7 +123,7 @@ export default function ScrollTextSection() {
             muted
             loop
             playsInline
-            className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none opacity-50"
+            className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none opacity-70"
           >
             <source
               src="/video/scroll_text_section_video.mp4"

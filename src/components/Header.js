@@ -89,11 +89,13 @@ export default function Header() {
 
   const headerBg = (isBlurSection && !activeDropdown && !menuOpen)
     ? 'bg-black/40 backdrop-blur-md border-white/5'
-    : (isDarkTheme && !activeDropdown && !menuOpen)
-      ? 'bg-transparent border-transparent'
-      : (isDarkTheme && (activeDropdown || menuOpen))
-        ? 'bg-black/90 backdrop-blur-md border-white/5'
-        : 'bg-white border-gray-100 shadow-sm';
+    : (isDarkTheme && scrolled && !activeDropdown && !menuOpen)
+      ? 'bg-black/40 backdrop-blur-md border-white/5'
+      : (isDarkTheme && !scrolled && !activeDropdown && !menuOpen)
+        ? 'bg-transparent border-transparent'
+        : (isDarkTheme && (activeDropdown || menuOpen))
+          ? 'bg-black/90 backdrop-blur-md border-white/5'
+          : 'bg-white border-gray-100 shadow-sm';
 
 
   const dropdownBg =

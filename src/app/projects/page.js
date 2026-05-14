@@ -151,7 +151,7 @@ export default function ProjectsPage() {
                 {[...Array(6)].map((_, i) => (
                   <div
                     key={i}
-                    className="rounded-xl border border-gray-200 bg-white overflow-hidden flex flex-col"
+                    className="rounded-3xl border border-gray-200 bg-white overflow-hidden flex flex-col"
                   >
                     {/* Thumbnail */}
                     <div className="w-full aspect-[4/3] animate-[skeleton_1.8s_ease-in-out_infinite] shrink-0" />

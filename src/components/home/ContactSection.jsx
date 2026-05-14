@@ -1,5 +1,7 @@
+"use client";
+
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Icon } from "@iconify/react";
 import { socialLinks } from "@/lib/mock";
 import Image from "next/image";
@@ -20,7 +22,7 @@ function FormField({
     <div className="relative w-full">
       <label
         className={`block text-[10px] font-bold tracking-widest uppercase mb-2 transition ${
-          focused ? "text-primary" : "text-dark/40"
+          focused ? "text-primary" : "text-white/50"
         }`}
       >
         {label} {required && <span className="text-red-400">*</span>}
@@ -35,7 +37,7 @@ function FormField({
           required={required}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          className="w-full px-4 py-2 rounded-[4px] bg-[#F8F9FA] border border-gray-200 text-sm outline-none focus:bg-white focus:border-primary focus:shadow-[0_0_0_3px_rgba(27,181,162,0.08)] transition placeholder:text-gray-400/60"
+          className="w-full px-4 py-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-sm text-white outline-none focus:bg-white/15 focus:border-primary focus:shadow-[0_0_0_3px_rgba(27,181,162,0.2)] transition placeholder:text-white/50 resize-none"
         />
       ) : (
         <input
@@ -46,7 +48,7 @@ function FormField({
           required={required}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          className="w-full px-4 py-2 rounded-[4px] bg-[#F8F9FA] border border-gray-200 text-sm outline-none focus:bg-white focus:border-primary focus:shadow-[0_0_0_3px_rgba(27,181,162,0.08)] transition placeholder:text-gray-400/60"
+          className="w-full px-4 py-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-sm text-white outline-none focus:bg-white/15 focus:border-primary focus:shadow-[0_0_0_3px_rgba(27,181,162,0.2)] transition placeholder:text-white/50"
         />
       )}
     </div>
@@ -70,10 +72,8 @@ export default function ContactSection({ isPage = false }) {
     e.preventDefault();
     setLoading(true);
     setError("");
-
     try {
       const res = await api_contact_us(formData);
-
       if (res && !res.code) {
         setSubmitted(true);
       } else {
@@ -89,7 +89,12 @@ export default function ContactSection({ isPage = false }) {
   const email = "hr@thebughex.com";
 
   return (
-    <section id="contact" className="w-full bg-white relative overflow-hidden">
+    <section
+      id="contact"
+      data-theme="dark"
+      data-nav-blur="true"
+      className="w-full bg-white relative overflow-hidden"
+    >
       {/* TOP BORDER */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
@@ -98,8 +103,9 @@ export default function ContactSection({ isPage = false }) {
           isPage ? "pt-36 pb-24" : "py-16 md:py-32"
         }`}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24">
-          {/* LEFT SIDE */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24 items-start">
+
+          {/* ── LEFT — text info ── */}
           <div>
             <h2 className="font-display text-4xl md:text-5xl xl:text-6xl font-bold text-dark leading-[1.05] mb-6">
               Let&apos;s build <br />
@@ -109,15 +115,14 @@ export default function ContactSection({ isPage = false }) {
 
             <p className="text-dark/50 text-lg font-medium leading-relaxed max-w-md mb-12">
               Whether you need a Flutter app, complex backend, or AI-powered
-              solution — we’re here to engineer it.
+              solution — we&apos;re here to engineer it.
             </p>
 
-            {/* SOCIALS & CONTACT MERGED */}
+            {/* SOCIALS */}
             <div className="space-y-4">
               <p className="text-[10px] font-bold text-dark/30 uppercase tracking-[0.3em]">
                 Connect With Us
               </p>
-
               <div className="flex flex-wrap items-center gap-x-3 gap-y-3 md:gap-x-5 md:gap-y-4">
                 {socialLinks.map((social) => (
                   <a
@@ -154,18 +159,35 @@ export default function ContactSection({ isPage = false }) {
             </div>
           </div>
 
-          {/* RIGHT SIDE FORM */}
-          <div className="relative">
-            <div className="bg-white border border-gray-100 rounded-xl shadow-lg p-4 md:p-6 relative overflow-hidden">
+          {/* ── RIGHT — video bg + glass form ── */}
+          <div className="relative rounded-3xl overflow-hidden">
+
+            {/* Video background */}
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src="/video/building.mp4" type="video/mp4" />
+            </video>
+
+            {/* Dark overlay so form is readable */}
+            <div className="absolute inset-0 bg-dark/60" />
+
+            {/* Form content sits on top */}
+            <div className="relative z-10 px-4 py-6 md:p-8">
               <AnimatePresence mode="wait">
                 {!submitted ? (
                   <motion.form
                     key="form"
                     onSubmit={handleSubmit}
-                    className="space-y-6"
+                    className="space-y-5"
                   >
                     {error && (
-                      <div className="p-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-sm flex items-center gap-3">
+                      <div className="p-4 bg-red-500/10 border border-red-400/30 rounded-xl text-red-300 text-sm flex items-center gap-3">
                         <Icon icon="mdi:alert-circle" width={20} />
                         {error}
                       </div>
@@ -194,7 +216,6 @@ export default function ContactSection({ isPage = false }) {
                         placeholder="e.g. your@name.com"
                         required
                       />
-
                       <FormField
                         label="Phone Number"
                         type="tel"
@@ -224,10 +245,7 @@ export default function ContactSection({ isPage = false }) {
                       textarea
                       value={formData.message}
                       onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          message: e.target.value,
-                        })
+                        setFormData({ ...formData, message: e.target.value })
                       }
                       placeholder="Tell us about your project or idea.."
                       required
@@ -241,15 +259,10 @@ export default function ContactSection({ isPage = false }) {
                       }`}
                     >
                       <i className="animation"></i>
-
                       <span className="relative z-10 flex items-center justify-center gap-2">
                         {loading ? (
                           <>
-                            <Icon
-                              icon="mdi:loading"
-                              className="animate-spin"
-                              width={16}
-                            />
+                            <Icon icon="mdi:loading" className="animate-spin" width={16} />
                             SENDING...
                           </>
                         ) : (
@@ -263,39 +276,27 @@ export default function ContactSection({ isPage = false }) {
                           </>
                         )}
                       </span>
-
                       <i className="animation"></i>
                     </button>
                   </motion.form>
                 ) : (
-                  <motion.div className="text-center py-20">
-                    <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                      <Icon
-                        icon="mdi:check-bold"
-                        width={40}
-                        className="text-primary"
-                      />
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center py-20"
+                  >
+                    <div className="w-20 h-20 bg-primary/20 border border-primary/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <Icon icon="mdi:check-bold" width={40} className="text-primary" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-2">
-                      Message Received
-                    </h3>
-
-                    <p className="text-dark/50 mb-6">
-                      Our team will contact you shortly.
-                    </p>
-
+                    <h3 className="text-3xl font-bold text-white mb-2">Message Received</h3>
+                    <p className="text-white/50 mb-6">Our team will contact you shortly.</p>
                     <button
                       onClick={() => {
                         setSubmitted(false);
-                        setFormData({
-                          name: "",
-                          email: "",
-                          subject: "",
-                          message: "",
-                          phone: "",
-                        });
+                        setFormData({ name: "", email: "", subject: "", message: "", phone: "" });
                       }}
-                      className="text-primary hover:text-teal-600 text-xs font-bold tracking-[0.2em] uppercase border-b border-primary/30 transition-colors"
+                      className="text-primary hover:text-teal-400 text-xs font-bold tracking-[0.2em] uppercase border-b border-primary/30 transition-colors"
                     >
                       Send Another Message
                     </button>
@@ -304,6 +305,7 @@ export default function ContactSection({ isPage = false }) {
               </AnimatePresence>
             </div>
           </div>
+
         </div>
       </div>
     </section>

@@ -3,7 +3,11 @@
 import { motion } from "framer-motion";
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050505]">
+    <section
+      data-theme="dark"
+      data-nav-blur="true"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050505]"
+    >
       {/* Background Video */}
       <video
         autoPlay
@@ -11,7 +15,7 @@ export default function HeroSection() {
         loop
         playsInline
         preload="auto"
-        className="absolute top-0 left-0 w-full h-full object-cover z-0 pointer-events-none opacity-40 mix-blend-screen"
+        className="absolute top-0 left-0 w-full h-full object-cover md:object-fill z-0 pointer-events-none opacity-60 mix-blend-screen"
       >
         <source src="/video/hero_section_video.mp4" type="video/mp4" />
       </video>
