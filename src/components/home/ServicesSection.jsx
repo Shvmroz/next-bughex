@@ -6,7 +6,6 @@ import { Icon } from "@iconify/react";
 import SectionHeader from "./SectionHeader";
 import { api_services_list } from "@/DAL/api";
 import { apiBaseURL } from "@/config/config";
-import Image from "next/image";
 
 export default function ServicesSection() {
   const [services, setServices] = useState([]);
@@ -50,12 +49,36 @@ export default function ServicesSection() {
 
         <div className="flex flex-col gap-10 md:gap-16 mt-10 md:mt-16">
           {loading ? (
-            // Skeleton Loader
+            // Skeleton — mirrors the real card layout
             [...Array(3)].map((_, i) => (
               <div
                 key={i}
-                className="h-[480px] md:h-[550px] rounded-3xl bg-gray-50 animate-pulse"
-              />
+                className="h-auto min-h-[450px] md:h-[550px] rounded-[1rem] md:rounded-[2rem] overflow-hidden relative animate-pulse bg-gray-100"
+              >
+                {/* Fake image bg */}
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-300 via-gray-200 to-gray-100" />
+
+                {/* Fake content block — bottom aligned like real card */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-16 flex flex-col items-center md:items-start gap-4">
+                  {/* Icon + title row */}
+                  <div className="flex items-center gap-4 md:flex-col md:items-start w-full">
+                    <div className="w-10 h-10 md:w-16 md:h-16 rounded-xl bg-gray-300 shrink-0" />
+                    <div className="h-7 md:h-12 w-48 md:w-80 rounded-lg bg-gray-300" />
+                  </div>
+                  {/* Description lines */}
+                  <div className="w-full max-w-2xl space-y-2.5">
+                    <div className="h-4 rounded-full bg-gray-300 w-full" />
+                    <div className="h-4 rounded-full bg-gray-300 w-5/6" />
+                    <div className="h-4 rounded-full bg-gray-300 w-4/6" />
+                  </div>
+                  {/* Tech chips */}
+                  <div className="flex gap-2 flex-wrap">
+                    {[...Array(4)].map((_, j) => (
+                      <div key={j} className="h-7 w-20 rounded-full bg-gray-300" />
+                    ))}
+                  </div>
+                </div>
+              </div>
             ))
           ) : services.length > 0 ? (
             services.map((service, index) => (
@@ -65,7 +88,7 @@ export default function ServicesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true, margin: "-100px" }}
-                className="group relative h-auto min-h-[450px] md:h-[550px] rounded-[2.5rem] md:rounded-[3rem] overflow-hidden flex flex-col justify-center md:justify-end shadow-[0_20px_50px_rgba(0,0,0,0.2)]"
+                className="group relative h-auto min-h-[450px] md:h-[550px] rounded-[1rem] md:rounded-[2rem] overflow-hidden flex flex-col justify-center md:justify-end shadow-[0_20px_50px_rgba(0,0,0,0.2)]"
               >
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0 overflow-hidden">
@@ -78,46 +101,40 @@ export default function ServicesSection() {
                 </div>
 
                 {/* Content Container */}
-                <div className="relative z-10 p-8 md:p-16 w-full max-w-5xl transition-all duration-500">
+                <div className="relative z-10 p-4 md:p-16 w-full max-w-5xl transition-all duration-500">
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 + index * 0.1 }}
-                    className="flex flex-col items-center text-center md:items-start md:text-left"
+                    className="flex flex-col md:items-start md:text-left"
                   >
                     {/* Header Row */}
                     <div className="flex items-center gap-4 mb-6 md:mb-8 md:flex-col md:items-start">
                       <div className="w-10 h-10 md:w-16 md:h-16 flex-shrink-0 flex items-center justify-center bg-white/10 backdrop-blur-md rounded-xl border border-white/10 md:bg-transparent md:backdrop-blur-none md:border-none md:rounded-none md:mb-6">
-                        {service.icon ? (
-                          <img
-                            src={getImageUrl(service.icon)}
-                            className="w-6 h-6 md:w-12 md:h-12 object-contain filter brightness-0 invert"
-                            alt=""
-                          />
-                        ) : (
-                          <Icon
-                            icon="solar:reorder-bold"
-                            width="24"
-                            className="text-white md:w-12"
-                          />
-                        )}
+                        <motion.img
+                          src="/bug.png"
+                          className="w-7 h-7 md:w-14 md:h-12 object-contain"
+                          alt=""
+                          animate={{ rotateY: [0, 180, 360] }}
+                          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                        />
                       </div>
-                      <h2 className="text-2xl md:text-6xl font-display font-bold text-white tracking-tight">
+                      <h2 className="text-xl md:text-6xl font-display font-bold text-white tracking-tight">
                         {service.name}
                       </h2>
                     </div>
 
                     {/* Description Box */}
-                    <p className="text-white/70 text-base md:text-xl font-medium leading-relaxed mb-8 max-w-2xl px-6 py-5 md:px-0 md:py-0 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 md:bg-transparent md:backdrop-blur-none md:border-none md:ml-0">
+                    <p className="text-white/70 text-base md:text-xl font-medium leading-relaxed mb-8 max-w-2xl p-3 md:px-0 md:py-0 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 md:bg-transparent md:backdrop-blur-none md:border-none md:ml-0">
                       {service.description}
                     </p>
 
                     {/* Tech & Action */}
-                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 w-full">
+                    <div className="flex flex-wrap items-center justify-start gap-2 md:gap-3 w-full">
                       {service.technologies?.slice(0, 5).map((tech) => (
                         <span
                           key={tech}
-                          className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/50 text-[10px] font-bold uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all cursor-default"
+                          className="px-2.5 py-1 md:px-4 md:py-1.5 rounded-full bg-white/5 border border-white/10 text-white/50 text-[9px] md:text-[10px] font-bold uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all cursor-default"
                         >
                           {tech}
                         </span>
@@ -139,7 +156,14 @@ export default function ServicesSection() {
               </motion.div>
             ))
           ) : (
-            <div className="col-span-full py-20 text-center text-dark/30 font-medium">
+            <div className="col-span-full py-20 flex flex-col items-center justify-center gap-3 text-dark/30 font-medium">
+              <motion.img
+                src="/bug.png"
+                alt=""
+                className="w-10 h-10 object-contain opacity-30"
+                animate={{ rotateY: [0, 180, 360] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              />
               No services available at the moment.
             </div>
           )}

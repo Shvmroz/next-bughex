@@ -263,13 +263,13 @@ export const testimonials = [
 // ─── FOOTER ───────────────────────────────────────────────
 export const footerData = {
   Technologies: [
-    { label: 'Flutter', icon: 'logos:flutter' },
-    { label: 'React Native', icon: 'logos:react' },
-    { label: 'React / Next.js', icon: 'logos:nextjs-icon' },
-    { label: 'Node.js', icon: 'logos:nodejs-icon' },
-    { label: 'Laravel / PHP', icon: 'logos:laravel' },
-    { label: 'iOS', icon: 'logos:apple-app-store' },
-    { label: 'Android', icon: 'logos:android-icon' },
+    { label: 'Flutter', icon: 'logos:flutter', href: '/services' },
+    { label: 'React Native', icon: 'logos:react', href: '/services' },
+    { label: 'React & Next.js', icon: 'logos:nextjs-icon', href: '/services' },
+    { label: 'Node.js', icon: 'logos:nodejs-icon', href: '/services' },
+    { label: 'Laravel & PHP', icon: 'logos:laravel', href: '/services' },
+    { label: 'Swift', icon: 'material-icon-theme:swift', href: '/services' },
+    { label: 'Android', icon: 'logos:android-icon', href: '/services' },
   ],
   Industries: [
     { label: 'FinTech', icon: 'mdi:bank-outline' },
@@ -287,9 +287,8 @@ export const footerData = {
   'Quick Links': [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
-    { label: 'Services', href: '/#services' },
+    { label: 'Services', href: '/services' },
     { label: 'Projects', href: '/projects' },
-
     { label: 'Blogs', href: '/blogs' },
     { label: 'Contact', href: '/contact' },
   ],

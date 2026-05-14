@@ -94,30 +94,47 @@ export default function ProjectsPage() {
 
             </motion.div>
 
-            {/* ── MOBILE: filter dropdown ── */}
+            {/* ── MOBILE: filter icon + horizontal chips ── */}
             <motion.div
-              className="flex md:hidden max-w-md mx-auto mb-8 relative"
+              className="flex md:hidden items-center gap-2 max-w-md mx-auto mb-2 md:mb-8 overflow-x-auto pb-1"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              <div className="relative w-full">
-                <select
-                  value={activeCategory}
-                  onChange={(e) => setActiveCategory(e.target.value)}
-                  className="w-full appearance-none px-5 py-3 pr-10 rounded-full bg-white border border-gray-200 shadow-sm text-dark/80 text-sm focus:outline-none focus:border-primary/50 transition-colors font-semibold cursor-pointer"
-                >
-                  {categories.map((cat) => (
-                    <option key={cat} value={cat}>{cat}</option>
-                  ))}
-                </select>
-                {/* chevron icon */}
-                <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
-                  <svg className="w-4 h-4 text-dark/40" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              {/* Filter / clear icon */}
+              <button
+                onClick={() => setActiveCategory('All')}
+                className={`shrink-0 w-8 h-8 rounded-full border flex items-center justify-center shadow-sm transition-colors duration-200 ${
+                  activeCategory !== 'All'
+                    ? 'bg-primary border-primary text-white'
+                    : 'bg-white border-gray-200 text-dark/50'
+                }`}
+              >
+                {activeCategory !== 'All' ? (
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
-                </div>
-              </div>
+                ) : (
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 4h18M7 8h10M11 12h2" />
+                  </svg>
+                )}
+              </button>
+              {/* Chips */}
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
+                    activeCategory === cat
+                      ? 'bg-primary text-white shadow-sm'
+                      : 'bg-white border border-gray-200 text-dark/60'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
             </motion.div>
 
             {/* ── DESKTOP: badge pills ── */}

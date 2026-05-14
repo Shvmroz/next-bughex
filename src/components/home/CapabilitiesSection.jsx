@@ -196,7 +196,7 @@ function CapabilityCard({ service }) {
   const strokeColor = hexToRgba(service.stroke || '#1bb5a2', 0.5);
 
   return (
-    <div className="flex-shrink-0 w-[320px] md:w-[380px] relative z-10 py-2">
+    <div className="flex-shrink-0 w-[280px] md:w-[380px] relative z-10 py-2">
       <div className="relative overflow-hidden rounded-2xl border border-black/5 bg-white shadow-[0_2px_12px_rgba(27,181,162,0.10)] transition-all duration-300 group hover:bg-[#f8fffd]">
 
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-20">
@@ -229,24 +229,24 @@ function CapabilityCard({ service }) {
         <div className="absolute -top-10 -left-10 w-28 h-28 bg-primary/[0.06] rounded-full blur-[55px] group-hover:bg-primary/12 transition-all duration-700 pointer-events-none z-0" />
 
         <div className="relative z-10 flex">
-          <div className="w-24 shrink-0 bg-[#f5fbfa] group-hover:bg-[#37d8bd] border-r border-black/5 flex items-center justify-center">
-            <div className="w-14 h-14 rounded-xl bg-white border border-[#eef1f6] flex items-center justify-center shadow-sm">
+          {/* Icon column */}
+          <div className="w-16 md:w-24 shrink-0 bg-[#f5fbfa] group-hover:bg-[#37d8bd] border-r border-black/5 flex items-center justify-center">
+            <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl bg-white border border-[#eef1f6] flex items-center justify-center shadow-sm">
               {service.icon}
             </div>
           </div>
 
-          <div className="flex-1 min-w-0 px-6 py-5 flex flex-col justify-center">
+          {/* Text column */}
+          <div className="flex-1 min-w-0 px-4 md:px-6 py-4 md:py-5 flex flex-col justify-center">
             {service.subtitle && (
-              <span className="text-[10px] font-bold text-primary/50 uppercase tracking-widest mb-2 block">
+              <span className="text-[9px] md:text-[10px] font-bold text-primary/50 uppercase tracking-widest mb-1.5 block">
                 {service.subtitle}
               </span>
             )}
-
-            <h3 className="font-display font-bold text-dark text-[17px] leading-tight group-hover:text-primary transition-colors duration-300">
+            <h3 className="font-display font-bold text-dark text-[15px] md:text-[17px] leading-tight group-hover:text-primary transition-colors duration-300">
               {service.title}
             </h3>
-
-            <p className="text-dark/50 text-[13px] leading-relaxed mt-2 group-hover:text-dark/70 transition-colors duration-300 break-words">
+            <p className="text-dark/50 text-[12px] md:text-[13px] leading-relaxed mt-1.5 group-hover:text-dark/70 transition-colors duration-300 break-words">
               {description}
             </p>
           </div>

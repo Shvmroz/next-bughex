@@ -224,7 +224,6 @@ export default function Header() {
       <AnimatePresence>
         {activeDropdown && menuWithServices[activeDropdown] && (
           <motion.div
-
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -232,38 +231,63 @@ export default function Header() {
             className={`absolute top-[70px] left-0 right-0 z-40 border-b shadow-2xl ${dropdownBg}`}
             onMouseEnter={() => setActiveDropdown(activeDropdown)}
           >
-            <div className="max-w-7xl mx-auto px-12 py-8">
+            {(() => {
+              const allGroups = menuWithServices[activeDropdown];
+              const limit = allGroups.length <= 4 ? 4 : 6;
+              const visible = allGroups.slice(0, limit);
+              const hasMore = allGroups.length > limit;
+              const cols = visible.length <= 4
+                ? 'lg:grid-cols-4'
+                : 'lg:grid-cols-6';
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-12">
-                {menuWithServices[activeDropdown].map((group, idx) => (
-                  <motion.div
-                    key={group.category}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: idx * 0.05, duration: 0.3 }}
-                    className="space-y-6"
-                  >
-                    <h3 className={`text-lg font-bold border-b border-gray-100 pb-4 tracking-tight ${dropdownTextColor}`}>
-                      {group.category}
-                    </h3>
-                    <ul className="space-y-4">
-                      {group.items.map((item) => (
-                        <li key={item.label}>
-                          <Link
-                            href={item.href}
-                            onClick={() => setActiveDropdown(null)}
-                            className={`text-[13px] font-medium flex items-center gap-2 group transition-all duration-300 ${dropdownSubColor} hover:text-primary`}
-                          >
-                            <span className="w-0 h-px bg-primary transition-all duration-300 group-hover:w-3" />
-                            {item.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+              return (
+                <div className="max-w-7xl mx-auto px-12 py-5">
+                  <div className={`grid grid-cols-2 md:grid-cols-3 ${cols} gap-x-8 gap-y-6`}>
+                    {visible.map((group, idx) => (
+                      <motion.div
+                        key={group.category}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: idx * 0.04, duration: 0.25 }}
+                      >
+                        <h3 className={`text-[11px] font-bold uppercase tracking-widest border-b pb-2 mb-2.5 ${dropdownTextColor} ${isDarkTheme && activeDropdown ? 'border-white/10' : 'border-gray-100'}`}>
+                          {group.category}
+                        </h3>
+                        <ul className="space-y-1.5">
+                          {group.items.map((item) => (
+                            <li key={item.label}>
+                              <Link
+                                href={item.href}
+                                onClick={() => setActiveDropdown(null)}
+                                className={`text-[12px] font-medium flex items-center gap-1.5 group/item transition-all duration-200 ${dropdownSubColor} hover:text-primary`}
+                              >
+                                <span className="w-0 h-px bg-primary transition-all duration-200 group-hover/item:w-2.5 shrink-0" />
+                                {item.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {hasMore && (
+                    <div className="flex justify-end mt-4 pt-3 border-t border-gray-100">
+                      <Link
+                        href="/services"
+                        onClick={() => setActiveDropdown(null)}
+                        className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-primary hover:gap-2.5 transition-all duration-200"
+                      >
+                        View All Services
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
           </motion.div>
         )}
       </AnimatePresence>
