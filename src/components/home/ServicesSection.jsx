@@ -143,16 +143,7 @@ export default function ServicesSection() {
                   </motion.div>
                 </div>
 
-                {/* Corner Decoration (Desktop) */}
-                <div className="absolute top-12 right-12 hidden md:flex opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0">
-                  <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center bg-white/5 backdrop-blur-xl">
-                    <Icon
-                      icon="solar:arrow-right-up-linear"
-                      width={32}
-                      className="text-white"
-                    />
-                  </div>
-                </div>
+            
               </motion.div>
             ))
           ) : (

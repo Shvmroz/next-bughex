@@ -67,7 +67,7 @@ export default function Footer() {
 
               <div className="space-y-4">
                 <p className="text-[10px] font-bold tracking-[0.3em] text-white/30 uppercase">Connect With Us</p>
-                <div className="flex items-center gap-x-3 md:gap-x-5 flex-nowrap overflow-x-auto no-scrollbar">
+                <div className="flex items-center gap-x-2 md:gap-x-5 flex-nowrap overflow-x-auto no-scrollbar">
                   {socialLinks.map((social) => (
                     <a
                       key={social.name}
@@ -92,7 +92,7 @@ export default function Footer() {
                       src="/bughex-logo.png"
                       width={25}
                       height={25}
-                      className="w-[25px] h-[25px] object-contain opacity-60 group-hover:opacity-100 transition-opacity"
+                      className="w-[25px] h-[25px] object-contain "
                       alt="Bughex"
                     />
                     {email}

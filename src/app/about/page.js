@@ -136,8 +136,8 @@ export default function AboutPage() {
             {/* Holographic Interaction Layer */}
             <HeroVisualEffect
               primaryColor="#1bb5a2"
-              secondaryColor="#0a0a0a"
-              particleOpacity={0.2}
+              secondaryColor="#022628ff"
+              particleOpacity={0.5}
               glowOpacity={0.1}
             />
 

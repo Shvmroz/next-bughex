@@ -15,7 +15,7 @@ export default function HeroSection() {
         loop
         playsInline
         preload="auto"
-        className="absolute top-0 left-0 w-full h-full object-cover md:object-fill z-0 pointer-events-none opacity-60 mix-blend-screen"
+        className="absolute top-0 left-0 w-full h-full object-cover md:object-fill z-0 pointer-events-none opacity-50 mix-blend-screen"
       >
         <source src="/video/hero_section_video.mp4" type="video/mp4" />
       </video>
