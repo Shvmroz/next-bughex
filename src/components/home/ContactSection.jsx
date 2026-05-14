@@ -171,17 +171,17 @@ export default function ContactSection({ isPage = false }) {
                           onChange={(e) =>
                             setFormData({ ...formData, name: e.target.value })
                           }
-                          placeholder="John Doe"
+                          placeholder="Enter Your Name"
                           required
                         />
                         <ModernInput
-                          label="Work Email"
+                          label="Email"
                           type="email"
                           value={formData.email}
                           onChange={(e) =>
                             setFormData({ ...formData, email: e.target.value })
                           }
-                          placeholder="john@company.com"
+                          placeholder="Enter Your Email"
                           required
                         />
                       </div>
@@ -196,16 +196,16 @@ export default function ContactSection({ isPage = false }) {
                               subject: e.target.value,
                             })
                           }
-                          placeholder="How can we help?"
+                          placeholder="eg. Mobile App, Web App"
                           required
                         />
                         <ModernInput
-                          label="Contact Number"
+                          label="Contact Number (optional)"
                           value={formData.phone}
                           onChange={(e) =>
                             setFormData({ ...formData, phone: e.target.value })
                           }
-                          placeholder="+44 ..."
+                          placeholder="eg. +44 xxxxxxx"
                         />
                       </div>
 
@@ -216,7 +216,7 @@ export default function ContactSection({ isPage = false }) {
                         onChange={(e) =>
                           setFormData({ ...formData, message: e.target.value })
                         }
-                        placeholder="Share your goals, timeline and budget..."
+                        placeholder="Share your idea..."
                         required
                       />
 
@@ -289,14 +289,6 @@ export default function ContactSection({ isPage = false }) {
           </div>
         </div>
       </div>
-
-      <style jsx global>{`
-        @keyframes shimmer {
-          100% {
-            transform: translateX(100%);
-          }
-        }
-      `}</style>
     </section>
   );
 }
@@ -332,7 +324,7 @@ function ModernInput({
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             placeholder={placeholder}
-            className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-white/10 outline-none transition-all duration-500 focus:bg-white/[0.06] focus:border-primary/50 focus:shadow-[0_0_20px_rgba(27,181,162,0.05)] resize-none"
+            className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-white/20 outline-none transition-all duration-500 focus:bg-white/[0.06] focus:border-primary/50 focus:shadow-[0_0_20px_rgba(27,181,162,0.05)] resize-none"
           />
         ) : (
           <input
@@ -342,7 +334,7 @@ function ModernInput({
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             placeholder={placeholder}
-            className="w-full h-14 bg-white/[0.03] border border-white/10 rounded-2xl px-6 text-white placeholder:text-white/10 outline-none transition-all duration-500 focus:bg-white/[0.06] focus:border-primary/50 focus:shadow-[0_0_20px_rgba(27,181,162,0.05)]"
+            className="w-full h-14 bg-white/[0.03] border border-white/10 rounded-2xl px-6 text-white placeholder:text-white/20 outline-none transition-all duration-500 focus:bg-white/[0.06] focus:border-primary/50 focus:shadow-[0_0_20px_rgba(27,181,162,0.05)]"
           />
         )}
 

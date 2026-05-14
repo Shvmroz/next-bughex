@@ -37,12 +37,12 @@ export default function HeroSection() {
           />
 
           <motion.h1
-            className="font-display text-4xl md:text-7xl lg:text-[100px] font-bold leading-[1] mb-8 tracking-tighter text-white"
+            className="font-display text-4xl md:text-7xl font-bold leading-[1] mb-8 tracking-tighter text-white"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            We Build <span className="text-gradient-animated">Digital</span>
+            We Build <span className="text-gradient-animated ">Digital</span>
             <br />
             Products That <span className="text-gradient-animated">Matter</span>
           </motion.h1>

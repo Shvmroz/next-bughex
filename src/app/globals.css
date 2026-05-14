@@ -47,24 +47,25 @@ body {
 }
 
 .text-gradient-animated {
-  background: linear-gradient(135deg,
-      #19B5A4 0%,
-      #21D9C4 20%,
-      #19B5A4 40%,
-      #21D9C4 60%,
-      #19B5A4 80%,
-      #21D9C4 90%,
-      #19B5A4 100%);
+  background: linear-gradient(to right,
+      #1bb5a2,
+      #21d9c4,
+      #4fd1c5,
+      #1bb5a2);
   background-size: 200% auto;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
-  display: inline-block;
-  animation: shimmer 4s linear infinite;
-  line-height: 1.25;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+  animation: textGradient 5s linear infinite;
+  will-change: background-position;
 }
 
-@keyframes shimmer {
+@keyframes textGradient {
+  from {
+    background-position: 0% center;
+  }
+
   to {
     background-position: 200% center;
   }
